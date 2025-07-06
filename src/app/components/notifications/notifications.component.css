@@ -1,0 +1,90 @@
+.notifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.notifications-header h1 {
+  margin: 0;
+}
+
+.notifications-actions {
+  margin-bottom: 15px;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+}
+
+.notification-item.read {
+  background-color: #fff;
+  opacity: 0.8;
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-type {
+  font-weight: bold;
+  color: #646cff;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.notification-time {
+  color: #666;
+  font-size: 0.8em;
+}
+
+.mark-read-btn {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.mark-read-btn:hover {
+  background-color: #535bf2;
+}
+
+.empty-notifications {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 20px;
+}

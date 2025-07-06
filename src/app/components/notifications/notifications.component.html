@@ -1,0 +1,35 @@
+<div class="notifications-container">
+  <header class="notifications-header">
+    <h1>Notificaciones</h1>
+    <button (click)="logout()">Cerrar sesión</button>
+  </header>
+
+  @if (error()) {
+    <div class="error-message">{{ error() }}</div>
+  }
+
+  @if (loading()) {
+    <div class="loading-spinner">Cargando notificaciones...</div>
+  } @else {
+    <div class="notifications-actions">
+      <button (click)="markAllAsRead()">Marcar todas como leídas</button>
+    </div>
+
+    <div class="notifications-list">
+      @for (notification of notifications(); track notification.id) {
+        <div class="notification-item" [class.read]="notification.isRead">
+          <div class="notification-content">
+            <span class="notification-type">{{ notification.type | uppercase }}</span>
+            <p class="notification-message">{{ notification.message }}</p>
+            <small class="notification-time">{{ notification.createdAt | date:'medium' }}</small>
+          </div>
+          @if (!notification.isRead) {
+            <button class="mark-read-btn" (click)="markAsRead(notification.id)">Marcar como leída</button>
+          }
+        </div>
+      } @empty {
+        <div class="empty-notifications">No hay notificaciones</div>
+      }
+    </div>
+  }
+</div>

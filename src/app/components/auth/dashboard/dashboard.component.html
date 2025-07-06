@@ -1,0 +1,10 @@
+<div class="dashboard-container">
+  <h1>Bienvenido, {{ user?.email }}</h1>
+  
+  <div class="user-info">
+    <p>ID: {{ user?.id }}</p>
+    <!-- Agrega más campos según lo que devuelva tu backend -->
+  </div>
+
+  <button (click)="logout()">Cerrar sesión</button>
+</div>
