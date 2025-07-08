@@ -34,31 +34,31 @@ export class NotificationsComponent implements OnInit {
     this.loadNotifications();
   }
 
-loadNotifications(): void {
-  this.loading.set(true);
-  this.error.set('');
+  loadNotifications(): void {
+    this.loading.set(true);
+    this.error.set('');
 
-  this.notificationService.getNotifications().subscribe({
-    next: (notifications) => {
-      const parsed = notifications.map((n: any) => ({
-        ...n,
-        createdAt: new Date(n.createdAt)
-      }));
-      this.notifications.set(parsed);
-      this.loading.set(false);
-    },
-    error: (err) => {
-      this.error.set('Error al cargar notificaciones');
-      this.loading.set(false);
-    }
-  });
-}
+    this.notificationService.getNotifications().subscribe({
+      next: (notifications) => {
+        const parsed = notifications.map((n: any) => ({
+          ...n,
+          createdAt: new Date(n.createdAt)
+        }));
+        this.notifications.set(parsed);
+        this.loading.set(false);
+      },
+      error: () => {
+        this.error.set('Error al cargar notificaciones');
+        this.loading.set(false);
+      }
+    });
+  }
 
   markAsRead(notificationId: number): void {
     this.notificationService.markAsRead(notificationId).subscribe({
       next: () => {
-        this.notifications.update(notifs => 
-          notifs.map(n => n.id === notificationId ? {...n, isRead: true} : n)
+        this.notifications.update(notifs =>
+          notifs.map(n => n.id === notificationId ? { ...n, isRead: true } : n)
         );
       },
       error: () => {
@@ -70,8 +70,8 @@ loadNotifications(): void {
   markAllAsRead(): void {
     this.notificationService.markAllAsRead().subscribe({
       next: () => {
-        this.notifications.update(notifs => 
-          notifs.map(n => ({...n, isRead: true}))
+        this.notifications.update(notifs =>
+          notifs.map(n => ({ ...n, isRead: true }))
         );
       },
       error: () => {
@@ -83,5 +83,9 @@ loadNotifications(): void {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  bloquearPuerta(): void {
+    alert('🔒 Puerta bloqueada correctamente');
   }
 }

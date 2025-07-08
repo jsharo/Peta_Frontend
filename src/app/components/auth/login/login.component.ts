@@ -37,12 +37,10 @@ export class LoginComponent {
 
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
-        console.log('Redirigiendo...');
         this.loading.set(false);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/admin']); // ✅ Redirige al componente de admin
       },
       error: (err) => {
-        console.error('Error durante login:', err);
         this.error.set(this.errorService.handleHttpError(err));
         this.loading.set(false);
       },
