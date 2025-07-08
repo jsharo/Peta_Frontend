@@ -1,0 +1,54 @@
+<h2>Registrar Mascota</h2>
+<form [formGroup]="mascotaForm" (ngSubmit)="agregarMascota()">
+  <label>
+    Nombre:
+    <input formControlName="nombre" />
+  </label>
+  <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
+    Nombre es requerido.
+  </div>
+
+  <label>
+    Edad:
+    <input type="number" formControlName="edad" />
+  </label>
+  <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
+    Edad es requerida y debe ser positiva.
+  </div>
+
+  <label>
+    Raza:
+    <input formControlName="raza" />
+  </label>
+  <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
+    Raza es requerida.
+  </div>
+
+  <label>
+    Código Collar:
+    <input formControlName="codigoCollar" />
+  </label>
+  <div *ngIf="mascotaForm.get('codigoCollar')?.touched && mascotaForm.get('codigoCollar')?.invalid" class="error">
+    Código Collar es requerido.
+  </div>
+
+  <label>
+    Foto (URL Opcional):
+    <input formControlName="foto" />
+  </label>
+
+  <button type="submit">Registrar Mascota</button>
+</form>
+
+<hr />
+
+<h2>Mascotas Registradas</h2>
+<div *ngIf="mascotas.length === 0">No hay mascotas registradas.</div>
+
+<div class="mascota-card" *ngFor="let mascota of mascotas">
+  <img *ngIf="mascota.foto" [src]="mascota.foto" [alt]="mascota.nombre" />
+  <h3>{{ mascota.nombre }}</h3>
+  <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
+  <p><strong>Raza:</strong> {{ mascota.raza }}</p>
+  <p><strong>Código Collar:</strong> {{ mascota.codigoCollar }}</p>
+</div>

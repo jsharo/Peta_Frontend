@@ -1,0 +1,45 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+input {
+  padding: 0.3rem;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+}
+
+button {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.mascota-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.mascota-card img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}

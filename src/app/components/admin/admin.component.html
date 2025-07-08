@@ -1,0 +1,9 @@
+<h2>Panel de Administración</h2>
+
+<div class="cards-container">
+  <div class="card" *ngFor="let card of cards">
+    <img [src]="card.image" alt="{{ card.name }}" />
+    <h3>{{ card.name }}</h3>
+    <button (click)="viewCard(card)">Visualizar</button>
+  </div>
+</div>
