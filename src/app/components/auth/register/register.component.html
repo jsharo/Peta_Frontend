@@ -63,6 +63,25 @@
         required
         #confirmPasswordRef="ngModel"
       />
+      @if (confirmPasswordRef.invalid && confirmPasswordRef.touched) {
+        <div class="validation-error">Confirmación de contraseña es requerida</div>
+      }
+    </div>
+
+    <!-- NUEVO: Campo para seleccionar rol -->
+    <div class="form-group">
+      <label for="role">Rol (opcional)</label>
+      <select
+        id="role"
+        name="role"
+        [(ngModel)]="role"
+        #roleRef="ngModel"
+      >
+        <option value="">Seleccionar rol (por defecto: Cliente)</option>
+        <option value="CLIENTE">Cliente</option>
+        <option value="ADMIN">Administrador</option>
+      </select>
+      <small class="form-hint">Si no seleccionas un rol, se creará como Cliente por defecto.</small>
     </div>
 
     <p class="password-hint">La contraseña debe contener al menos 8 caracteres.</p>

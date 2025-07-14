@@ -52,13 +52,23 @@ export class AuthService {
   );
 }
 
-  register(userData: { name: string, email: string, password: string }) {
-    return this.http.post<{ message: string }>(`${this.apiUrl}/register`, userData).pipe(
-      catchError(error => {
-        return throwError(() => this.errorService.handleHttpError(error));
-      })
-    );
-  }
+  register(userData: { name: string, email: string, password: string, confirmPassword: string, role?: string }) {
+  console.log('📤 AuthService: Enviando datos de registro:', userData);
+  return this.http.post<{ message: string }>(`${this.apiUrl}/register`, userData).pipe(
+    tap({
+      next: (response) => {
+        console.log('✅ Respuesta del registro:', response);
+      },
+      error: (err) => {
+        console.error('❌ Error en el registro:', err);
+      }
+    }),
+    catchError(error => {
+      console.error('❌ Error capturado en register:', error);
+      return throwError(() => this.errorService.handleHttpError(error));
+    })
+  );
+}
 
   updateProfile(userId: string, updateData: any) {
     return this.http.patch(`${this.apiUrl}/profile`, updateData, {
