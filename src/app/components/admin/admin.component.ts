@@ -63,12 +63,6 @@ export class AdminComponent {
       img: '/mascotas.png'
     },
     { 
-      title: 'Registrar Usuario', 
-      description: 'Crear nuevo usuario', 
-      route: '/admin/registrar-usuario',
-      img: '/crear-usuario.png'
-    },
-    { 
       title: 'Notificaciones', 
       description: 'Ver notificaciones', 
       route: '/admin/notificaciones',

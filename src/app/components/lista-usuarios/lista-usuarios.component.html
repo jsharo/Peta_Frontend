@@ -6,6 +6,20 @@
     </button>
   </div>
 
+  <!-- Tarjeta para registrar nuevo usuario -->
+  <div class="tarjeta-registro" (click)="irARegistrarUsuario()">
+    <div class="icono-registro">
+      <span>👤➕</span>
+    </div>
+    <div class="contenido-registro">
+      <h3>Registrar Nuevo Usuario</h3>
+      <p>Crear una nueva cuenta de usuario</p>
+    </div>
+    <div class="boton-registro">
+      <span>➜</span>
+    </div>
+  </div>
+
   <!-- Estado de carga -->
   <div *ngIf="loading" class="loading">
     <p>Cargando usuarios...</p>
@@ -21,28 +35,16 @@
   <div *ngIf="!loading && !error">
     <div *ngFor="let usuario of usuariosClientes; trackBy: trackByUsuario" class="usuario-card">
       <div class="datos">
-        <div class="info-principal">
-          <h3>{{ usuario.name || 'Nombre no disponible' }}</h3>
-          <p class="email">{{ usuario.email }}</p>
-        </div>
-        <div class="info-secundaria">
-          <span *ngIf="usuario.apellido" class="apellido">{{ usuario.apellido }}</span>
-          <span class="rol">{{ usuario.role }}</span>
-          <span class="id">ID: {{ usuario.id }}</span>
-          <span *ngIf="usuario.isActive !== undefined" class="estado" 
-                [class.activo]="usuario.isActive" 
-                [class.inactivo]="!usuario.isActive">
-            {{ usuario.isActive ? 'Activo' : 'Inactivo' }}
-          </span>
-          <span *ngIf="usuario.fechaCreacion" class="fecha">
-            Registrado: {{ usuario.fechaCreacion | date:'dd/MM/yyyy' }}
-          </span>
-        </div>
+        <strong>{{ usuario.name }}</strong>
+        <span>{{ usuario.email }}</span>
+        <small>Rol: {{ usuario.role }}</small>
+        <small *ngIf="usuario.fechaCreacion">Creado: {{ usuario.fechaCreacion }}</small>
+        <small [style.color]="usuario.isActive ? 'green' : 'red'">
+          {{ usuario.isActive ? 'Activo' : 'Inactivo' }}
+        </small>
       </div>
-
-      <button (click)="irAlPanelAdmin()" class="admin-boton">
-        ⚙️ Panel Admin
-      </button>
+      <!-- CAMBIO: Ahora el botón Ver lleva al panel de admin -->
+      <button class="ver-boton" (click)="irAlPanelAdmin()">Ver</button>
     </div>
 
     <!-- Mensaje cuando no hay usuarios clientes -->

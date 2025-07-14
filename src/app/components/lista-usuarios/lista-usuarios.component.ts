@@ -154,6 +154,10 @@ export class ListaUsuariosComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
+  irARegistrarUsuario() {
+    this.router.navigate(['/register']);
+  }
+
   recargarUsuarios() {
     this.cargarUsuarios();
   }

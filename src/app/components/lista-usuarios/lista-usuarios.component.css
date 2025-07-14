@@ -38,3 +38,129 @@
 .ver-boton:hover {
   background-color: #0056b3;
 }
+
+/* Tarjeta de registro */
+.tarjeta-registro {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #646cff, #535bf2);
+  color: white;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.3);
+}
+
+.tarjeta-registro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(100, 108, 255, 0.4);
+  background: linear-gradient(135deg, #535bf2, #646cff);
+}
+
+.icono-registro {
+  font-size: 2rem;
+  margin-right: 15px;
+  opacity: 0.9;
+}
+
+.contenido-registro {
+  flex: 1;
+}
+
+.contenido-registro h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.contenido-registro p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.boton-registro {
+  font-size: 1.5rem;
+  opacity: 0.8;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-registro:hover .boton-registro {
+  transform: translateX(4px);
+}
+
+/* Ajustar el layout del header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.reload-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.reload-btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+}
+
+.reload-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Estilos faltantes */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.retry-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
+
+.retry-btn:hover {
+  background-color: #c82333;
+}
+
+.sin-usuarios {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.info-footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}

@@ -42,12 +42,6 @@ export const routes: Routes = [
     canActivate: [adminGuard]
   },
   {
-    path: 'admin/registrar-usuario',
-    loadComponent: () =>
-      import('./components/admin/crear-usuario.component').then(m => m.CrearUsuarioComponent),
-    canActivate: [adminGuard]
-  },
-  {
     path: 'admin/notificaciones',
     loadComponent: () =>
       import('./components/notifications/notifications.component').then(m => m.NotificationsComponent),
