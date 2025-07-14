@@ -1,14 +1,58 @@
 <div class="contenedor">
-  <h2>Usuarios Registrados</h2>
+  <div class="header">
+    <h2>Usuarios Clientes</h2>
+    <button (click)="recargarUsuarios()" class="reload-btn" [disabled]="loading">
+      🔄 Recargar
+    </button>
+  </div>
 
-  <div *ngFor="let usuario of usuarios" class="usuario-card">
-    <div class="datos">
-      <strong>{{ usuario.nombre }}</strong>
-      <span>{{ usuario.email }}</span>
+  <!-- Estado de carga -->
+  <div *ngIf="loading" class="loading">
+    <p>Cargando usuarios...</p>
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="error && !loading" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="recargarUsuarios()" class="retry-btn">Reintentar</button>
+  </div>
+
+  <!-- Lista de usuarios clientes -->
+  <div *ngIf="!loading && !error">
+    <div *ngFor="let usuario of usuariosClientes; trackBy: trackByUsuario" class="usuario-card">
+      <div class="datos">
+        <div class="info-principal">
+          <h3>{{ usuario.name || 'Nombre no disponible' }}</h3>
+          <p class="email">{{ usuario.email }}</p>
+        </div>
+        <div class="info-secundaria">
+          <span *ngIf="usuario.apellido" class="apellido">{{ usuario.apellido }}</span>
+          <span class="rol">{{ usuario.role }}</span>
+          <span class="id">ID: {{ usuario.id }}</span>
+          <span *ngIf="usuario.isActive !== undefined" class="estado" 
+                [class.activo]="usuario.isActive" 
+                [class.inactivo]="!usuario.isActive">
+            {{ usuario.isActive ? 'Activo' : 'Inactivo' }}
+          </span>
+          <span *ngIf="usuario.fechaCreacion" class="fecha">
+            Registrado: {{ usuario.fechaCreacion | date:'dd/MM/yyyy' }}
+          </span>
+        </div>
+      </div>
+
+      <button (click)="irAlPanelAdmin()" class="admin-boton">
+        ⚙️ Panel Admin
+      </button>
     </div>
 
-    <button (click)="irAlPanelAdmin()" class="ver-boton">
-      👁 Ver
-    </button>
+    <!-- Mensaje cuando no hay usuarios clientes -->
+    <div *ngIf="usuariosClientes.length === 0" class="sin-usuarios">
+      <p>No hay usuarios con rol de cliente registrados</p>
+    </div>
+  </div>
+
+  <!-- Información adicional -->
+  <div *ngIf="!loading && !error" class="info-footer">
+    <p>Total de clientes: {{ usuariosClientes.length }}</p>
   </div>
 </div>

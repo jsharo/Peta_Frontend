@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin-auth.guard';
 
 export const routes: Routes = [
   {
@@ -13,50 +14,59 @@ export const routes: Routes = [
       import('./components/auth/register/register.component').then(m => m.RegisterComponent)
   },
   
-  {
-    path: 'admin',
-    loadComponent: () =>
-      import('./components/admin/admin.component').then(m => m.AdminComponent),
-    canActivate: [authGuard]
-  },
+  // Rutas que requieren solo autenticación (para cualquier usuario autenticado)
   {
     path: 'notifications',
     loadComponent: () =>
       import('./components/notifications/notifications.component').then(m => m.NotificationsComponent),
     canActivate: [authGuard]
   },
+
+  // Rutas que requieren ser ADMINISTRADOR
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./components/admin/admin.component').then(m => m.AdminComponent),
+    canActivate: [adminGuard]
+  },
   {
     path: 'admin/mascotas',
     loadComponent: () =>
       import('./components/admin/ver-mascota.component').then(m => m.VerMascotasComponent),
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/registrar-mascota',
     loadComponent: () =>
       import('./components/admin/registrar-mascota.component').then(m => m.RegistrarMascotaComponent),
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/registrar-usuario',
     loadComponent: () =>
       import('./components/admin/crear-usuario.component').then(m => m.CrearUsuarioComponent),
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/notificaciones',
     loadComponent: () =>
       import('./components/notifications/notifications.component').then(m => m.NotificationsComponent),
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
   {
     path: 'admin/bloquear-puerta',
     loadComponent: () =>
       import('./components/admin/bloquear-puerta.component').then(m => m.BloquearPuertaComponent),
-    canActivate: [authGuard]
+    canActivate: [adminGuard]
   },
-  // Redireccionamiento raíz a usuarios
-  { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
-  // Ruta fallback
-  { path: '**', redirectTo: 'login' }
+  {
+    path: 'usuarios',
+    loadComponent: () =>
+      import('./components/lista-usuarios/lista-usuarios.component').then(m => m.ListaUsuariosComponent),
+    canActivate: [adminGuard] // Solo admins pueden ver la lista de usuarios
+  },
+
+  // Redireccionamientos
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' }
 ];
