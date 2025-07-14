@@ -1,0 +1,14 @@
+<div class="contenedor">
+  <h2>Usuarios Registrados</h2>
+
+  <div *ngFor="let usuario of usuarios" class="usuario-card">
+    <div class="datos">
+      <strong>{{ usuario.nombre }}</strong>
+      <span>{{ usuario.email }}</span>
+    </div>
+
+    <button (click)="irAlPanelAdmin()" class="ver-boton">
+      👁 Ver
+    </button>
+  </div>
+</div>

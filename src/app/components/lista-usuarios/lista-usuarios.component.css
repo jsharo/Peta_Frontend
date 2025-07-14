@@ -1,0 +1,40 @@
+.contenedor {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.usuario-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.ver-boton {
+  background-color: #007bff;
+  border: none;
+  padding: 8px 16px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.ver-boton:hover {
+  background-color: #0056b3;
+}

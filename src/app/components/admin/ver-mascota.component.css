@@ -1,45 +1,49 @@
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-width: 400px;
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
-
-label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 700;
 }
-
-input {
-  padding: 0.3rem;
-  font-size: 1rem;
-  margin-top: 0.2rem;
+.empty {
+  text-align: center;
+  font-style: italic;
+  color: #888;
 }
-
-.error {
-  color: red;
-  font-size: 0.85rem;
+.mascotas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
-
-button {
-  width: fit-content;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
 .mascota-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  background: #fff;
   border-radius: 8px;
-  max-width: 400px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
-
+.mascota-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 0.15);
+}
 .mascota-card img {
-  width: 100%;
-  max-width: 150px;
-  border-radius: 6px;
+  max-width: 120px;
+  border-radius: 8px;
   margin-bottom: 1rem;
+  object-fit: cover;
+  height: 120px;
+  width: 100%;
+}
+.mascota-card h3 {
+  margin-bottom: 0.5rem;
+  color: #34495e;
+}
+.mascota-card p {
+  margin: 0.25rem 0;
+  color: #555;
 }

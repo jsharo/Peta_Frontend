@@ -1,1 +1,8 @@
-<p>bloquear-puerta works!</p>
+<div class="contenedor">
+  <button 
+    (click)="cambiarEstado()" 
+    [ngClass]="estado" 
+    class="boton-color">
+    {{ texto }}
+  </button>
+</div>

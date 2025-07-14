@@ -1,0 +1,32 @@
+/* Centrar el botón */
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Pantalla completa */
+  background-color: #f5f5f5;
+}
+
+/* Estilo del botón */
+.boton-color {
+  padding: 16px 32px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+/* Colores según estado */
+.gris {
+  background-color: gray;
+}
+
+.verde {
+  background-color: green;
+}
+
+.rojo {
+  background-color: red;
+}

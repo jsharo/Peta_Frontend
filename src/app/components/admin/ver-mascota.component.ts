@@ -30,7 +30,7 @@ interface Mascota {
         <input type="number" formControlName="edad" />
       </label>
       <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
-        Edad es requerida y debe ser positiva.
+        Edad es requerida y debe ser mayor o igual a 0.
       </div>
 
       <label>
@@ -54,15 +54,18 @@ interface Mascota {
         <input formControlName="foto" />
       </label>
 
-      <button type="submit">Registrar Mascota</button>
+      <button type="submit" [disabled]="mascotaForm.invalid">Registrar Mascota</button>
     </form>
 
     <hr />
 
     <h2>Mascotas Registradas</h2>
-    <div *ngIf="mascotas.length === 0">No hay mascotas registradas.</div>
 
-    <div class="mascota-card" *ngFor="let mascota of mascotas">
+    <div *ngIf="mascotas.length === 0">
+      No hay mascotas registradas.
+    </div>
+
+    <div *ngFor="let mascota of mascotas" class="mascota-card">
       <img *ngIf="mascota.foto" [src]="mascota.foto" [alt]="mascota.nombre" />
       <h3>{{ mascota.nombre }}</h3>
       <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
@@ -77,31 +80,27 @@ interface Mascota {
       gap: 0.5rem;
       max-width: 400px;
     }
-
     label {
+      font-weight: bold;
       display: flex;
       flex-direction: column;
-      font-weight: bold;
     }
-
     input {
       padding: 0.3rem;
       font-size: 1rem;
       margin-top: 0.2rem;
     }
-
     .error {
       color: red;
       font-size: 0.85rem;
     }
-
     button {
       width: fit-content;
       padding: 0.5rem 1rem;
       font-weight: bold;
       margin-top: 1rem;
+      cursor: pointer;
     }
-
     .mascota-card {
       border: 1px solid #ccc;
       padding: 1rem;
@@ -109,7 +108,6 @@ interface Mascota {
       border-radius: 8px;
       max-width: 400px;
     }
-
     .mascota-card img {
       width: 100%;
       max-width: 150px;
@@ -126,7 +124,7 @@ export class VerMascotasComponent {
   constructor(private fb: FormBuilder) {
     this.mascotaForm = this.fb.group({
       nombre: ['', Validators.required],
-      edad: ['', [Validators.required, Validators.min(0)]],
+      edad: [null, [Validators.required, Validators.min(0)]],
       raza: ['', Validators.required],
       codigoCollar: ['', Validators.required],
       foto: ['']
