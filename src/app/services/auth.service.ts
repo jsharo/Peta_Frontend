@@ -76,10 +76,16 @@ export class AuthService {
     });
   }
 
-  logout() {
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('user');
-  }
+  logout(): void {
+  console.log('🚪 Cerrando sesión...');
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('user');
+  
+  // ✅ Redirigir a login con parámetro que indica logout
+  this.router.navigate(['/login'], { 
+    queryParams: { fromLogout: 'true' } 
+  });
+}
 
   isAuthenticated(): boolean {
   const token = localStorage.getItem('auth_token');

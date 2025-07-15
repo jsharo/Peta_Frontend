@@ -2,14 +2,15 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
 import { AuthService } from '../../services/auth.service';
+import { ErrorService } from '../../services/error.service';
 import { Router } from '@angular/router';
 
 interface Notification {
   id: number;
-  message: string;
   type: string;
-  createdAt: Date;
+  message: string;
   isRead: boolean;
+  createdAt: Date;
 }
 
 @Component({
@@ -27,7 +28,8 @@ export class NotificationsComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -47,9 +49,16 @@ export class NotificationsComponent implements OnInit {
         this.notifications.set(parsed);
         this.loading.set(false);
       },
-      error: () => {
-        this.error.set('Error al cargar notificaciones');
+      error: (err) => {
+        this.error.set(this.errorService.handleHttpError(err));
         this.loading.set(false);
+        
+        if (err.status === 401) {
+          localStorage.removeItem('auth_token');
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
+        }
       }
     });
   }
@@ -61,8 +70,8 @@ export class NotificationsComponent implements OnInit {
           notifs.map(n => n.id === notificationId ? { ...n, isRead: true } : n)
         );
       },
-      error: () => {
-        this.error.set('Error al marcar como leída');
+      error: (err) => {
+        this.error.set(this.errorService.handleHttpError(err));
       }
     });
   }
@@ -74,18 +83,13 @@ export class NotificationsComponent implements OnInit {
           notifs.map(n => ({ ...n, isRead: true }))
         );
       },
-      error: () => {
-        this.error.set('Error al marcar todas como leídas');
+      error: (err) => {
+        this.error.set(this.errorService.handleHttpError(err));
       }
     });
   }
 
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
-  bloquearPuerta(): void {
-    alert('🔒 Puerta bloqueada correctamente');
+  recargarNotificaciones(): void {
+    this.loadNotifications();
   }
 }

@@ -13,6 +13,7 @@
         id="name"
         name="name"
         [(ngModel)]="name"
+        (input)="onInputChange()"
         required
         #nameRef="ngModel"
       />
@@ -28,6 +29,7 @@
         id="email"
         name="email"
         [(ngModel)]="email"
+        (input)="onInputChange()"
         required
         email
         #emailRef="ngModel"
@@ -44,6 +46,7 @@
         id="password"
         name="password"
         [(ngModel)]="password"
+        (input)="onInputChange()"
         required
         minlength="8"
         #passwordRef="ngModel"
@@ -60,6 +63,7 @@
         id="confirmPassword"
         name="confirmPassword"
         [(ngModel)]="confirmPassword"
+        (input)="onInputChange()"
         required
         #confirmPasswordRef="ngModel"
       />
@@ -68,7 +72,10 @@
       }
     </div>
 
-    <p class="password-hint">La contraseña debe contener al menos 8 caracteres.</p>
+    <!-- ✅ MEJORADO: Hint más detallado -->
+    <p class="password-hint">
+      La contraseña debe tener al menos 8 caracteres, incluyendo una minúscula, una mayúscula y un número.
+    </p>
 
     <button type="submit" [disabled]="loading() || registerForm.invalid">
       @if (loading()) {

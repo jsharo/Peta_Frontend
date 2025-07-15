@@ -16,6 +16,7 @@
       placeholder="Correo electrónico"
       class="input"
       [(ngModel)]="email"
+      (input)="onInputChange()"
       name="email"
       required
     />
@@ -26,6 +27,7 @@
       placeholder="Contraseña"
       class="input"
       [(ngModel)]="password"
+      (input)="onInputChange()"
       name="password"
       required
     />
@@ -35,10 +37,8 @@
       {{ loading() ? 'Cargando...' : 'Entrar' }}
     </button>
 
-    <!-- Enlace de registro -->
     <div class="register">
-      ¿No tienes cuenta?
-      <a [routerLink]="['/register']">Regístrate</a>
-    </div>
+  ¿No tienes cuenta? <a href="mailto:soporte@tudominio.com">Contáctanos</a>
+</div>
   </div>
 </div>

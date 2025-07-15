@@ -15,7 +15,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   if (!isAuthenticated) {
     console.log('❌ No autenticado, redirigiendo a login');
     router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+    return false; // ✅ AGREGAR ESTA LÍNEA - detiene la ejecución aquí
   }
 
   // Obtener información del usuario para debugging

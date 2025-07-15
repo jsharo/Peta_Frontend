@@ -69,12 +69,8 @@
 
     <!-- Mensaje cuando no hay mascotas -->
     <div *ngIf="mascotas.length === 0" class="sin-mascotas">
-      <p>No hay mascotas registradas</p>
-      <button (click)="irARegistrarMascota()" class="btn-registrar-primera">
-        Registrar Primera Mascota
-      </button>
-    </div>
-  </div>
+  <p>No hay mascotas registradas</p>
+</div>
 
   <!-- Información adicional -->
   <div *ngIf="!loading && mascotas.length > 0" class="info-footer">

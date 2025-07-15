@@ -32,41 +32,9 @@ export class VerMascotaComponent implements OnInit {
 
   cargarMascotas(): void {
     this.loading = true;
-    
-    setTimeout(() => {
-      this.mascotas = [
-        {
-          id: 1,
-          nombre: 'Max',
-          edad: 3,
-          raza: 'Golden Retriever',
-          codigoCollar: 'GR001',
-          foto: '/perrp.jpeg',
-          fechaRegistro: '2024-01-15',
-          activo: true
-        },
-        {
-          id: 2,
-          nombre: 'Luna',
-          edad: 2,
-          raza: 'Border Collie',
-          codigoCollar: 'BC002',
-          foto: '/petat.jpg',
-          fechaRegistro: '2024-02-20',
-          activo: true
-        },
-        {
-          id: 3,
-          nombre: 'Rocky',
-          edad: 5,
-          raza: 'Pastor Alemán',
-          codigoCollar: 'PA003',
-          fechaRegistro: '2024-03-10',
-          activo: false
-        }
-      ];
-      this.loading = false;
-    }, 1000);
+    // Aquí puedes agregar la lógica para cargar mascotas reales desde tu API
+    this.mascotas = [];
+    this.loading = false;
   }
 
   irARegistrarMascota(): void {
