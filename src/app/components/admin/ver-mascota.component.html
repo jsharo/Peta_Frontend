@@ -1,54 +1,84 @@
-<h2>Registrar Mascota</h2>
-<form [formGroup]="mascotaForm" (ngSubmit)="agregarMascota()">
-  <label>
-    Nombre:
-    <input formControlName="nombre" />
-  </label>
-  <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
-    Nombre es requerido.
+<div class="contenedor">
+  <div class="header">
+    <h2>Mascotas Registradas</h2>
+    <button (click)="recargarMascotas()" class="reload-btn" [disabled]="loading">
+      🔄 Recargar
+    </button>
   </div>
 
-  <label>
-    Edad:
-    <input type="number" formControlName="edad" />
-  </label>
-  <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
-    Edad es requerida y debe ser positiva.
+  <!-- Tarjeta para registrar nueva mascota -->
+  <div class="tarjeta-registro" (click)="irARegistrarMascota()">
+    <div class="icono-registro">
+      <span>🐕➕</span>
+    </div>
+    <div class="contenido-registro">
+      <h3>Registrar Nueva Mascota</h3>
+      <p>Agregar una nueva mascota al sistema</p>
+    </div>
+    <div class="boton-registro">
+      <span>➜</span>
+    </div>
   </div>
 
-  <label>
-    Raza:
-    <input formControlName="raza" />
-  </label>
-  <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
-    Raza es requerida.
+  <!-- Estado de carga -->
+  <div *ngIf="loading" class="loading">
+    <p>Cargando mascotas...</p>
   </div>
 
-  <label>
-    Código Collar:
-    <input formControlName="codigoCollar" />
-  </label>
-  <div *ngIf="mascotaForm.get('codigoCollar')?.touched && mascotaForm.get('codigoCollar')?.invalid" class="error">
-    Código Collar es requerido.
+  <!-- Lista de mascotas -->
+  <div *ngIf="!loading">
+    <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
+      <div class="foto-container">
+        <img 
+          *ngIf="mascota.foto" 
+          [src]="mascota.foto" 
+          [alt]="mascota.nombre"
+          class="foto-mascota"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+        />
+        <div *ngIf="!mascota.foto" class="sin-foto">
+          🐕
+        </div>
+        <span 
+          class="estado-badge"
+          [class.activo]="mascota.activo"
+          [class.inactivo]="!mascota.activo"
+        >
+          {{ mascota.activo ? 'Activo' : 'Inactivo' }}
+        </span>
+      </div>
+      
+      <div class="info-mascota">
+        <h3>{{ mascota.nombre }}</h3>
+        <div class="detalles">
+          <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
+          <p><strong>Raza:</strong> {{ mascota.raza }}</p>
+          <p><strong>Código:</strong> {{ mascota.codigoCollar }}</p>
+          <p *ngIf="mascota.fechaRegistro" class="fecha">
+            <strong>Registrado:</strong> {{ mascota.fechaRegistro }}
+          </p>
+        </div>
+      </div>
+      
+      <div class="acciones">
+        <button class="ver-boton" (click)="verDetallesMascota(mascota)">
+          Ver Detalles
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensaje cuando no hay mascotas -->
+    <div *ngIf="mascotas.length === 0" class="sin-mascotas">
+      <p>No hay mascotas registradas</p>
+      <button (click)="irARegistrarMascota()" class="btn-registrar-primera">
+        Registrar Primera Mascota
+      </button>
+    </div>
   </div>
 
-  <label>
-    Foto (URL Opcional):
-    <input formControlName="foto" />
-  </label>
-
-  <button type="submit">Registrar Mascota</button>
-</form>
-
-<hr />
-
-<h2>Mascotas Registradas</h2>
-<div *ngIf="mascotas.length === 0">No hay mascotas registradas.</div>
-
-<div class="mascota-card" *ngFor="let mascota of mascotas">
-  <img *ngIf="mascota.foto" [src]="mascota.foto" [alt]="mascota.nombre" />
-  <h3>{{ mascota.nombre }}</h3>
-  <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
-  <p><strong>Raza:</strong> {{ mascota.raza }}</p>
-  <p><strong>Código Collar:</strong> {{ mascota.codigoCollar }}</p>
+  <!-- Información adicional -->
+  <div *ngIf="!loading && mascotas.length > 0" class="info-footer">
+    <p>Total de mascotas: {{ mascotas.length }}</p>
+    <p>Activas: {{ obtenerMascotasActivas() }}</p>
+  </div>
 </div>

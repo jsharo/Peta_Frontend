@@ -57,12 +57,6 @@ export class AdminComponent {
       img: '/ver-mascota.jpeg'
     },
     { 
-      title: 'Registrar Mascota', 
-      description: 'Formulario para registrar una nueva mascota', 
-      route: '/admin/registrar-mascota',
-      img: '/mascotas.png'
-    },
-    { 
       title: 'Notificaciones', 
       description: 'Ver notificaciones', 
       route: '/admin/notificaciones',

@@ -1,143 +1,91 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface Mascota {
+  id: number;
   nombre: string;
   edad: number;
   raza: string;
   codigoCollar: string;
   foto?: string;
+  fechaRegistro?: string;
+  activo?: boolean;
 }
 
 @Component({
-  selector: 'app-ver-mascotas',
+  selector: 'app-ver-mascota',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
-    <h2>Registrar Mascota</h2>
-    <form [formGroup]="mascotaForm" (ngSubmit)="agregarMascota()">
-      <label>
-        Nombre:
-        <input formControlName="nombre" />
-      </label>
-      <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
-        Nombre es requerido.
-      </div>
-
-      <label>
-        Edad:
-        <input type="number" formControlName="edad" />
-      </label>
-      <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
-        Edad es requerida y debe ser mayor o igual a 0.
-      </div>
-
-      <label>
-        Raza:
-        <input formControlName="raza" />
-      </label>
-      <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
-        Raza es requerida.
-      </div>
-
-      <label>
-        Código Collar:
-        <input formControlName="codigoCollar" />
-      </label>
-      <div *ngIf="mascotaForm.get('codigoCollar')?.touched && mascotaForm.get('codigoCollar')?.invalid" class="error">
-        Código Collar es requerido.
-      </div>
-
-      <label>
-        Foto (URL Opcional):
-        <input formControlName="foto" />
-      </label>
-
-      <button type="submit" [disabled]="mascotaForm.invalid">Registrar Mascota</button>
-    </form>
-
-    <hr />
-
-    <h2>Mascotas Registradas</h2>
-
-    <div *ngIf="mascotas.length === 0">
-      No hay mascotas registradas.
-    </div>
-
-    <div *ngFor="let mascota of mascotas" class="mascota-card">
-      <img *ngIf="mascota.foto" [src]="mascota.foto" [alt]="mascota.nombre" />
-      <h3>{{ mascota.nombre }}</h3>
-      <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
-      <p><strong>Raza:</strong> {{ mascota.raza }}</p>
-      <p><strong>Código Collar:</strong> {{ mascota.codigoCollar }}</p>
-    </div>
-  `,
-  styles: [`
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-width: 400px;
-    }
-    label {
-      font-weight: bold;
-      display: flex;
-      flex-direction: column;
-    }
-    input {
-      padding: 0.3rem;
-      font-size: 1rem;
-      margin-top: 0.2rem;
-    }
-    .error {
-      color: red;
-      font-size: 0.85rem;
-    }
-    button {
-      width: fit-content;
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      cursor: pointer;
-    }
-    .mascota-card {
-      border: 1px solid #ccc;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      max-width: 400px;
-    }
-    .mascota-card img {
-      width: 100%;
-      max-width: 150px;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-    }
-  `]
+  imports: [CommonModule],
+  templateUrl: './ver-mascota.component.html',
+  styleUrls: ['./ver-mascota.component.css']
 })
-export class VerMascotasComponent {
+export class VerMascotaComponent implements OnInit {
   mascotas: Mascota[] = [];
+  loading = false;
 
-  mascotaForm: FormGroup;
+  constructor(private router: Router) {}
 
-  constructor(private fb: FormBuilder) {
-    this.mascotaForm = this.fb.group({
-      nombre: ['', Validators.required],
-      edad: [null, [Validators.required, Validators.min(0)]],
-      raza: ['', Validators.required],
-      codigoCollar: ['', Validators.required],
-      foto: ['']
-    });
+  ngOnInit(): void {
+    this.cargarMascotas();
   }
 
-  agregarMascota() {
-    if (this.mascotaForm.invalid) {
-      this.mascotaForm.markAllAsTouched();
-      return;
-    }
+  cargarMascotas(): void {
+    this.loading = true;
+    
+    setTimeout(() => {
+      this.mascotas = [
+        {
+          id: 1,
+          nombre: 'Max',
+          edad: 3,
+          raza: 'Golden Retriever',
+          codigoCollar: 'GR001',
+          foto: '/perrp.jpeg',
+          fechaRegistro: '2024-01-15',
+          activo: true
+        },
+        {
+          id: 2,
+          nombre: 'Luna',
+          edad: 2,
+          raza: 'Border Collie',
+          codigoCollar: 'BC002',
+          foto: '/petat.jpg',
+          fechaRegistro: '2024-02-20',
+          activo: true
+        },
+        {
+          id: 3,
+          nombre: 'Rocky',
+          edad: 5,
+          raza: 'Pastor Alemán',
+          codigoCollar: 'PA003',
+          fechaRegistro: '2024-03-10',
+          activo: false
+        }
+      ];
+      this.loading = false;
+    }, 1000);
+  }
 
-    this.mascotas.push(this.mascotaForm.value);
-    this.mascotaForm.reset();
+  irARegistrarMascota(): void {
+    this.router.navigate(['/admin/registrar-mascota']);
+  }
+
+  verDetallesMascota(mascota: Mascota): void {
+    console.log('Ver detalles de:', mascota);
+  }
+
+  recargarMascotas(): void {
+    this.cargarMascotas();
+  }
+
+  obtenerMascotasActivas(): number {
+    return this.mascotas.filter(mascota => mascota.activo).length;
+  }
+
+  trackByMascota(index: number, mascota: Mascota): number {
+    return mascota.id;
   }
 }

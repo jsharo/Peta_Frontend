@@ -17,7 +17,6 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
-  role = ''; // Nuevo campo para el rol
 
   error = signal('');
   loading = signal(false);
@@ -55,8 +54,6 @@ export class RegisterComponent {
       email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword,
-      // Solo incluir el rol si se seleccionó uno, sino el backend usará CLIENTE por defecto
-      ...(this.role && { role: this.role.toLowerCase() })
     };
 
     console.log('📤 Datos a enviar:', userData); // Para debugging

@@ -32,7 +32,7 @@ export const routes: Routes = [
   {
     path: 'admin/mascotas',
     loadComponent: () =>
-      import('./components/admin/ver-mascota.component').then(m => m.VerMascotasComponent),
+      import('./components/admin/ver-mascota.component').then(m => m.VerMascotaComponent), // ✅ Corregido: VerMascotaComponent en lugar de VerMascotasComponent
     canActivate: [adminGuard]
   },
   {
