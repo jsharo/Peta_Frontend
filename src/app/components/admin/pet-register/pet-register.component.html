@@ -1,41 +1,61 @@
-<h2>Registrar Mascota</h2>
-<form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
-  <label>
-    Nombre:
-    <input formControlName="nombre" />
-  </label>
-  <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
-    Nombre es requerido.
+<div class="mascota-wrapper">
+  <div class="mascota-header">
+    <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
   </div>
 
-  <label>
-    Edad:
-    <input type="number" formControlName="edad" />
-  </label>
-  <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
-    Edad es requerida y debe ser mayor o igual a 0.
-  </div>
+  <h2>Registrar Mascota</h2>
 
-  <label>
-    Raza:
-    <input formControlName="raza" />
-  </label>
-  <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
-    Raza es requerida.
-  </div>
+  <form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()" class="mascota-formulario">
 
-  <label>
-    Código Collar:
-    <input formControlName="codigoCollar" />
-  </label>
-  <div *ngIf="mascotaForm.get('codigoCollar')?.touched && mascotaForm.get('codigoCollar')?.invalid" class="error">
-    Código Collar es requerido.
-  </div>
+    <label>
+      Nombre:
+      <input formControlName="nombre" />
+    </label>
+    <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
+      Nombre es requerido.
+    </div>
 
-  <label>
-    Foto (URL opcional):
-    <input formControlName="foto" />
-  </label>
+    <label>
+      Edad:
+      <input type="number" formControlName="edad" />
+    </label>
+    <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
+      Edad es requerida y debe ser mayor o igual a 0.
+    </div>
 
-  <button type="submit">Registrar Mascota</button>
-</form>
+    <label>
+      Raza:
+      <input formControlName="raza" />
+    </label>
+    <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
+      Raza es requerida.
+    </div>
+
+    <label>
+      Sexo:
+      <select formControlName="sexo">
+        <option value="">Selecciona</option>
+        <option value="Macho">Macho</option>
+        <option value="Hembra">Hembra</option>
+      </select>
+    </label>
+    <div *ngIf="mascotaForm.get('sexo')?.touched && mascotaForm.get('sexo')?.invalid" class="error">
+      Sexo es requerido.
+    </div>
+
+    <label>
+      UID del Collar:
+      <input formControlName="uidCollar" />
+    </label>
+    <div *ngIf="mascotaForm.get('uidCollar')?.touched && mascotaForm.get('uidCollar')?.invalid" class="error">
+      UID del Collar es requerido.
+    </div>
+
+    <label>
+      Foto (URL opcional):
+      <input formControlName="foto" />
+    </label>
+
+    <button type="submit" class="btn-registrar">Registrar Mascota</button>
+  </form>
+</div>

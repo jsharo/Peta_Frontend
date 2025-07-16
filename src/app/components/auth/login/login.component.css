@@ -1,81 +1,136 @@
-.login-wrapper {
-  background: url('/petat.jpg') no-repeat center center;
-  background-size: cover;
-  height: 100vh;
+/* Reset y base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Contenedor principal */
+.login-wrapper {
+  background: url('/logopet.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  padding: 40px;
-  box-sizing: border-box;
+  padding: 2rem 1rem;
 }
 
+/* Logo fuera del cuadro */
+.logo-outside {
+  width: 100px;
+  margin-bottom: 1rem;
+}
+
+/* Caja del formulario */
 .login-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 30px;
-  border-radius: 12px;
-  width: 300px;
-  max-width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 400px;
   color: white;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Título */
+.login-box h2 {
+  color: #00bfff;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Campos de entrada */
 .input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
   border: none;
-  font-size: 16px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
+/* Botón */
 .btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #00aaff;
-  color: white;
+  padding: 0.6rem;
+  background-color: #d4f21a;
+  color: black;
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 0.5rem;
   cursor: pointer;
-  margin-bottom: 15px;
+  font-weight: bold;
+  transition: background 0.3s;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
+.btn:hover {
+  background-color: #c1e00f;
+}
+
+/* Mensajes */
+.error {
+  background-color: #ff4d4d;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.success {
+  background-color: #4caf50;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Registro */
 .register {
-  color: #ccc;
-  font-size: 14px;
-  text-align: center;
-  width: 100%;
+  margin-top: 1rem;
+  font-size: 0.9rem;
 }
 
 .register a {
-  color: #00aaff;
+  color: #00bfff;
   text-decoration: none;
 }
 
-.error {
-  background-color: #ff4f4f;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  font-size: 14px;
-  color: white;
-  text-align: center;
-  width: 100%;
-}
+/* Desktop */
+@media (min-width: 768px) {
+  .logo-outside {
+    width: 120px;
+  }
 
-@media (max-width: 600px) {
   .login-wrapper {
-    padding: 20px;
+    background-attachment: fixed;
+    background-position: center;
   }
 
   .login-box {
-    width: 90%;
-    padding: 20px;
+    max-width: 400px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .login-wrapper {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .logo-outside {
+    width: 80px;
+  }
+
+  .login-box {
+    padding: 1.5rem;
   }
 }

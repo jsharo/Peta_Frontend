@@ -1,88 +1,65 @@
-<div class="register-container">
-  <h1>Crear Cuenta</h1>
+<div class="cliente-wrapper">
+  <div class="cliente-header">
+    <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
+  </div>
 
-  @if (error()) {
-    <div class="error-message">{{ error() }}</div>
-  }
+  <div class="cliente-formulario">
+    <h2>Crear Cliente</h2>
 
-  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-    <div class="form-group">
-      <label for="name">Nombre</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        [(ngModel)]="name"
-        (input)="onInputChange()"
-        required
-        #nameRef="ngModel"
-      />
-      @if (nameRef.invalid && nameRef.touched) {
-        <div class="validation-error">Nombre es requerido</div>
-      }
+    <div *ngIf="registered" class="success">
+      ¡Registro exitoso! Por favor inicia sesión.
     </div>
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        [(ngModel)]="email"
-        (input)="onInputChange()"
-        required
-        email
-        #emailRef="ngModel"
-      />
-      @if (emailRef.invalid && emailRef.touched) {
-        <div class="validation-error">Email es requerido y debe ser válido</div>
-      }
+    <div *ngIf="error()" class="error">
+      {{ error() }}
     </div>
 
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="password"
-        (input)="onInputChange()"
-        required
-        minlength="8"
-        #passwordRef="ngModel"
-      />
-      @if (passwordRef.invalid && passwordRef.touched) {
-        <div class="validation-error">Contraseña debe tener al menos 8 caracteres</div>
-      }
-    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="name"
+          name="name"
+          (input)="onInputChange()" />
+      </div>
 
-    <div class="form-group">
-      <label for="confirmPassword">Confirmar Contraseña</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        name="confirmPassword"
-        [(ngModel)]="confirmPassword"
-        (input)="onInputChange()"
-        required
-        #confirmPasswordRef="ngModel"
-      />
-      @if (confirmPasswordRef.invalid && confirmPasswordRef.touched) {
-        <div class="validation-error">Confirmación de contraseña es requerida</div>
-      }
-    </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          (input)="onInputChange()" />
+      </div>
 
-    <!-- ✅ MEJORADO: Hint más detallado -->
-    <p class="password-hint">
-      La contraseña debe tener al menos 8 caracteres, incluyendo una minúscula, una mayúscula y un número.
-    </p>
+      <div class="form-group">
+        <label>Contraseña:</label>
+        <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          name="password"
+          (input)="onInputChange()" />
+      </div>
 
-    <button type="submit" [disabled]="loading() || registerForm.invalid">
-      @if (loading()) {
-        <span>Procesando...</span>
-      } @else {
-        <span>Crear Cuenta</span>
-      }
-    </button>
-  </form>
+      <div class="form-group">
+        <label>Confirmar contraseña:</label>
+        <input
+          type="password"
+          placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          (input)="onInputChange()" />
+      </div>
+
+      <p class="nota">La contraseña debe contener al menos 8 caracteres.</p>
+
+      <button type="submit" class="btn-crear" [disabled]="loading()">
+        {{ loading() ? 'Creando...' : 'Crear' }}
+      </button>
+    </form>
+  </div>
 </div>
