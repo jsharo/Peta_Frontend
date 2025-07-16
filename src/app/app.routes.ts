@@ -8,11 +8,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/auth/login/login.component').then(m => m.LoginComponent)
   },
-  {
-    path: 'register',
-    loadComponent: () =>
-      import('./components/auth/register/register.component').then(m => m.RegisterComponent)
-  },
   
   // Rutas que requieren solo autenticación (para cualquier usuario autenticado)
   {
@@ -25,39 +20,50 @@ export const routes: Routes = [
   // Rutas que requieren ser ADMINISTRADOR
   {
     path: 'admin',
+    redirectTo: 'admin/admin-panel',
+    pathMatch: 'full'
+  },
+  {
+    path: 'admin/admin-panel',
     loadComponent: () =>
-      import('./components/admin/admin.component').then(m => m.AdminComponent),
+      import('./components/admin/admin-panel/admin-panel.component').then(m => m.AdminPanelComponent),
     canActivate: [adminGuard]
   },
   {
-    path: 'admin/mascotas',
+    path: 'admin/admin-pets-view',
     loadComponent: () =>
-      import('./components/admin/ver-mascota.component').then(m => m.VerMascotaComponent), // ✅ Corregido: VerMascotaComponent en lugar de VerMascotasComponent
+      import('./components/admin/admin-pets-view/admin-pets-view.component').then(m => m.AdminPetsViewComponent),
     canActivate: [adminGuard]
   },
   {
-    path: 'admin/registrar-mascota',
+    path: 'admin/pet-register',
     loadComponent: () =>
-      import('./components/admin/registrar-mascota.component').then(m => m.RegistrarMascotaComponent),
+      import('./components/admin/pet-register/pet-register.component').then(m => m.PetRegisterComponent),
     canActivate: [adminGuard]
   },
   {
-    path: 'admin/notificaciones',
+    path: 'admin/notifications',
     loadComponent: () =>
       import('./components/notifications/notifications.component').then(m => m.NotificationsComponent),
     canActivate: [adminGuard]
   },
   {
-    path: 'admin/bloquear-puerta',
+    path: 'admin/block-door',
     loadComponent: () =>
-      import('./components/admin/bloquear-puerta.component').then(m => m.BloquearPuertaComponent),
+      import('./components/block-door/block-door.component').then(m => m.BlockDoorComponent),
     canActivate: [adminGuard]
   },
   {
-    path: 'usuarios',
+    path: 'admin/clients-list',
     loadComponent: () =>
-      import('./components/lista-usuarios/lista-usuarios.component').then(m => m.ListaUsuariosComponent),
-    canActivate: [adminGuard] // Solo admins pueden ver la lista de usuarios
+      import('./components/admin/clients-list/clients-list.component').then(m => m.ClientsListComponent),
+    canActivate: [adminGuard]
+  },
+   {
+  path: 'admin/client-register',
+    loadComponent: () =>
+      import('./components/admin/client-register/client-register.component').then(m => m.ClientRegisterComponent),
+    canActivate: [adminGuard] // Solo si quieres que solo admin pueda registrar usuarios
   },
 
   // Redireccionamientos

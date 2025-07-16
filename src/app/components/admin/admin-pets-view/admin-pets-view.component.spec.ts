@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AdminPetsViewComponent } from './admin-pets-view.component';
 
-import { VerMascotaComponent } from './ver-mascota.component';
-
-describe('VerMascotaComponent', () => {
-  let component: VerMascotaComponent;
-  let fixture: ComponentFixture<VerMascotaComponent>;
+describe('AdminPetsViewComponent', () => {
+  let component: AdminPetsViewComponent;
+  let fixture: ComponentFixture<AdminPetsViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VerMascotaComponent]
+      imports: [AdminPetsViewComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VerMascotaComponent);
+    fixture = TestBed.createComponent(AdminPetsViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

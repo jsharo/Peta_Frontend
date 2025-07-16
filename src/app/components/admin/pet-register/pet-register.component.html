@@ -1,0 +1,41 @@
+<h2>Registrar Mascota</h2>
+<form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
+  <label>
+    Nombre:
+    <input formControlName="nombre" />
+  </label>
+  <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
+    Nombre es requerido.
+  </div>
+
+  <label>
+    Edad:
+    <input type="number" formControlName="edad" />
+  </label>
+  <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
+    Edad es requerida y debe ser mayor o igual a 0.
+  </div>
+
+  <label>
+    Raza:
+    <input formControlName="raza" />
+  </label>
+  <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
+    Raza es requerida.
+  </div>
+
+  <label>
+    Código Collar:
+    <input formControlName="codigoCollar" />
+  </label>
+  <div *ngIf="mascotaForm.get('codigoCollar')?.touched && mascotaForm.get('codigoCollar')?.invalid" class="error">
+    Código Collar es requerido.
+  </div>
+
+  <label>
+    Foto (URL opcional):
+    <input formControlName="foto" />
+  </label>
+
+  <button type="submit">Registrar Mascota</button>
+</form>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ErrorService } from '../../services/error.service';
+import { ErrorService } from '../../../services/error.service';
 
 interface Usuario {
   id: number;
@@ -15,13 +15,13 @@ interface Usuario {
 }
 
 @Component({
-  selector: 'app-lista-usuarios',
+  selector: 'app-clients-list',
   standalone: true,
   imports: [CommonModule, HttpClientModule],
-  templateUrl: './lista-usuarios.component.html',
-  styleUrls: ['./lista-usuarios.component.css']
+  templateUrl: './clients-list.component.html',
+  styleUrls: ['./clients-list.component.css']
 })
-export class ListaUsuariosComponent implements OnInit {
+export class ClientsListComponent implements OnInit {
   usuarios: Usuario[] = [];
   usuariosClientes: Usuario[] = [];
   loading = true;
@@ -116,11 +116,11 @@ export class ListaUsuariosComponent implements OnInit {
 }
 
   irAlPanelAdmin() {
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/admin-panel']);
   }
 
   irARegistrarUsuario() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['admin/client-register']);
   }
 
   recargarUsuarios() {

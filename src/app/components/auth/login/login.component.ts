@@ -8,7 +8,7 @@ import { ErrorService } from '../../../services/error.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -151,7 +151,7 @@ export class LoginComponent {
     switch (normalizedRole) {
       case 'ADMIN':
         console.log('✅ Redirigiendo a usuarios (admin)');
-        this.router.navigate(['/usuarios']);
+        this.router.navigate(['/admin/clients-list']);
         break;
         
       case 'CLIENTE':

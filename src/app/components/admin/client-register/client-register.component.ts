@@ -6,13 +6,13 @@ import { AuthService } from '../../../services/auth.service';
 import { ErrorService } from '../../../services/error.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-client-register',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './client-register.component.html',
+  styleUrls: ['./client-register.component.css']
 })
-export class RegisterComponent {
+export class ClientRegisterComponent {
   name = '';
   email = '';
   password = '';

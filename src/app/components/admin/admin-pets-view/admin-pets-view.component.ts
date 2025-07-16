@@ -14,13 +14,13 @@ interface Mascota {
 }
 
 @Component({
-  selector: 'app-ver-mascota',
+  selector: 'app-admin-pets-view',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './ver-mascota.component.html',
-  styleUrls: ['./ver-mascota.component.css']
+  templateUrl: './admin-pets-view.component.html',
+  styleUrls: ['./admin-pets-view.component.css']
 })
-export class VerMascotaComponent implements OnInit {
+export class AdminPetsViewComponent implements OnInit {
   mascotas: Mascota[] = [];
   loading = false;
 
@@ -38,7 +38,7 @@ export class VerMascotaComponent implements OnInit {
   }
 
   irARegistrarMascota(): void {
-    this.router.navigate(['/admin/registrar-mascota']);
+    this.router.navigate(['/admin/pet-register']);
   }
 
   verDetallesMascota(mascota: Mascota): void {

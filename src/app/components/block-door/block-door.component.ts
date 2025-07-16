@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-bloquear-puerta',
+  selector: 'app-block-door',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './bloquear-puerta.component.html',
-  styleUrls: ['./bloquear-puerta.component.css']
+  templateUrl: './block-door.component.html',
+  styleUrls: ['./block-door.component.css']
 })
-export class BloquearPuertaComponent {
+export class BlockDoorComponent {
   estado: 'gris' | 'verde' | 'rojo' = 'gris';
 
   cambiarEstado() {
