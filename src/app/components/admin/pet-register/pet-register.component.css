@@ -1,141 +1,76 @@
-/* Estilo base móvil */
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  background-color: #f0f4fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 360px;
-  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #eeeecc;
 }
 
-/* Contenedor principal */
 .mascota-wrapper {
-  width: 360px;
-  margin: 0 auto;
-  padding: 24px 20px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  color: #333;
-
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeSlideIn 0.6s ease-out forwards;
-}
-
-/* Animación entrada */
-@keyframes fadeSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Barra azul decorativa */
-.mascota-header {
-  position: relative;
-  padding-top: 14px;
-  margin-bottom: 12px;
-}
-
-.mascota-header::before {
-  content: '';
-  display: block;
-  height: 10px;
-  width: 100%;
-  background-color: #1565c0;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: expandBar 0.6s ease-out forwards;
-}
-
-@keyframes expandBar {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* Logo centrado */
-.mascota-header .logo {
-  width: 100px;
-  height: auto;
-  margin: 14px auto 8px auto;
-  display: block;
-}
-
-/* Título */
-.mascota-formulario h2,
-.mascota-wrapper h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #222;
-}
-
-/* Formulario */
-.mascota-formulario label {
+  min-height: 100vh;
+  background-color: #eeeecc;
   display: flex;
   flex-direction: column;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #444;
-  margin-bottom: 12px;
 }
 
-.mascota-formulario input,
-.mascota-formulario select {
-  margin-top: 6px;
-  padding: 10px 14px;
-  font-size: 1rem;
-  border: 1.8px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
+.header-blue {
+  background-color: #0099cc;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
 }
 
-.mascota-formulario input:focus,
-.mascota-formulario select:focus {
-  border-color: #4d90fe;
-  outline: none;
-  box-shadow: 0 0 6px #90c2ff70;
+.logo {
+  height: 40px;
 }
 
-/* Mensajes de error */
-.error {
-  background-color: #fbdada;
-  color: #a10a0a;
-  border-radius: 6px;
-  padding: 8px;
-  margin-bottom: 12px;
-  font-weight: 600;
-  font-size: 0.85rem;
+h2 {
   text-align: center;
+  color: #0099cc;
+  font-size: 26px;
+  margin: 20px 0;
 }
 
-/* Botón */
-.btn-registrar {
-  width: 100%;
-  padding: 12px 0;
-  background-color: #1976d2;
-  color: white;
-  font-weight: 700;
-  font-size: 1.05rem;
+.mascota-formulario {
+  padding: 0 16px 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #999966;
+  font-size: 14px;
+}
+
+input,
+select {
+  padding: 12px;
+  border-radius: 15px;
   border: none;
-  border-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: -10px;
+}
+
+.btn-registrar {
+  background-color: #0099cc;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto 0 auto;
   cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.25s ease;
-}
-
-.btn-registrar:disabled {
-  background-color: #a4c8f0;
-  cursor: not-allowed;
-}
-
-.btn-registrar:hover:not(:disabled) {
-  background-color: #0d47a1;
+  display: block;
 }

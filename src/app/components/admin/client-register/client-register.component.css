@@ -1,164 +1,91 @@
-/* Estilo base para pantalla móvil típica */
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  background-color: #f5f5dc; /* fondo beige */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 360px;
-  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #eeeecc;
 }
 
-/* Contenedor principal con animación */
 .cliente-wrapper {
-  width: 360px;
-  margin: 0 auto;
-  padding: 24px 20px;
-  background: #fff;  /* fondo blanco para contraste */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  color: #333;
-
-  /* Animación de entrada */
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeSlideIn 0.6s ease-out forwards;
-}
-
-/* Animación: entrada suave desde abajo */
-@keyframes fadeSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Header con barra decorativa verde animada */
-.cliente-header {
-  text-align: center;
-  margin-bottom: 18px;
-  position: relative;
-  padding-top: 14px;
-}
-
-.cliente-header::before {
-  content: '';
-  display: block;
-  height: 10px;
-  width: 100%;
-  background-color: #2e7d32; /* verde oscuro */
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  /* Animación barra expandiéndose */
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: expandBar 0.6s ease-out forwards;
-}
-
-@keyframes expandBar {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* Logo */
-.cliente-header .logo {
-  width: 100px; /* tamaño reducido */
-  height: auto;
-  margin-top: 12px;
-}
-
-/* Título */
-.cliente-formulario h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 18px;
-  color: #222;
-}
-
-/* Mensajes de estado */
-.success {
-  background-color: #daf5d7;
-  color: #2a7a1e;
-  border-radius: 6px;
-  padding: 10px;
-  margin-bottom: 16px;
-  font-weight: 600;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.error {
-  background-color: #fbdada;
-  color: #a10a0a;
-  border-radius: 6px;
-  padding: 10px;
-  margin-bottom: 16px;
-  font-weight: 600;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-/* Formulario */
-.form-group {
-  margin-bottom: 16px;
+  min-height: 100vh;
+  background-color: #eeeecc;
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
-  margin-bottom: 6px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #444;
+.header-green {
+  background-color: #88b300;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
 }
 
-/* Inputs */
-.form-group input {
-  padding: 10px 14px;
-  font-size: 1rem;
-  border: 1.8px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-  background-color: #fff;
+.logo {
+  height: 40px;
 }
 
-.form-group input:focus {
-  border-color: #5a9bf6;
-  outline: none;
-  box-shadow: 0 0 6px #a4c6ff70;
+.cliente-formulario {
+  padding: 24px 16px;
+  flex: 1;
 }
 
-/* Nota de contraseña */
-.nota {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 20px;
-  font-style: italic;
+h2 {
   text-align: center;
+  color: #669900;
+  font-size: 26px;
+  margin-bottom: 24px;
 }
 
-/* Botón */
-.btn-crear {
-  width: 100%;
-  padding: 12px 0;
-  background-color: #1a73e8;
-  color: white;
-  font-weight: 700;
-  font-size: 1.1rem;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: bold;
+  color: #999966;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 12px;
+  border-radius: 15px;
   border: none;
-  border-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+}
+
+.nota {
+  font-size: 13px;
+  color: #999966;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.btn-crear {
+  background-color: #88b300;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
   cursor: pointer;
-  transition: background-color 0.25s ease;
 }
 
-.btn-crear:disabled {
-  background-color: #87a9e7;
-  cursor: not-allowed;
+.success,
+.error {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 14px;
 }
 
-.btn-crear:hover:not(:disabled) {
-  background-color: #155ab6;
+.success {
+  color: green;
+}
+.error {
+  color: red;
 }

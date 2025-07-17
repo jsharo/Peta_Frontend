@@ -1,5 +1,5 @@
 <div class="mascota-wrapper">
-  <div class="mascota-header">
+  <div class="mascota-header header-blue">
     <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
   </div>
 
@@ -7,7 +7,7 @@
 
   <form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()" class="mascota-formulario">
 
-    <label>
+    <label class="form-label">
       Nombre:
       <input formControlName="nombre" />
     </label>
@@ -15,7 +15,7 @@
       Nombre es requerido.
     </div>
 
-    <label>
+    <label class="form-label">
       Edad:
       <input type="number" formControlName="edad" />
     </label>
@@ -23,7 +23,7 @@
       Edad es requerida y debe ser mayor o igual a 0.
     </div>
 
-    <label>
+    <label class="form-label">
       Raza:
       <input formControlName="raza" />
     </label>
@@ -31,7 +31,7 @@
       Raza es requerida.
     </div>
 
-    <label>
+    <label class="form-label">
       Sexo:
       <select formControlName="sexo">
         <option value="">Selecciona</option>
@@ -43,7 +43,7 @@
       Sexo es requerido.
     </div>
 
-    <label>
+    <label class="form-label">
       UID del Collar:
       <input formControlName="uidCollar" />
     </label>
@@ -51,11 +51,11 @@
       UID del Collar es requerido.
     </div>
 
-    <label>
+    <label class="form-label">
       Foto (URL opcional):
       <input formControlName="foto" />
     </label>
 
-    <button type="submit" class="btn-registrar">Registrar Mascota</button>
-  </form>
+    <button type="submit" class="btn-registrar" [disabled]="mascotaForm.invalid">Registrar Mascota</button>
+  </form>
 </div>
