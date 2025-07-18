@@ -1,0 +1,35 @@
+<h1>Panel de Usuario</h1>
+<div class="cards-container">
+  <div class="card">
+    <img src="/ver-mascota.jpeg" alt="Mascotas" class="card-img" />
+    <h3>Mascotas</h3>
+    <p>Listado de mascotas del usuario</p>
+    <ul>
+      <li *ngFor="let mascota of mascotas">
+        {{ mascota.nombre }} ({{ mascota.raza }})
+      </li>
+      <li *ngIf="mascotas.length === 0">No hay mascotas registradas.</li>
+    </ul>
+    <button (click)="goToMascotas()">Visualizar</button>
+  </div>
+  <div class="card">
+    <img src="/notisss.png" alt="Notificaciones" class="card-img" />
+    <h3>Notificaciones</h3>
+    <p>Notificaciones del usuario</p>
+    <ul>
+      <li *ngFor="let noti of notificaciones">
+        {{ noti.message }}
+      </li>
+      <li *ngIf="notificaciones.length === 0">No hay notificaciones.</li>
+    </ul>
+    <button (click)="goToNotificaciones()">Visualizar</button>
+  </div>
+  <div class="card">
+    <img src="/puerta.jpeg" alt="Usuario" class="card-img" />
+    <h3>Información del Usuario</h3>
+    <p><strong>Nombre:</strong> {{ usuario?.name }}</p>
+    <p><strong>Email:</strong> {{ usuario?.email }}</p>
+    <p><strong>Rol:</strong> {{ usuario?.role || usuario?.rol }}</p>
+    <button (click)="goToInfo()">Visualizar</button>
+  </div>
+</div>

@@ -125,18 +125,15 @@ export class ClientRegisterComponent {
   // ✅ NUEVO: Método para redirigir basado en rol (igual que LoginComponent)
   private redirectBasedOnRole(): void {
     const userRole = this.authService.getCurrentUserRole();
-    
     if (!userRole) {
       console.error('❌ No se pudo obtener el rol del usuario');
       this.router.navigate(['/login']);
       return;
     }
-    
     const normalizedRole = userRole.toUpperCase();
-    
     switch (normalizedRole) {
       case 'ADMIN':
-        this.router.navigate(['/usuarios']);
+        this.router.navigate(['/admin/clients-list']); // <-- CAMBIO AQUÍ
         break;
       case 'CLIENTE':
         this.router.navigate(['/notifications']);

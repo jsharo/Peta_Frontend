@@ -6,11 +6,12 @@ import { ErrorService } from '../../../services/error.service';
 
 interface Usuario {
   id: number;
-  name: string;        
-  apellido?: string;   
+  name: string;
+  apellido?: string;
   email: string;
-  role: string;        
-  isActive?: boolean;  
+  role?: string;      // Puede venir como 'role'
+  rol?: string;       // Puede venir como 'rol'
+  isActive?: boolean;
   fechaCreacion?: string;
 }
 
@@ -66,9 +67,11 @@ export class ClientsListComponent implements OnInit {
         this.usuarios = data;
         
         // Filtrar solo usuarios con rol "CLIENTE"
-        this.usuariosClientes = data.filter(usuario => 
-          usuario.role && usuario.role.toUpperCase() === 'CLIENTE'
-        );
+        const clientes = data.filter(u => {
+          const rol = (u.role ?? u.rol ?? '').toString().toLowerCase();
+          return rol === 'client' || rol === 'cliente';
+        });
+        this.usuariosClientes = clientes;
         
         this.loading = false;
         console.log('✅ Usuarios clientes cargados:', this.usuariosClientes);
@@ -101,14 +104,14 @@ export class ClientsListComponent implements OnInit {
     next: (data) => {
       console.log('✅ Datos sin auth:', data);
       this.usuarios = data;
-      this.usuariosClientes = data.filter(usuario => 
-        usuario.role && usuario.role.toUpperCase() === 'CLIENTE'
-      );
+      this.usuariosClientes = data.filter(usuario => {
+        const rol = (usuario.role ?? usuario.rol ?? '').toString().toLowerCase();
+        return rol === 'client' || rol === 'cliente';
+      });
       this.loading = false;
     },
     error: (err) => {
       console.error('❌ Error sin auth:', err);
-      // ✅ Usar ErrorService consistentemente
       this.error = this.errorService.handleHttpError(err);
       this.loading = false;
     }
@@ -130,5 +133,14 @@ export class ClientsListComponent implements OnInit {
   // Método para debugging - eliminar después
   probarSinAuth() {
     this.cargarUsuariosSinAuth();
+  }
+
+  verUsuario(usuario: any) {
+    const userId = usuario.id_user ?? usuario.id;
+    if (!userId) {
+      console.error('El usuario no tiene id_user ni id:', usuario);
+      return;
+    }
+    this.router.navigate(['/admin/client-detail', userId]);
   }
 }
