@@ -27,23 +27,19 @@ export class AuthService {
     private router: Router
   ) {}
 
-  login(email: string, password: string) {
+// ...existing code...
+// ...existing code...
+login(email: string, password: string) {
   return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
     tap({
-      next: (response) => {
-        console.log('✅ Respuesta completa del login:', response);
-        console.log('Token recibido:', response.token);
-        console.log('Usuario recibido:', response.user);
-        
-        localStorage.setItem('auth_token', response.token);
-        
-        // Guardar información del usuario
-        if (response.user) {
-          localStorage.setItem('user', JSON.stringify(response.user));
-          console.log('✅ Usuario guardado en localStorage');
-        } else {
-          console.warn('⚠️ No se recibió información del usuario');
+      next: (response: any) => {
+        // Mapear 'rol' a 'role' si es necesario
+        if (response.user && response.user.rol && !response.user.role) {
+          response.user.role = response.user.rol;
         }
+        localStorage.setItem('auth_token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        console.log('✅ Usuario guardado en localStorage');
       },
       error: (err) => {
         console.error('❌ Error en login:', err);
@@ -51,6 +47,8 @@ export class AuthService {
     })
   );
 }
+// ...existing code...
+// ...existing code...
 
   register(userData: { name: string, email: string, password: string, confirmPassword: string, role?: string }) {
   console.log('📤 AuthService: Enviando datos de registro:', userData);

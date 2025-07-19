@@ -20,16 +20,16 @@ export const routes: Routes = [
   // Rutas que requieren ser ADMINISTRADOR
   {
     path: 'admin',
-    redirectTo: 'admin/admin-panel',
+    redirectTo: 'admin/client-detail/1', // Cambia "1" por el id que quieras mostrar por defecto
     pathMatch: 'full'
   },
   {
-    path: 'admin/admin-panel',
+  /**   path: 'admin/admin-panel',
     loadComponent: () =>
       import('./components/admin/admin-panel/admin-panel.component').then(m => m.AdminPanelComponent),
     canActivate: [adminGuard]
   },
-  {
+  { **/
     path: 'admin/admin-pets-view',
     loadComponent: () =>
       import('./components/admin/admin-pets-view/admin-pets-view.component').then(m => m.AdminPetsViewComponent),
@@ -64,6 +64,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/admin/client-register/client-register.component').then(m => m.ClientRegisterComponent),
     canActivate: [adminGuard] // Solo si quieres que solo admin pueda registrar usuarios
+  },
+  {
+    path: 'admin/client-detail/:id',
+    loadComponent: () =>
+      import('./components/admin/client-detail/client-detail.component').then(m => m.ClientDetailComponent),
+    canActivate: [adminGuard]
   },
 
   // Redireccionamientos

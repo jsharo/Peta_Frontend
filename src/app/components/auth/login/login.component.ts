@@ -148,13 +148,21 @@ export class LoginComponent {
     console.log('🔍 Rol normalizado:', normalizedRole);
     
     // ✅ ROUTING: Redirigir según el rol
+    const validRoles = ['ADMIN', 'CLIENT']; // Agrega CLIENT como rol válido
+
+    if (!validRoles.includes(normalizedRole)) {
+      console.error('Rol no válido:', userRole);
+      this.authService.logout();
+      return;
+    }
+
     switch (normalizedRole) {
       case 'ADMIN':
         console.log('✅ Redirigiendo a usuarios (admin)');
         this.router.navigate(['/admin/clients-list']);
         break;
         
-      case 'CLIENTE':
+      case 'CLIENT':
         console.log('✅ Redirigiendo a notifications (cliente)');
         this.router.navigate(['/notifications']);
         break;
