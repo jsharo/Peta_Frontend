@@ -1,1 +1,11 @@
-<p>nav-bar works!</p>
+<nav class="navbar">
+  <button class="nav-btn" [class.active]="active === 'huella'" (click)="select('huella')">
+    <img src="/g23.png" alt="Mascotas" />
+  </button>
+  <button class="nav-btn" [class.active]="active === 'puerta'" (click)="select('puerta')">
+    <img src="" alt="Puerta" />
+  </button>
+  <button class="nav-btn" [class.active]="active === 'notificaciones'" (click)="select('notificaciones')">
+    <img src="/Vector.png" alt="Notificaciones" />
+  </button>
+</nav>

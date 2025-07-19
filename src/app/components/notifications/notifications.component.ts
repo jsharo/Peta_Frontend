@@ -1,13 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../services/error.service';
-import { Router } from '@angular/router';
 
 interface Notification {
   id: number;
-  type: string;
+  type: 'entrada' | 'salida';
   message: string;
   isRead: boolean;
   createdAt: Date;
@@ -24,12 +24,13 @@ export class NotificationsComponent implements OnInit {
   notifications = signal<Notification[]>([]);
   loading = signal(true);
   error = signal('');
+  puertaDesbloqueada = signal(true);
 
   constructor(
     private notificationService: NotificationService,
     private authService: AuthService,
-    private router: Router,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +42,12 @@ export class NotificationsComponent implements OnInit {
     this.error.set('');
 
     this.notificationService.getNotifications().subscribe({
-      next: (notifications) => {
-        const parsed = notifications.map((n: any) => ({
-          ...n,
+      next: (data: any[]) => {
+        const parsed: Notification[] = data.map((n: any) => ({
+          id: n.id,
+          type: n.type === 'IN' ? 'entrada' : 'salida',
+          message: n.message,
+          isRead: n.isRead,
           createdAt: new Date(n.createdAt)
         }));
         this.notifications.set(parsed);
@@ -52,26 +56,11 @@ export class NotificationsComponent implements OnInit {
       error: (err) => {
         this.error.set(this.errorService.handleHttpError(err));
         this.loading.set(false);
-        
+
         if (err.status === 401) {
           localStorage.removeItem('auth_token');
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 2000);
+          this.router.navigate(['/login']);
         }
-      }
-    });
-  }
-
-  markAsRead(notificationId: number): void {
-    this.notificationService.markAsRead(notificationId).subscribe({
-      next: () => {
-        this.notifications.update(notifs =>
-          notifs.map(n => n.id === notificationId ? { ...n, isRead: true } : n)
-        );
-      },
-      error: (err) => {
-        this.error.set(this.errorService.handleHttpError(err));
       }
     });
   }
@@ -79,8 +68,8 @@ export class NotificationsComponent implements OnInit {
   markAllAsRead(): void {
     this.notificationService.markAllAsRead().subscribe({
       next: () => {
-        this.notifications.update(notifs =>
-          notifs.map(n => ({ ...n, isRead: true }))
+        this.notifications.update(n =>
+          n.map(notif => ({ ...notif, isRead: true }))
         );
       },
       error: (err) => {
@@ -91,5 +80,9 @@ export class NotificationsComponent implements OnInit {
 
   recargarNotificaciones(): void {
     this.loadNotifications();
+  }
+
+  togglePuerta(): void {
+    this.puertaDesbloqueada.set(!this.puertaDesbloqueada());
   }
 }

@@ -1,17 +1,26 @@
-<div class="background">
+<div class="container">
   <div class="notifications-container">
-    <header class="notifications-header">
-      <h1>🔔 Notificaciones</h1>
-    </header>
+    
+    <!-- Estado de la puerta -->
+    <div class="estado-puerta">
+      <p>{{ puertaDesbloqueada() ? 'Puerta Desbloqueada' : 'Puerta Bloqueada' }}</p>
+      <button class="icon-btn" (click)="togglePuerta()">
+        {{ puertaDesbloqueada() ? '🔓' : '🔒' }}
+      </button>
+    </div>
 
+    <!-- Loading -->
     @if (loading()) {
       <div class="loading-spinner">Cargando notificaciones...</div>
     } @else {
+
+      <!-- Botones -->
       <div class="notifications-actions">
         <button (click)="markAllAsRead()">✅ Marcar todas como leídas</button>
         <button (click)="recargarNotificaciones()">🔄 Recargar</button>
       </div>
 
+      <!-- Error -->
       @if (error()) {
         <div class="error-message">
           {{ error() }}
@@ -19,17 +28,12 @@
         </div>
       }
 
-      <div class="notifications-list">
-        @for (notification of notifications(); track notification.id) {
-          <div class="notification-item" [class.read]="notification.isRead">
-            <div class="notification-content">
-              <span class="notification-type">{{ notification.type | uppercase }}</span>
-              <p class="notification-message">{{ notification.message }}</p>
-              <small class="notification-time">{{ notification.createdAt | date:'medium' }}</small>
-            </div>
-            @if (!notification.isRead) {
-              <button class="mark-read-btn" (click)="markAsRead(notification.id)">Marcar como leída</button>
-            }
+      <!-- Lista de notificaciones -->
+      <div class="notificaciones-chat">
+        @for (n of notifications(); track n.id) {
+          <div class="burbuja" [class.entrada]="n.type === 'entrada'" [class.salida]="n.type === 'salida'">
+            <p class="hora">{{ n.createdAt | date: 'shortTime' }}:</p>
+            <p class="mensaje">{{ n.message }}</p>
           </div>
         } @empty {
           <div class="empty-notifications">📭 No hay notificaciones</div>

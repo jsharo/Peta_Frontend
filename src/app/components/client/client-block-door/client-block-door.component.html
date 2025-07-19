@@ -1,1 +1,12 @@
-<p>client-block-door works!</p>
+<div class="background">
+  <div class="overlay">
+    <h2>Estado de la Puerta</h2>
+    <button 
+      class="puerta-btn" 
+      [class.encendida]="puertaEncendida"
+      [class.apagada]="!puertaEncendida"
+      (click)="togglePuerta()">
+      {{ puertaEncendida ? 'Puerta Encendida' : 'Puerta Apagada' }}
+    </button>
+  </div>
+</div>

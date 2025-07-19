@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-nav-bar',
+  selector: 'app-navbar',
   standalone: true,
-  imports: [],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css'
+  styleUrls: ['./nav-bar.component.css'],
 })
-export class NavBarComponent {
+export class NavbarComponent {
+  active: 'huella' | 'puerta' | 'notificaciones' = 'huella';
 
+  select(tab: 'huella' | 'puerta' | 'notificaciones') {
+    this.active = tab;
+    // Aquí puedes hacer navegación, emitir eventos o cargar componentes
+  }
 }

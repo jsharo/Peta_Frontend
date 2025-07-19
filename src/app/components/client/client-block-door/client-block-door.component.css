@@ -1,0 +1,44 @@
+/* Fondo con imagen */
+.background {
+  background-image: url('/assets/images/fondo-puerta.jpg'); /* Cambia esta ruta si es necesario */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cuadro oscuro centrado */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Botón base */
+.puerta-btn {
+  font-size: 18px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  background-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Botón encendido */
+.puerta-btn.encendida {
+  background-color: #28a745; /* verde */
+  color: #fff;
+}
+
+/* Botón apagado */
+.puerta-btn.apagada {
+  background-color: #dc3545; /* rojo */
+  color: #fff;
+}

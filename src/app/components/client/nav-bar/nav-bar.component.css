@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  background-color: #88b000;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.nav-btn img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* efecto blanco */
+}
+
+.nav-btn.active {
+  background-color: #00aaff; /* azul cuando está activo */
+}
+

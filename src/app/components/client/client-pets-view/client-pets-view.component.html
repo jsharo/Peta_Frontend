@@ -1,1 +1,10 @@
-<p>client-pets-view works!</p>
+<div class="page-container">
+  <h1>Mis Mascotas</h1>
+
+  <div class="mascotas-list">
+    <div class="mascota-card" *ngFor="let mascota of mascotas">
+      <img [src]="mascota.foto" alt="{{ mascota.nombre }}" />
+      <p>{{ mascota.nombre }}</p>
+    </div>
+  </div>
+</div>

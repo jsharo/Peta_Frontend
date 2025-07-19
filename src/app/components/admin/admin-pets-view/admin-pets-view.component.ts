@@ -32,7 +32,15 @@ export class AdminPetsViewComponent implements OnInit {
 
   cargarMascotas(): void {
     this.loading = true;
-    // Aquí puedes agregar la lógica para cargar mascotas reales desde tu API
+
+    // Aquí deberías hacer una llamada real a tu API para cargar las mascotas
+    // Ejemplo:
+    // this.miServicio.obtenerMascotas().subscribe(data => {
+    //   this.mascotas = data;
+    //   this.loading = false;
+    // });
+
+    // Por ahora sin datos falsos
     this.mascotas = [];
     this.loading = false;
   }
@@ -43,6 +51,7 @@ export class AdminPetsViewComponent implements OnInit {
 
   verDetallesMascota(mascota: Mascota): void {
     console.log('Ver detalles de:', mascota);
+    // Puedes hacer navegación si tienes vista de detalles
   }
 
   recargarMascotas(): void {
@@ -50,10 +59,14 @@ export class AdminPetsViewComponent implements OnInit {
   }
 
   obtenerMascotasActivas(): number {
-    return this.mascotas.filter(mascota => mascota.activo).length;
+    return this.mascotas.filter(m => m.activo).length;
   }
 
   trackByMascota(index: number, mascota: Mascota): number {
     return mascota.id;
+  }
+
+  logout(): void {
+    this.router.navigate(['/login']);
   }
 }

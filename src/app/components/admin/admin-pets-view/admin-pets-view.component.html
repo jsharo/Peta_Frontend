@@ -1,80 +1,26 @@
-<div class="contenedor">
+<div class="mobile-container">
+  <!-- Encabezado con logo y botón de cerrar sesión -->
   <div class="header">
-    <h2>Mascotas Registradas</h2>
-    <button (click)="recargarMascotas()" class="reload-btn" [disabled]="loading">
-      🔄 Recargar
+    <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </div>
+
+  <!-- Título -->
+  <h1 class="title">Mascotas</h1>
+
+  <!-- Botón Registrar -->
+  <div class="register-container">
+    <button class="register-btn" (click)="irARegistrarMascota()">
+      <span class="plus">+</span> Registrar mascota
     </button>
   </div>
 
-  <!-- Tarjeta para registrar nueva mascota -->
-  <div class="tarjeta-registro" (click)="irARegistrarMascota()">
-    <div class="icono-registro">
-      <span>🐕➕</span>
-    </div>
-    <div class="contenido-registro">
-      <h3>Registrar Nueva Mascota</h3>
-      <p>Agregar una nueva mascota al sistema</p>
-    </div>
-    <div class="boton-registro">
-      <span>➜</span>
-    </div>
-  </div>
+  <!-- Contador de mascotas -->
+  <p class="count">Total Mascotas: {{ mascotas.length }}</p>
 
-  <!-- Estado de carga -->
-  <div *ngIf="loading" class="loading">
-    <p>Cargando mascotas...</p>
-  </div>
-
-  <!-- Lista de mascotas -->
-  <div *ngIf="!loading">
-    <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
-      <div class="foto-container">
-        <img 
-          *ngIf="mascota.foto" 
-          [src]="mascota.foto" 
-          [alt]="mascota.nombre"
-          class="foto-mascota"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
-        />
-        <div *ngIf="!mascota.foto" class="sin-foto">
-          🐕
-        </div>
-        <span 
-          class="estado-badge"
-          [class.activo]="mascota.activo"
-          [class.inactivo]="!mascota.activo"
-        >
-          {{ mascota.activo ? 'Activo' : 'Inactivo' }}
-        </span>
-      </div>
-      
-      <div class="info-mascota">
-        <h3>{{ mascota.nombre }}</h3>
-        <div class="detalles">
-          <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
-          <p><strong>Raza:</strong> {{ mascota.raza }}</p>
-          <p><strong>Código:</strong> {{ mascota.codigoCollar }}</p>
-          <p *ngIf="mascota.fechaRegistro" class="fecha">
-            <strong>Registrado:</strong> {{ mascota.fechaRegistro }}
-          </p>
-        </div>
-      </div>
-      
-      <div class="acciones">
-        <button class="ver-boton" (click)="verDetallesMascota(mascota)">
-          Ver Detalles
-        </button>
-      </div>
-    </div>
-
-    <!-- Mensaje cuando no hay mascotas -->
-    <div *ngIf="mascotas.length === 0" class="sin-mascotas">
-  <p>No hay mascotas registradas</p>
-</div>
-
-  <!-- Información adicional -->
-  <div *ngIf="!loading && mascotas.length > 0" class="info-footer">
-    <p>Total de mascotas: {{ mascotas.length }}</p>
-    <p>Activas: {{ obtenerMascotasActivas() }}</p>
+  <!-- Lista -->
+  <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
+    <span class="nombre">{{ mascota.nombre }}</span>
+    <button class="ver-btn" (click)="verDetallesMascota(mascota)">Ver</button>
   </div>
 </div>
