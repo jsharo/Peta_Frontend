@@ -1,61 +1,100 @@
 <div class="mascota-wrapper">
-  <div class="mascota-header header-blue">
+  <header class="header-blue">
     <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
-  </div>
+  </header>
 
   <h2>Registrar Mascota</h2>
 
-  <form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()" class="mascota-formulario">
-
+  <form (ngSubmit)="registrarMascota()" #form="ngForm" class="mascota-formulario" novalidate>
     <label class="form-label">
-      Nombre:
-      <input formControlName="nombre" />
+      Nombre
+      <input
+        type="text"
+        name="nombre"
+        [(ngModel)]="mascota.nombre"
+        #nombre="ngModel"
+        required
+      />
+      <div class="error" *ngIf="nombre.invalid && nombre.touched">El nombre es obligatorio</div>
     </label>
-    <div *ngIf="mascotaForm.get('nombre')?.touched && mascotaForm.get('nombre')?.invalid" class="error">
-      Nombre es requerido.
-    </div>
 
     <label class="form-label">
-      Edad:
-      <input type="number" formControlName="edad" />
+      Edad
+      <input
+        type="number"
+        name="edad"
+        [(ngModel)]="mascota.edad"
+        #edad="ngModel"
+        required
+      />
+      <div class="error" *ngIf="edad.invalid && edad.touched">La edad es obligatoria</div>
     </label>
-    <div *ngIf="mascotaForm.get('edad')?.touched && mascotaForm.get('edad')?.invalid" class="error">
-      Edad es requerida y debe ser mayor o igual a 0.
-    </div>
 
     <label class="form-label">
-      Raza:
-      <input formControlName="raza" />
+      Raza
+      <input
+        type="text"
+        name="raza"
+        [(ngModel)]="mascota.raza"
+        #raza="ngModel"
+        required
+      />
+      <div class="error" *ngIf="raza.invalid && raza.touched">La raza es obligatoria</div>
     </label>
-    <div *ngIf="mascotaForm.get('raza')?.touched && mascotaForm.get('raza')?.invalid" class="error">
-      Raza es requerida.
-    </div>
 
     <label class="form-label">
-      Sexo:
-      <select formControlName="sexo">
-        <option value="">Selecciona</option>
+      Sexo
+      <select
+        name="sexo"
+        [(ngModel)]="mascota.sexo"
+        #sexo="ngModel"
+        required
+      >
+        <option value="" disabled selected>Selecciona sexo</option>
         <option value="Macho">Macho</option>
         <option value="Hembra">Hembra</option>
+        <option value="Otro">Otro</option>
       </select>
+      <div class="error" *ngIf="sexo.invalid && sexo.touched">El sexo es obligatorio</div>
     </label>
-    <div *ngIf="mascotaForm.get('sexo')?.touched && mascotaForm.get('sexo')?.invalid" class="error">
-      Sexo es requerido.
-    </div>
 
     <label class="form-label">
-      UID del Collar:
-      <input formControlName="uidCollar" />
+      Código del collar
+      <input
+        type="text"
+        name="codigoCollar"
+        [(ngModel)]="mascota.codigoCollar"
+        #codigoCollar="ngModel"
+        required
+      />
+      <div class="error" *ngIf="codigoCollar.invalid && codigoCollar.touched">El código del collar es obligatorio</div>
     </label>
-    <div *ngIf="mascotaForm.get('uidCollar')?.touched && mascotaForm.get('uidCollar')?.invalid" class="error">
-      UID del Collar es requerido.
-    </div>
 
     <label class="form-label">
-      Foto (URL opcional):
-      <input formControlName="foto" />
+      Foto de la mascota
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onFileChange($event)"
+        required
+      />
+      <div class="error" *ngIf="errorFoto">{{ errorFoto }}</div>
     </label>
 
-    <button type="submit" class="btn-registrar" [disabled]="mascotaForm.invalid">Registrar Mascota</button>
-  </form>
+    <div *ngIf="fotoPreview" style="text-align:center;">
+      <img
+        [src]="fotoPreview"
+        alt="Preview mascota"
+        style="max-width:150px; border-radius: 12px; margin-top:10px;"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="btn-registrar"
+      [disabled]="form.invalid"
+    >
+      Registrar
+    </button>
+  </form>
 </div>

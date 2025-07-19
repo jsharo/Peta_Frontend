@@ -15,33 +15,14 @@ export class ClientDetailComponent implements OnInit {
   usuario: any = null;
   notificaciones: any[] = [];
   mascotas: any[] = [];
-  loading = true;
 
-  // Tarjetas como en el panel de administración
-  cards = [
-    { 
-      title: 'Mascotas', 
-      description: 'Listado de mascotas del usuario', 
-      img: '/ver-mascota.jpeg',
-      action: () => this.goToMascotas()
-    },
-    { 
-      title: 'Notificaciones', 
-      description: 'Notificaciones del usuario', 
-      img: '/notisss.png',
-      action: () => this.goToNotificaciones()
-    },
-    { 
-      title: 'Información', 
-      description: 'Datos del usuario', 
-      img: '/puerta.jpeg',
-      action: () => this.goToInfo()
-    }
-  ];
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    public router: Router
+  ) {}
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
     if (this.userId) {
       this.cargarUsuario();
@@ -50,39 +31,42 @@ export class ClientDetailComponent implements OnInit {
     }
   }
 
-  cargarUsuario() {
+  cargarUsuario(): void {
     this.http.get(`http://localhost:3000/users/${this.userId}`).subscribe({
-      next: (data) => { this.usuario = data; },
+      next: (data) => this.usuario = data,
       error: (err) => console.error('Error al cargar usuario:', err)
     });
   }
 
-  cargarNotificaciones() {
+  cargarNotificaciones(): void {
     this.http.get<any[]>(`http://localhost:3000/notifications/user/${this.userId}`).subscribe({
       next: (data) => this.notificaciones = data,
       error: (err) => console.error('Error al cargar notificaciones:', err)
     });
   }
 
-  cargarMascotas() {
+  cargarMascotas(): void {
     this.http.get<any[]>(`http://localhost:3000/pets/user/${this.userId}`).subscribe({
       next: (data) => this.mascotas = data,
       error: (err) => console.error('Error al cargar mascotas:', err)
     });
   }
 
-  goToMascotas() {
-    this.router.navigate(['/admin/admin-pets-view'], { queryParams: { userId: this.userId } });
+  goToMascotas(): void {
+    this.router.navigate(['/admin/admin-pets-view'], {
+      queryParams: { userId: this.userId }
+    });
   }
 
-  goToNotificaciones() {
-    this.router.navigate(['/admin/notifications'], { queryParams: { userId: this.userId } });
+  goToNotificaciones(): void {
+    this.router.navigate(['/admin/notifications'], {
+      queryParams: { userId: this.userId }
+    });
   }
 
-  goToInfo() {
+  goToInfo(): void {
     alert(
       `Nombre: ${this.usuario?.name}\nEmail: ${this.usuario?.email}\nRol: ${this.usuario?.role || this.usuario?.rol}`
     );
   }
 }
-

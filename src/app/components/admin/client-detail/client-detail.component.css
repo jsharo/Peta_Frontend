@@ -1,28 +1,211 @@
-.cards-container {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5dc; /* beige */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
 }
-.card {
-  border: 1px solid #ccc;
+
+.admin-panel {
+  max-width: 360px;
+  margin: 0 auto;
   padding: 1rem;
-  border-radius: 8px;
-  width: 220px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.top-bar {
+  background-color: #80804d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 2px solid #ccc;
+}
+
+.logo {
+  height: 40px;
+}
+
+.logout-btn {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.panel-title {
+  font-size: 1.4rem;
+  margin: 1rem 0;
+  color: #55552e;
+  text-align: left;
+}
+
+.user-card {
+  background-color: #2b2b2b;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.user-email, .user-status {
+  font-size: 0.9rem;
+}
+
+.edit-btn {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.option-card {
+  background-color: #3c3c2c;
+  border-radius: 20px;
+  padding: 1rem;
   text-align: center;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.card-img {
-  width: 100px;
-  height: 100px;
+
+.option-card img {
+  width: 60px;
+  height: 60px;
   object-fit: contain;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
-button {
-  margin-top: auto;
-  padding: 0.5rem 1rem;
+
+.option-card button {
+  background-color: #80804d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: bold;
-  cursor: pointer;
+}
+
+/* ... resto del código permanece igual ... */
+
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.option-card {
+  background-color: #3c3c2c;
+  border-radius: 20px;
+  width: 160px;
+  height: 160px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 0.6rem;
+}
+
+.option-card button {
+  background-color: #80804d;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+/* Animación al cargar */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option-card {
+  background-color: #3c3c2c;
+  border-radius: 20px;
+  width: 160px;
+  height: 160px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* Animación inicial */
+  opacity: 0;
+  animation: fadeSlideIn 0.6s ease-out forwards;
+}
+
+.option-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.option-card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+/* Hover: efecto agrandado */
+.option-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Imagen dentro */
+.option-card img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 0.6rem;
+}
+
+/* Botón */
+.option-card button {
+  background-color: #80804d;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.option-card button:hover {
+  background-color: #6f6f3d;
 }

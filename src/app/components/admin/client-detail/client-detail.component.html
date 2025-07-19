@@ -1,35 +1,32 @@
-<h1>Panel de Usuario</h1>
-<div class="cards-container">
-  <div class="card">
-    <img src="/ver-mascota.jpeg" alt="Mascotas" class="card-img" />
-    <h3>Mascotas</h3>
-    <p>Listado de mascotas del usuario</p>
-    <ul>
-      <li *ngFor="let mascota of mascotas">
-        {{ mascota.nombre }} ({{ mascota.raza }})
-      </li>
-      <li *ngIf="mascotas.length === 0">No hay mascotas registradas.</li>
-    </ul>
-    <button (click)="goToMascotas()">Visualizar</button>
+<div class="admin-panel">
+  <!-- Barra superior -->
+  <div class="top-bar">
+    <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
+    <button class="logout-btn" (click)="router.navigate(['/login'])">Cerrar Sesión</button>
   </div>
-  <div class="card">
-    <img src="/notisss.png" alt="Notificaciones" class="card-img" />
-    <h3>Notificaciones</h3>
-    <p>Notificaciones del usuario</p>
-    <ul>
-      <li *ngFor="let noti of notificaciones">
-        {{ noti.message }}
-      </li>
-      <li *ngIf="notificaciones.length === 0">No hay notificaciones.</li>
-    </ul>
-    <button (click)="goToNotificaciones()">Visualizar</button>
+
+  <!-- Título -->
+  <h2 class="panel-title">Panel de Administración</h2>
+
+  <!-- Tarjeta de usuario -->
+  <div class="user-card">
+    <div class="user-info">
+      <p class="user-name">{{ usuario?.name }}</p>
+      <p class="user-email">{{ usuario?.email }}</p>
+      <p class="user-status">Activo</p>
+    </div>
+    <button class="edit-btn" (click)="goToInfo()">Editar</button>
   </div>
-  <div class="card">
-    <img src="/puerta.jpeg" alt="Usuario" class="card-img" />
-    <h3>Información del Usuario</h3>
-    <p><strong>Nombre:</strong> {{ usuario?.name }}</p>
-    <p><strong>Email:</strong> {{ usuario?.email }}</p>
-    <p><strong>Rol:</strong> {{ usuario?.role || usuario?.rol }}</p>
-    <button (click)="goToInfo()">Visualizar</button>
+
+  <!-- Opciones -->
+  <div class="option-buttons">
+    <div class="option-card" (click)="goToMascotas()">
+      <img src="/g23.png" alt="Mascotas" />
+      <button>Mascotas</button>
+    </div>
+    <div class="option-card" (click)="goToNotificaciones()">
+      <img src="/Vector.png" alt="Notificaciones" />
+      <button>Notificaciones</button>
+    </div>
   </div>
 </div>

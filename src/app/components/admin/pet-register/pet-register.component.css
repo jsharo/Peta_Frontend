@@ -72,5 +72,9 @@ select {
   max-width: 200px;
   margin: 20px auto 0 auto;
   cursor: pointer;
-  display: block;
+}
+
+.btn-registrar:disabled {
+  background-color: #aac6db;
+  cursor: not-allowed;
 }
