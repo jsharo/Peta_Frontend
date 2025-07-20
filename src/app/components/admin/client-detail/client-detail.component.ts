@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ClientDetailComponent implements OnInit {
   userId: string | null = null;
-  usuario: any = null;
+  usuario: any; // o Usuario
   notificaciones: any[] = [];
   mascotas: any[] = [];
   petRegistered: boolean = false;
@@ -43,7 +43,9 @@ export class ClientDetailComponent implements OnInit {
 
   cargarUsuario(): void {
     this.http.get(`http://localhost:3000/users/${this.userId}`).subscribe({
-      next: (data) => this.usuario = data,
+      next: (data: any) => {
+        this.usuario = data;
+      },
       error: (err) => console.error('Error al cargar usuario:', err)
     });
   }
@@ -78,5 +80,18 @@ export class ClientDetailComponent implements OnInit {
     alert(
       `Nombre: ${this.usuario?.name}\nEmail: ${this.usuario?.email}\nRol: ${this.usuario?.role || this.usuario?.rol}`
     );
+  }
+
+  cambiarEstadoUsuario(nuevoEstado: boolean): void {
+    if (!this.userId) return;
+    this.http.patch(`http://localhost:3000/users/${this.userId}/status`, { is_active: nuevoEstado }).subscribe({
+      next: (data: any) => {
+        this.usuario.is_active = data.is_active;
+      },
+      error: (err) => {
+        console.error('Error al cambiar estado del usuario:', err);
+        alert('No se pudo cambiar el estado del usuario');
+      }
+    });
   }
 }

@@ -17,7 +17,7 @@
     <div class="cliente-info">
       <div class="cliente-nombre">{{ usuario.name }}</div>
       <div class="cliente-email">{{ usuario.email }}</div>
-      <div class="cliente-estado">{{ usuario.isActive ? 'Activo' : 'Inactivo' }}</div>
+      <div class="cliente-estado">{{ usuario.is_active ? 'Activo' : 'Inactivo' }}</div>
     </div>
     <button class="ver-btn" (click)="verUsuario(usuario)">Ver</button>
   </div>

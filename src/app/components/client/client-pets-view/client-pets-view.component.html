@@ -1,10 +1,27 @@
 <div class="page-container">
-  <h1>Mis Mascotas</h1>
+  <!-- Header -->
+  <div class="header">
+    <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </div>
 
+  <!-- Título -->
+  <h1 class="title">Mascotas</h1>
+
+  <!-- Contador de mascotas -->
+  <p class="count">Total Mascotas: {{ mascotas.length }}</p>
+
+  <!-- Lista de mascotas -->
   <div class="mascotas-list">
-    <div class="mascota-card" *ngFor="let mascota of mascotas">
-      <img [src]="mascota.foto" alt="{{ mascota.nombre }}" />
-      <p>{{ mascota.nombre }}</p>
+    <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
+      <span class="nombre">{{ mascota.nombre }}</span>
+      <button class="ver-btn" (click)="verDetallesMascota(mascota)">Ver</button>
     </div>
   </div>
+
+  <!-- Mensaje cuando no hay mascotas -->
+  <div *ngIf="mascotas.length === 0" class="no-pets-message">
+    <p>No se encontraron mascotas para este usuario</p>
+  </div>
 </div>
+<app-navbar [activeTab]="'mascotas'"></app-navbar>

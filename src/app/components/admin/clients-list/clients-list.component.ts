@@ -9,9 +9,9 @@ interface Usuario {
   name: string;
   apellido?: string;
   email: string;
-  role?: string;      // Puede venir como 'role'
-  rol?: string;       // Puede venir como 'rol'
-  isActive?: boolean;
+  role?: string;
+  rol?: string;
+  is_active?: boolean; // <-- agrega esta línea
   fechaCreacion?: string;
 }
 

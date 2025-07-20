@@ -22,6 +22,12 @@ export const routes: Routes = [
       import('./components/notifications-client/notifications-client.component').then(m => m.NotificationsClientComponent),
     canActivate: [authGuard]
   },
+  {
+    path: 'cliente/mascotas',
+    loadComponent: () =>
+      import('./components/client/client-pets-view/client-pets-view.component').then(m => m.ClientPetsViewComponent),
+    canActivate: [authGuard]
+  },
 
   // Rutas que requieren ser ADMINISTRADOR
   {

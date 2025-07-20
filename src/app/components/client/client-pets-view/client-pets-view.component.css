@@ -1,49 +1,122 @@
+body, html, :host {
+  margin: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #fff;
+  width: 100%;
+}
+
+/* Contenedor principal adaptativo */
 .page-container {
-  background-color: #000;
-  color: #fff;
   min-height: 100vh;
-  padding: 30px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* Header */
+.header {
+  background-color: #A9BF04; /* Igual que notificaciones */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* <-- Cambiado de flex-start a space-between */
+  padding: 0 16px;
+  margin-bottom: 18px;
+}
+
+/* Logo */
+.logo {
+  height: 40px;
+}
+
+/* Título */
+.title {
+  color: #8a885c;
+  font-size: 2rem;
+  margin-bottom: 18px;
+  margin-left: 16px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Contador */
+.count {
+  color: #8a885c;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  margin-left: 16px;
+  font-weight: 600;
+}
+
+/* Lista de mascotas */
+.mascotas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 0 16px 32px 16px; /* Igual que notificaciones */
+  box-sizing: border-box;
+}
+
+/* Tarjetas de mascota */
+.mascota-card {
+  background-color: #2d2d2d;
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(44,44,44,0.08);
+  margin-bottom: 0;
+}
+
+.nombre {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Botón Ver con verde igual al de notificaciones */
+.ver-btn {
+  background: #A9BF04;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ver-btn:hover {
+  background: #8a885c;
+}
+
+.no-pets-message {
+  color: #8a885c;
+  font-size: 1.1rem;
+  margin-top: 24px;
   text-align: center;
 }
 
-.page-container h1 {
-  margin-bottom: 40px;
-}
-
-.mascotas-list {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.mascota-card {
-  background-color: #222;
-  border-radius: 12px;
-  padding: 15px;
-  width: 150px;
-  box-shadow: 0 0 10px #88b000aa;
-  transition: transform 0.3s ease;
+/* Botón de cierre de sesión */
+.logout-btn {
+  background-color: #0090e7;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: 600;
 }
 
-.mascota-card:hover {
-  transform: scale(1.05);
-}
-
-.mascota-card img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #88b000;
-  margin-bottom: 10px;
-}
-
-.mascota-card p {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
+.logout-btn:hover {
+  background: #007bff;
 }

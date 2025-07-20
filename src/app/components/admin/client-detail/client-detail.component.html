@@ -10,10 +10,26 @@
 
   <!-- Tarjeta de usuario -->
   <div class="user-card">
-    <div class="user-info">
-      <p class="user-name">{{ usuario?.name }}</p>
-      <p class="user-email">{{ usuario?.email }}</p>
-      <p class="user-active">{{ usuario?.is_active ? 'Activo' : 'Inactivo' }}</p>
+    <div class="user-row">
+      <div class="user-info">
+        <p class="user-name">{{ usuario?.name }}</p>
+        <p class="user-email">{{ usuario?.email }}</p>
+        <p class="user-active">{{ usuario?.is_active ? 'Activo' : 'Inactivo' }}</p>
+      </div>
+      <div class="user-actions">
+        <button
+          *ngIf="usuario?.is_active === false"
+          class="activate-btn"
+          (click)="cambiarEstadoUsuario(true)">
+          Activar usuario
+        </button>
+        <button
+          *ngIf="usuario?.is_active === true"
+          class="inactivate-btn"
+          (click)="cambiarEstadoUsuario(false)">
+          Inactivar usuario
+        </button>
+      </div>
     </div>
   </div>
 

@@ -35,20 +35,18 @@ export class ClientRegisterComponent {
   }
 
   onSubmit() {
-    // ✅ MEJORADO: Validación más robusta
+    // Validaciones
     if (!this.name.trim() || !this.email.trim() || !this.password.trim() || !this.confirmPassword.trim()) {
       this.error.set('Por favor, completa todos los campos');
       return;
     }
 
-    // ✅ MEJORADO: Validación de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.email)) {
       this.error.set('Por favor, ingresa un email válido');
       return;
     }
 
-    // Validación de contraseñas
     if (this.password !== this.confirmPassword) {
       this.error.set('Las contraseñas no coinciden');
       return;
@@ -59,7 +57,6 @@ export class ClientRegisterComponent {
       return;
     }
 
-    // ✅ MEJORADO: Validación de contraseña fuerte
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
     if (!passwordRegex.test(this.password)) {
       this.error.set('La contraseña debe contener al menos una minúscula, una mayúscula y un número');
@@ -76,76 +73,24 @@ export class ClientRegisterComponent {
       confirmPassword: this.confirmPassword,
     };
 
-    console.log('📤 Datos a enviar:', { ...userData, password: '[HIDDEN]', confirmPassword: '[HIDDEN]' });
-
     this.authService.register(userData).subscribe({
       next: (response) => {
-        console.log('✅ Registro exitoso:', response);
         this.loading.set(false);
-        
-        // ✅ MEJORADO: Mejor manejo del auto-login
-        this.attemptAutoLogin();
+        // Redirige SIEMPRE a la lista de clientes después de crear
+        this.router.navigate(['/admin/clients-list']);
       },
       error: (err) => {
-        console.error('❌ Error en registro:', err);
-        
-        // ✅ CORRECTO: Usar ErrorService para todos los errores HTTP
         this.error.set(this.errorService.handleHttpError(err));
         this.loading.set(false);
-        
-        // ✅ MEJORADO: Manejo específico después del ErrorService
+
         if (err.status === 400 && err.error?.field === 'email') {
-          // Limpiar solo el email si el error es específico del email
           this.email = '';
         }
       }
     });
   }
 
-  // ✅ NUEVO: Método separado para auto-login más limpio
-  private attemptAutoLogin(): void {
-    this.authService.login(this.email, this.password).subscribe({
-      next: (loginResponse) => {
-        console.log('✅ Auto-login exitoso:', loginResponse);
-        
-        // Redirigir basado en el rol del usuario
-        this.redirectBasedOnRole();
-      },
-      error: (loginError) => {
-        console.log('❌ Error en auto-login:', loginError);
-        
-        // Registro exitoso pero login fallido - redirigir a login manual
-        this.router.navigate(['/login'], {
-          queryParams: { registered: 'true' }
-        });
-      }
-    });
-  }
-
-  // ✅ NUEVO: Método para redirigir basado en rol (igual que LoginComponent)
-  private redirectBasedOnRole(): void {
-    const userRole = this.authService.getCurrentUserRole();
-    if (!userRole) {
-      console.error('❌ No se pudo obtener el rol del usuario');
-      this.router.navigate(['/login']);
-      return;
-    }
-    const normalizedRole = userRole.toUpperCase();
-    switch (normalizedRole) {
-      case 'ADMIN':
-        this.router.navigate(['/admin/clients-list']); // <-- CAMBIO AQUÍ
-        break;
-      case 'CLIENTE':
-        this.router.navigate(['/notifications']);
-        break;
-      default:
-        console.error('❌ Rol no válido:', userRole);
-        this.router.navigate(['/login']);
-        break;
-    }
-  }
-
-  // ✅ NUEVO: Limpiar errores cuando el usuario empiece a escribir
+  // Limpiar errores cuando el usuario empiece a escribir
   onInputChange(): void {
     if (this.error()) {
       this.error.set('');

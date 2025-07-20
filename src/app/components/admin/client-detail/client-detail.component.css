@@ -83,6 +83,11 @@ body, html, :host {
   padding: 2px 16px; /* 2px arriba y abajo, 16px lateral */
 }
 
+.user-info {
+  flex: 1;
+  padding: 2px 16px;
+}
+
 .user-name {
   font-weight: bold;
   font-size: 1.1rem;
@@ -173,6 +178,50 @@ body, html, :host {
   background-color: #056a99; /* Un azul más oscuro para hover */
 }
 
+.user-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.user-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;  /* Centrado vertical */
+  margin-right: 16px;       /* Margen derecho */
+  min-width: 140px;         /* Opcional: ancho mínimo para botones */
+  gap: 8px;
+}
+
+.activate-btn {
+  background-color: #0797CF;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.activate-btn:hover {
+  background-color: #056a99;
+}
+
+.inactivate-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.inactivate-btn:hover {
+  background-color: #b52a37;
+}
+
 /* Animación al cargar */
 @keyframes fadeSlideIn {
   0% {
@@ -183,4 +232,12 @@ body, html, :host {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.user-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;      /* Centrado vertical */
+  justify-content: space-between;
+  width: 100%;
 }

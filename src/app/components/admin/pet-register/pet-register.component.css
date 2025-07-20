@@ -104,3 +104,44 @@ select:focus {
   background-color: #aac6db;
   cursor: not-allowed;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0; /* Sin espacio entre los botones */
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.btn-cancelar,
+.btn-registrar {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px; /* Redondeado en ambos lados */
+  width: 100%;
+  max-width: 200px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 0;
+}
+
+.btn-cancelar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-registrar {
+  background-color: #0099cc;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background-color: #b52a37;
+}
+
+.btn-registrar:hover {
+  background-color: #0077aa;
+}
