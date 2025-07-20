@@ -1,18 +1,18 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #eeeecc;
+  background-color: #fff;
 }
 
 .cliente-wrapper {
   min-height: 100vh;
-  background-color: #eeeecc;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
 }
 
 .header-green {
-  background-color: #88b300;
+  background-color: #A9BF04; /* Cambia el color del header */
   height: 60px;
   display: flex;
   align-items: center;
@@ -26,13 +26,16 @@ body {
 .cliente-formulario {
   padding: 24px 16px;
   flex: 1;
+  font-family: 'Montserrat', Arial, sans-serif; /* Igual que lista de clientes */
 }
 
 h2 {
   text-align: center;
-  color: #669900;
+  color: #A9BF04; /* Cambia el color del título */
   font-size: 26px;
   margin-bottom: 24px;
+  font-family: 'Montserrat', Arial, sans-serif; /* Igual que lista de clientes */
+  font-weight: 600;
 }
 
 .form-group {
@@ -50,9 +53,17 @@ label {
 input {
   padding: 12px;
   border-radius: 15px;
-  border: none;
-  background-color: white;
+  border: 1px solid #222; /* Borde negro y fino */
+  background-color: #F6F7E3; /* Color suave que combina con el verde y blanco */
   font-size: 16px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  box-shadow: 0 1px 4px rgba(169,191,4,0.08);
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(169,191,4,0.6);
+  border-color: #A9BF04; /* Opcional: verde al enfocar */
 }
 
 .nota {
@@ -63,7 +74,7 @@ input {
 }
 
 .btn-crear {
-  background-color: #88b300;
+  background-color: #A9BF04; /* Cambia el color del botón */
   color: white;
   padding: 15px;
   font-size: 18px;
@@ -74,6 +85,8 @@ input {
   margin: 0 auto;
   display: block;
   cursor: pointer;
+  font-family: 'Montserrat', Arial, sans-serif; /* Igual que lista de clientes */
+  font-weight: 600;
 }
 
 .success,
@@ -88,4 +101,15 @@ input {
 }
 .error {
   color: red;
+}
+
+.cliente-contenedor {
+  min-height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 24px 16px 32px 16px; /* Igual que lista de clientes */
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
 }

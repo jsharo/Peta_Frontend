@@ -20,7 +20,24 @@
 
   <!-- Lista -->
   <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
-    <span class="nombre">{{ mascota.nombre }}</span>
+    <span class="nombre">{{ mascota.name_pet }}</span>
     <button class="ver-btn" (click)="verDetallesMascota(mascota)">Ver</button>
   </div>
+
+<!-- Mensaje de carga -->
+<div *ngIf="loading" class="loading-message">
+  <p>Cargando mascotas...</p>
+</div>
+
+<!-- Mensaje de error -->
+<div *ngIf="error" class="error-message">
+  <p>{{ error }}</p>
+  <button (click)="cargarMascotas()" class="retry-btn">Reintentar</button>
+</div>
+
+<!-- Mensaje cuando no hay mascotas -->
+<div *ngIf="!loading && !error && mascotas.length === 0" class="no-pets-message">
+  <p>No se encontraron mascotas para este usuario</p>
+</div>
+
 </div>

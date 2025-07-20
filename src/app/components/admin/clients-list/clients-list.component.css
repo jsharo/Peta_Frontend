@@ -1,3 +1,135 @@
+/* Fondo y fuente general */
+body, :host {
+  margin: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #fff;
+}
+
+/* Contenedor principal adaptativo */
+.clientes-contenedor {
+  min-height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 24px 16px 32px 16px; /* Igual que .cliente-formulario */
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* Header */
+.clientes-header {
+  background-color: #A9BF04;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 18px;
+  justify-content: space-between;
+  /* Elimina border-radius para que el borde inferior sea recto */
+}
+
+.logo {
+  height: 40px;
+}
+
+/* Título */
+.clientes-title {
+  color: #A9BF04;
+  font-size: 2rem;
+  margin-bottom: 18px;
+  margin-left: 8px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+}
+
+/* Tarjeta crear cliente */
+.crear-cliente-card {
+  background: #A9BF04;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px 0;
+  margin: 0 0 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  gap: 12px;
+}
+
+.crear-icono {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #A9BF04;
+}
+
+/* Botón Crear Cliente */
+.crear-cliente-card:hover {
+  background: #7ca100; /* Un verde más oscuro */
+}
+
+/* Total clientes */
+.total-clientes {
+  color: #0797CF; /* Azul solicitado */
+  font-size: 1rem;
+  margin-bottom: 18px;
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+/* Tarjeta de cliente */
+.cliente-card {
+  background: #2d2d2d;
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(44,44,44,0.08);
+}
+
+.cliente-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cliente-nombre {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.cliente-email {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.cliente-estado {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* Botón Ver */
+.ver-btn {
+  background: #0797CF; /* Azul solicitado */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ver-btn:hover {
+  background: #056a99; /* Azul más oscuro al pasar el ratón */
+}
+
 .contenedor {
   max-width: 600px;
   margin: 40px auto;
@@ -163,4 +295,25 @@
   font-size: 0.9rem;
   border-top: 1px solid #eee;
   padding-top: 15px;
+}
+
+.logout-btn {
+  background-color: #0797CF; /* Azul solicitado */
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #056a99; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Ejemplo para botones azules */
+.btn-azul:hover {
+  background: #007bff; /* Azul más oscuro */
 }

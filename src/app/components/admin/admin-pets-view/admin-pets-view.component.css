@@ -1,47 +1,60 @@
-body, html {
+body, html, :host {
   margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f5dc;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #E9E9C6; /* Fondo igual a la imagen */
   width: 100%;
-  max-width: 400px;
-  margin: auto;
 }
 
+/* Contenedor principal adaptativo */
 .mobile-container {
-  padding: 20px 10px;
+  min-height: 100vh;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 24px 16px 32px 16px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 /* Header */
 .header {
+  background-color: #A9BF04;
+  height: 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #8a8856;
-  padding: 10px;
-  border-radius: 0 0 10px 10px;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 18px;
+  /* Sin border-radius para borde recto */
 }
 
+/* Logo */
 .logo {
   height: 40px;
 }
 
+/* Botón cerrar sesión */
 .logout-btn {
-  background-color: #00aaff;
-  color: white;
-  padding: 5px 12px;
+  background-color: #0090e7;
+  color: #fff;
   border: none;
-  border-radius: 12px;
-  font-weight: bold;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: 600;
 }
 
 /* Título */
 .title {
-  font-size: 24px;
-  color: #66623b;
-  text-align: center;
-  margin: 16px 0 8px;
+  color: #8a885c;
+  font-size: 2rem;
+  margin-bottom: 18px;
+  margin-left: 8px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  text-align: left;
 }
 
 /* Botón registrar */
@@ -52,55 +65,68 @@ body, html {
 }
 
 .register-btn {
-  background-color: #8a8856;
-  color: white;
+  background-color: #A9BF04;
+  color: #fff;
   border: none;
-  padding: 14px 20px;
-  border-radius: 15px;
-  font-size: 18px;
-  font-weight: bold;
+  padding: 18px 0;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
+  width: 100%;
+  max-width: 340px;
+  justify-content: center;
 }
 
 .plus {
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
+  color: #fff;
 }
 
 /* Contador */
 .count {
-  text-align: center;
-  font-weight: bold;
-  color: #66623b;
-  margin-bottom: 15px;
+  color: #8a885c;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  margin-left: 8px;
+  font-weight: 600;
 }
 
 /* Tarjetas de mascota */
 .mascota-card {
-  background-color: #333;
-  color: white;
-  border-radius: 15px;
-  padding: 16px;
-  margin: 0 10px 15px;
+  background-color: #2d2d2d;
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(44,44,44,0.08);
 }
 
 .nombre {
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
+/* Botón Ver con verde igual al de la imagen */
 .ver-btn {
-  background-color: #99cc00;
+  background: #A9BF04;
+  color: #fff;
   border: none;
-  padding: 6px 14px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: white;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ver-btn:hover {
+  background: #8a885c;
 }

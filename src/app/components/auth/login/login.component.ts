@@ -135,7 +135,6 @@ export class LoginComponent {
     const userRole = this.authService.getCurrentUserRole();
     console.log('🔍 Rol obtenido:', userRole);
     
-    // ✅ VALIDACIÓN: Verificar que existe un rol
     if (!userRole) {
       console.error('❌ No se pudo obtener el rol del usuario');
       this.error.set('Error al obtener información del usuario');
@@ -143,13 +142,10 @@ export class LoginComponent {
       return;
     }
     
-    // Normalizar el rol a mayúsculas para la comparación
     const normalizedRole = userRole.toUpperCase();
     console.log('🔍 Rol normalizado:', normalizedRole);
     
-    // ✅ ROUTING: Redirigir según el rol
-    const validRoles = ['ADMIN', 'CLIENT']; // Agrega CLIENT como rol válido
-
+    const validRoles = ['ADMIN', 'CLIENT'];
     if (!validRoles.includes(normalizedRole)) {
       console.error('Rol no válido:', userRole);
       this.authService.logout();
@@ -158,13 +154,13 @@ export class LoginComponent {
 
     switch (normalizedRole) {
       case 'ADMIN':
-        console.log('✅ Redirigiendo a usuarios (admin)');
+        console.log('✅ Redirigiendo a lista de clientes (admin)');
         this.router.navigate(['/admin/clients-list']);
         break;
         
       case 'CLIENT':
-        console.log('✅ Redirigiendo a notifications (cliente)');
-        this.router.navigate(['/notifications']);
+        console.log('✅ Redirigiendo a notificaciones (client)');
+        this.router.navigate(['/cliente/notificaciones']);
         break;
         
       default:

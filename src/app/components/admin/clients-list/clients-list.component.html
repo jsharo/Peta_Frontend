@@ -1,60 +1,24 @@
-<div class="contenedor">
-  <div class="header">
-    <h2>Usuarios Clientes</h2>
-    <button (click)="recargarUsuarios()" class="reload-btn" [disabled]="loading">
-      🔄 Recargar
-    </button>
+<div class="clientes-contenedor">
+  <div class="clientes-header">
+    <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
   </div>
 
-  <!-- Tarjeta para registrar nuevo usuario -->
-  <div class="tarjeta-registro" (click)="irARegistrarUsuario()">
-    <div class="icono-registro">
-      <span>👤➕</span>
-    </div>
-    <div class="contenido-registro">
-      <h3>Registrar Nuevo Usuario</h3>
-      <p>Crear una nueva cuenta de usuario</p>
-    </div>
-    <div class="boton-registro">
-      <span>➜</span>
-    </div>
+  <h1 class="clientes-title">Clientes</h1>
+
+  <div class="crear-cliente-card" (click)="irARegistrarUsuario()">
+    <span class="crear-icono">+</span>
+    <span>Crear Cliente</span>
   </div>
 
-  <!-- Estado de carga -->
-  <div *ngIf="loading" class="loading">
-    <p>Cargando usuarios...</p>
-  </div>
+  <p class="total-clientes">Total Clientes: {{ usuariosClientes.length }}</p>
 
-  <!-- Mensaje de error -->
-  <div *ngIf="error && !loading" class="error-message">
-    <p>{{ error }}</p>
-    <button (click)="recargarUsuarios()" class="retry-btn">Reintentar</button>
-  </div>
-
-  <!-- Lista de usuarios clientes -->
-  <div *ngIf="!loading && !error">
-    <div *ngFor="let usuario of usuariosClientes; trackBy: trackByUsuario" class="usuario-card">
-      <div class="datos">
-        <strong>{{ usuario.name }}</strong>
-        <span>{{ usuario.email }}</span>
-        <small>Rol: {{ usuario.role }}</small>
-        <small *ngIf="usuario.fechaCreacion">Creado: {{ usuario.fechaCreacion }}</small>
-        <small [style.color]="usuario.isActive ? 'green' : 'red'">
-          {{ usuario.isActive ? 'Activo' : 'Inactivo' }}
-        </small>
-      </div>
-      <!-- CAMBIO: Ahora el botón Ver lleva al panel de admin -->
-      <button class="ver-boton" (click)="verUsuario(usuario)">Ver</button>
+  <div *ngFor="let usuario of usuariosClientes; trackBy: trackByUsuario" class="cliente-card">
+    <div class="cliente-info">
+      <div class="cliente-nombre">{{ usuario.name }}</div>
+      <div class="cliente-email">{{ usuario.email }}</div>
+      <div class="cliente-estado">{{ usuario.isActive ? 'Activo' : 'Inactivo' }}</div>
     </div>
-
-    <!-- Mensaje cuando no hay usuarios clientes -->
-    <div *ngIf="usuariosClientes.length === 0" class="sin-usuarios">
-      <p>No hay usuarios con rol de cliente registrados</p>
-    </div>
-  </div>
-
-  <!-- Información adicional -->
-  <div *ngIf="!loading && !error" class="info-footer">
-    <p>Total de clientes: {{ usuariosClientes.length }}</p>
+    <button class="ver-btn" (click)="verUsuario(usuario)">Ver</button>
   </div>
 </div>

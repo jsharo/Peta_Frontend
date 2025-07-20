@@ -16,6 +16,12 @@ export const routes: Routes = [
       import('./components/notifications/notifications.component').then(m => m.NotificationsComponent),
     canActivate: [authGuard]
   },
+  {
+    path: 'cliente/notificaciones',
+    loadComponent: () =>
+      import('./components/notifications-client/notifications-client.component').then(m => m.NotificationsClientComponent),
+    canActivate: [authGuard]
+  },
 
   // Rutas que requieren ser ADMINISTRADOR
   {

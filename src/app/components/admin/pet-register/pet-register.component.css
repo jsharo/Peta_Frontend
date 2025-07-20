@@ -1,16 +1,22 @@
-body {
+body, :host {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #eeeecc;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #fff;
 }
 
+/* Contenedor principal adaptativo */
 .mascota-wrapper {
   min-height: 100vh;
-  background-color: #eeeecc;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  padding: 24px 16px 32px 16px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
+/* Header */
 .header-blue {
   background-color: #0099cc;
   height: 60px;
@@ -23,36 +29,53 @@ body {
   height: 40px;
 }
 
+/* Título */
 h2 {
   text-align: center;
   color: #0099cc;
   font-size: 26px;
   margin: 20px 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
 }
 
+/* Formulario */
 .mascota-formulario {
-  padding: 0 16px 32px 16px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
+/* Etiquetas y campos */
 .form-label {
   display: flex;
   flex-direction: column;
   font-weight: bold;
   color: #999966;
   font-size: 14px;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
 input,
 select {
   padding: 12px;
   border-radius: 15px;
-  border: none;
-  background-color: white;
+  border: 1px solid #222; /* Borde negro fino */
+  background-color: #F6F7E3; /* Igual que registro de cliente */
   font-size: 16px;
   margin-top: 6px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  box-shadow: 0 1px 4px rgba(169,191,4,0.08);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(169,191,4,0.6);
+  border-color: #A9BF04;
 }
 
 .error {
@@ -61,6 +84,7 @@ select {
   margin-top: -10px;
 }
 
+/* Botón registrar */
 .btn-registrar {
   background-color: #0099cc;
   color: white;
@@ -72,6 +96,8 @@ select {
   max-width: 200px;
   margin: 20px auto 0 auto;
   cursor: pointer;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
 }
 
 .btn-registrar:disabled {

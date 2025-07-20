@@ -15,6 +15,7 @@ export class ClientDetailComponent implements OnInit {
   usuario: any = null;
   notificaciones: any[] = [];
   mascotas: any[] = [];
+  petRegistered: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +25,15 @@ export class ClientDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
+    
+    // Verificar si viene de registro exitoso de mascota
+    this.route.queryParams.subscribe(params => {
+      this.petRegistered = params['petRegistered'] === 'true';
+      if (this.petRegistered) {
+        setTimeout(() => this.petRegistered = false, 3000); // Ocultar después de 3 segundos
+      }
+    });
+
     if (this.userId) {
       this.cargarUsuario();
       this.cargarNotificaciones();

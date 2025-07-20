@@ -1,4 +1,4 @@
-<div class="admin-panel">
+<div class="admin-contenedor">
   <!-- Barra superior -->
   <div class="top-bar">
     <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
@@ -13,9 +13,8 @@
     <div class="user-info">
       <p class="user-name">{{ usuario?.name }}</p>
       <p class="user-email">{{ usuario?.email }}</p>
-      <p class="user-status">Activo</p>
+      <p class="user-active">{{ usuario?.is_active ? 'Activo' : 'Inactivo' }}</p>
     </div>
-    <button class="edit-btn" (click)="goToInfo()">Editar</button>
   </div>
 
   <!-- Opciones -->

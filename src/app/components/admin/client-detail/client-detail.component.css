@@ -1,63 +1,105 @@
-body, html {
+body, html, :host {
   margin: 0;
   padding: 0;
-  background-color: #f5f5dc; /* beige */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
   width: 100%;
 }
 
-.admin-panel {
-  max-width: 360px;
-  margin: 0 auto;
-  padding: 1rem;
+.admin-contenedor {
+  min-height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 24px 16px 32px 16px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', Arial, sans-serif;
 }
 
+/* Header adaptativo y verde */
 .top-bar {
-  background-color: #80804d;
+  background-color: #A9BF04;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
-  border-bottom: 2px solid #ccc;
+  padding: 0 16px;
+  height: 60px;
+  margin-bottom: 18px;
+  /* Sin borde redondeado */
 }
 
+/* Logo */
 .logo {
   height: 40px;
 }
 
+/* Botón cerrar sesión */
 .logout-btn {
-  background-color: #00aaff;
+  background-color: #0797CF; /* Mismo azul que los otros botones */
   color: white;
   border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 10px;
-  font-weight: bold;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s; /* Igual que los otros botones */
 }
 
+.logout-btn:hover {
+  background-color: #056a99; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Título */
 .panel-title {
-  font-size: 1.4rem;
-  margin: 1rem 0;
-  color: #55552e;
+  font-size: 2rem;
+  margin-bottom: 18px;
+  margin-left: 8px;
+  color: #A9BF04;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
   text-align: left;
 }
 
 .user-card {
   background-color: #2b2b2b;
   color: white;
-  padding: 1rem;
+  padding: 2px 2px;           /* Más margen arriba y abajo */
   border-radius: 15px;
+  width: 100%;
+  margin: 0 0 8px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(44,44,44,0.08);
+}
+
+.user-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;         /* Menos espacio entre líneas */
+  padding: 2px 16px; /* 2px arriba y abajo, 16px lateral */
 }
 
 .user-name {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin-bottom: 0;          /* Sin margen extra */
 }
 
-.user-email, .user-status {
-  font-size: 0.9rem;
+.user-email,
+.user-active {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 0;          /* Sin margen extra */
+}
+
+.user-status {
+  font-size: 0.95rem;
+  color: #A9BF04;
+  font-weight: 600;
 }
 
 .edit-btn {
@@ -74,86 +116,7 @@ body, html {
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 2rem;
-}
-
-.option-card {
-  background-color: #3c3c2c;
-  border-radius: 20px;
-  padding: 1rem;
-  text-align: center;
-  color: white;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-.option-card img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 0.8rem;
-}
-
-.option-card button {
-  background-color: #80804d;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-/* ... resto del código permanece igual ... */
-
-.option-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  align-items: center;
-}
-
-.option-card {
-  background-color: #3c3c2c;
-  border-radius: 20px;
-  width: 160px;
-  height: 160px;
-  text-align: center;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.option-card img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  margin-bottom: 0.6rem;
-}
-
-.option-card button {
-  background-color: #80804d;
-  color: white;
-  border: none;
-  padding: 0.4rem 1rem;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: bold;
-}
-
-/* Animación al cargar */
-@keyframes fadeSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .option-card {
@@ -196,7 +159,7 @@ body, html {
 
 /* Botón */
 .option-card button {
-  background-color: #80804d;
+  background-color: #0797CF; /* Azul solicitado */
   color: white;
   border: none;
   padding: 0.4rem 1rem;
@@ -207,5 +170,17 @@ body, html {
 }
 
 .option-card button:hover {
-  background-color: #6f6f3d;
+  background-color: #056a99; /* Un azul más oscuro para hover */
+}
+
+/* Animación al cargar */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

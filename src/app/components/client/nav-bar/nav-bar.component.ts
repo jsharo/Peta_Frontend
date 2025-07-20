@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavbarComponent {
-  active: 'huella' | 'puerta' | 'notificaciones' = 'huella';
+  active: 'notificaciones' | 'mascotas' = 'notificaciones';
 
-  select(tab: 'huella' | 'puerta' | 'notificaciones') {
+  select(tab: 'notificaciones' | 'mascotas') {
     this.active = tab;
     // Aquí puedes hacer navegación, emitir eventos o cargar componentes
   }

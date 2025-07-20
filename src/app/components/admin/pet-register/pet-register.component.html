@@ -1,100 +1,77 @@
 <div class="mascota-wrapper">
-  <header class="header-blue">
+  <div class="header-blue">
     <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
-  </header>
+  </div>
 
   <h2>Registrar Mascota</h2>
 
-  <form (ngSubmit)="registrarMascota()" #form="ngForm" class="mascota-formulario" novalidate>
-    <label class="form-label">
-      Nombre
-      <input
-        type="text"
-        name="nombre"
-        [(ngModel)]="mascota.nombre"
-        #nombre="ngModel"
-        required
-      />
-      <div class="error" *ngIf="nombre.invalid && nombre.touched">El nombre es obligatorio</div>
-    </label>
-
-    <label class="form-label">
-      Edad
-      <input
-        type="number"
-        name="edad"
-        [(ngModel)]="mascota.edad"
-        #edad="ngModel"
-        required
-      />
-      <div class="error" *ngIf="edad.invalid && edad.touched">La edad es obligatoria</div>
-    </label>
-
-    <label class="form-label">
-      Raza
-      <input
-        type="text"
-        name="raza"
-        [(ngModel)]="mascota.raza"
-        #raza="ngModel"
-        required
-      />
-      <div class="error" *ngIf="raza.invalid && raza.touched">La raza es obligatoria</div>
-    </label>
-
-    <label class="form-label">
-      Sexo
-      <select
-        name="sexo"
-        [(ngModel)]="mascota.sexo"
-        #sexo="ngModel"
-        required
-      >
-        <option value="" disabled selected>Selecciona sexo</option>
-        <option value="Macho">Macho</option>
-        <option value="Hembra">Hembra</option>
-        <option value="Otro">Otro</option>
-      </select>
-      <div class="error" *ngIf="sexo.invalid && sexo.touched">El sexo es obligatorio</div>
-    </label>
-
-    <label class="form-label">
-      Código del collar
-      <input
-        type="text"
-        name="codigoCollar"
-        [(ngModel)]="mascota.codigoCollar"
-        #codigoCollar="ngModel"
-        required
-      />
-      <div class="error" *ngIf="codigoCollar.invalid && codigoCollar.touched">El código del collar es obligatorio</div>
-    </label>
-
-    <label class="form-label">
-      Foto de la mascota
-      <input
-        type="file"
-        accept="image/*"
-        (change)="onFileChange($event)"
-        required
-      />
-      <div class="error" *ngIf="errorFoto">{{ errorFoto }}</div>
-    </label>
-
-    <div *ngIf="fotoPreview" style="text-align:center;">
-      <img
-        [src]="fotoPreview"
-        alt="Preview mascota"
-        style="max-width:150px; border-radius: 12px; margin-top:10px;"
-      />
+  <form (ngSubmit)="registrarMascota()" class="mascota-formulario">
+    <!-- Mostrar nombre del cliente si es admin -->
+    <div *ngIf="isAdminRegistering && clientName" class="client-info">
+      <p>Registrando mascota para: <strong>{{ clientName }}</strong></p>
     </div>
 
-    <button
-      type="submit"
-      class="btn-registrar"
-      [disabled]="form.invalid"
-    >
-      Registrar
-    </button>
+    <!-- Mensaje de error -->
+    <div *ngIf="errorFoto" class="error">
+      {{ errorFoto }}
+    </div>
+
+    <!-- Nombre -->
+    <div class="form-label">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="mascota.name_pet" name="name_pet" placeholder="Ingrese nombre de la mascota" required>
+    </div>
+
+    <!-- Edad -->
+    <div class="form-label">
+      <label>Edad</label>
+      <input type="number" [(ngModel)]="mascota.edad" name="edad" placeholder="Ingrese edad" required>
+    </div>
+
+    <!-- Especie -->
+    <div class="form-label">
+      <label>Especie</label>
+      <input type="text" [(ngModel)]="mascota.species" name="species" placeholder="Ingrese especie" required>
+    </div>
+
+    <!-- Raza -->
+    <div class="form-label">
+      <label>Raza</label>
+      <input type="text" [(ngModel)]="mascota.race" name="race" placeholder="Ingrese raza" required>
+    </div>
+
+    <!-- Sexo -->
+    <div class="form-label">
+      <label>Sexo</label>
+      <select [(ngModel)]="mascota.sex" name="sex" required>
+        <option value="">Seleccione sexo</option>
+        <option value="M">Macho</option>
+        <option value="F">Hembra</option>
+      </select>
+    </div>
+
+    <!-- Código del collar -->
+    <div class="form-label">
+      <label>Código del collar</label>
+      <input type="text" [(ngModel)]="mascota.id_collar" name="id_collar" placeholder="Ingrese código del collar" required>
+    </div>
+
+    <!-- Fotografía -->
+    <div class="form-label">
+      <label>Fotografía</label>
+      <input type="file" (change)="onFileChange($event)" accept="image/*">
+
+      <div *ngIf="fotoPreview" class="photo-preview">
+        <img [src]="fotoPreview" alt="Vista previa de la foto">
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="buttons">
+      <button type="button" class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn-registrar" [disabled]="!isFormValid() || isLoading">
+        {{ isLoading ? 'Registrando...' : 'Registrar' }}
+      </button>
+    </div>
   </form>
 </div>

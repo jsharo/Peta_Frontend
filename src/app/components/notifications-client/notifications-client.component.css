@@ -44,7 +44,6 @@ body, html, :host {
   font-size: 1rem;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s;
 }
 
 .logout-btn:hover {

@@ -1,5 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../client/nav-bar/nav-bar.component';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { AuthService } from '../../services/auth.service';
@@ -14,13 +15,13 @@ interface Notification {
 }
 
 @Component({
-  selector: 'app-notifications',
+  selector: 'app-notifications-client',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.css']
+  imports: [CommonModule, NavbarComponent],
+  templateUrl: './notifications-client.component.html',
+  styleUrls: ['./notifications-client.component.css']
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsClientComponent implements OnInit {
   notifications = signal<Notification[]>([]);
   loading = signal(true);
   error = signal('');

@@ -143,4 +143,9 @@ export class ClientsListComponent implements OnInit {
     }
     this.router.navigate(['/admin/client-detail', userId]);
   }
+
+  logout() {
+    localStorage.removeItem('auth_token');
+    this.router.navigate(['/login']);
+  }
 }
