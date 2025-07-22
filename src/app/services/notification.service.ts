@@ -82,6 +82,20 @@ export class NotificationService {
   }
 
   markAllAsReadByUser(userId: number) {
-    return this.http.patch(`http://localhost:3000/notifications/user/${userId}/read-all`, {});
+    return this.http.patch(
+      `http://localhost:3000/notifications/user/${userId}/read-all`,
+      {},
+      { headers: this.getHeaders() }
+    ).pipe(
+      catchError(error => {
+        console.error('Error al marcar todas como leídas por usuario:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  // notification.service.ts
+  deleteAllByUser(userId: number) {
+    return this.http.delete(`${this.apiUrl}/user/${userId}`);
   }
 }

@@ -46,10 +46,9 @@ export class NotificationsClientComponent implements OnInit {
     if (user && user.id_user) {
       this.notificationService.getNotificationsByUser(user.id_user).subscribe({
         next: (data: any[]) => {
-          console.log('Notificaciones recibidas:', data); // <-- Agrega esto
           const parsed: Notification[] = data.map((n: any) => ({
             id: n.id,
-            type: n.action, // o usa n.type si lo necesitas
+            type: n.action,
             message: `La mascota ${n.petName} ha ${n.action} por la puerta ${n.doorId}.`,
             isRead: n.isRead,
             createdAt: new Date(n.createdAt)
@@ -75,8 +74,8 @@ export class NotificationsClientComponent implements OnInit {
   markAllAsRead(): void {
     this.notificationService.markAllAsRead().subscribe({
       next: () => {
-        // Marca todas como leídas y limpia la lista visualmente
-        this.notifications.set([]); // <-- Esto vacía la lista en pantalla
+        // Elimina visualmente todas las notificaciones después de marcarlas como leídas
+        this.notifications.set([]);
       },
       error: (err) => {
         this.error.set(this.errorService.handleHttpError(err));
@@ -92,7 +91,7 @@ export class NotificationsClientComponent implements OnInit {
     this.puertaDesbloqueada.set(!this.puertaDesbloqueada());
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('auth_token');
     this.router.navigate(['/login']);
   }

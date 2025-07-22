@@ -3,6 +3,7 @@
   <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
   <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
 </div>
+
 <div class="notifications-main-container">
   <div class="estado-puerta">
     <p
@@ -19,13 +20,11 @@
       {{ puertaDesbloqueada() ? '🔓' : '🔒' }}
     </button>
   </div>
+
   <div class="notificaciones-panel">
-    <!-- Loading -->
     @if (loading()) {
       <div class="loading-spinner">Cargando notificaciones...</div>
     } @else {
-
-      <!-- Botones -->
       <div class="notifications-actions">
         <button (click)="markAllAsRead()">Marcar todas como leídas</button>
         <div class="recargar-container">
@@ -33,7 +32,6 @@
         </div>
       </div>
 
-      <!-- Error -->
       @if (error()) {
         <div class="error-message">
           {{ error() }}
@@ -41,7 +39,6 @@
         </div>
       }
 
-      <!-- Lista de notificaciones -->
       <div class="notificaciones-chat">
         @for (n of notifications(); track n.id) {
           <div class="burbuja" [class.entrada]="n.type === 'entrada'" [class.salida]="n.type === 'salida'">
@@ -55,4 +52,5 @@
     }
   </div>
 </div>
+
 <app-navbar [activeTab]="'notificaciones'"></app-navbar>

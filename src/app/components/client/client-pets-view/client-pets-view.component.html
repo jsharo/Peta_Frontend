@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="page-container">  
   <!-- Header -->
   <div class="header">
     <img src="/PETA-logo1.svg" alt="Logo" class="logo" />
@@ -15,7 +15,7 @@
   <div class="mascotas-list">
     <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
       <span class="nombre">{{ mascota.nombre }}</span>
-      <button class="ver-btn" (click)="verDetallesMascota(mascota)">Ver</button>
+      <button class="ver-btn" (click)="abrirModalEditar(mascota)">Ver</button>
     </div>
   </div>
 
@@ -24,4 +24,38 @@
     <p>No se encontraron mascotas para este usuario</p>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="modalAbierto" (click)="cerrarModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h2>Información de Mascota</h2>
+    <form (ngSubmit)="guardarCambios()" class="modal-form">
+      <div class="input-group">
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" type="text" [(ngModel)]="mascotaEdit.nombre" name="nombre" required />
+      </div>
+
+      <div class="input-group">
+        <label for="edad">Edad:</label>
+        <input id="edad" type="number" [(ngModel)]="mascotaEdit.edad" name="edad" min="0" required />
+      </div>
+
+      <div class="input-group">
+        <label for="raza">Raza:</label>
+        <input id="raza" type="text" [(ngModel)]="mascotaEdit.raza" name="raza" />
+      </div>
+
+      <div class="input-group">
+        <label for="especie">Especie:</label>
+        <input id="especie" type="text" [(ngModel)]="mascotaEdit.especie" name="especie" />
+      </div>
+
+      <div class="modal-buttons">
+        <button type="submit" class="btn-guardar">Guardar</button>
+        <button type="button" class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <app-navbar [activeTab]="'mascotas'"></app-navbar>

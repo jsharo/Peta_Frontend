@@ -19,11 +19,11 @@ body, html, :host {
 
 /* Header */
 .header {
-  background-color: #A9BF04; /* Igual que notificaciones */
+  background-color: #A9BF04;
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* <-- Cambiado de flex-start a space-between */
+  justify-content: space-between;
   padding: 0 16px;
   margin-bottom: 18px;
 }
@@ -59,7 +59,7 @@ body, html, :host {
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  padding: 0 16px 32px 16px; /* Igual que notificaciones */
+  padding: 0 16px 32px 16px;
   box-sizing: border-box;
 }
 
@@ -81,7 +81,7 @@ body, html, :host {
   font-size: 1.1rem;
 }
 
-/* Botón Ver con verde igual al de notificaciones */
+/* Botón Editar */
 .ver-btn {
   background: #A9BF04;
   color: #fff;
@@ -119,4 +119,145 @@ body, html, :host {
 
 .logout-btn:hover {
   background: #007bff;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+
+  animation: fadeInBackdrop 0.3s ease forwards;
+}
+
+@keyframes fadeInBackdrop {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.35); }
+}
+
+.modal {
+  background-color: #fff;
+  padding: 32px 40px;
+  border-radius: 20px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  animation: modalScaleFadeIn 0.35s ease forwards;
+  transform-origin: center center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* CENTRAR todo el contenido del modal */
+  gap: 24px;
+}
+
+@keyframes modalScaleFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal h2 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #2d2d2d;
+  font-family: 'Montserrat', Arial, sans-serif;
+  text-align: center;
+}
+
+/* Formulario: usar un contenedor flex vertical para inputs */
+.modal form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Labels centrados, con buen espaciado */
+.modal label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #4a4a4a;
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin-bottom: 6px;
+  display: block;
+  text-align: left;
+}
+
+/* Inputs uniformes, centrados y anchos iguales */
+.modal input[type="text"],
+.modal input[type="number"] {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.8px solid #c0c0c0;
+  font-size: 1rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+.modal input[type="text"]:focus,
+.modal input[type="number"]:focus {
+  outline: none;
+  border-color: #A9BF04;
+  box-shadow: 0 0 10px rgba(169, 191, 4, 0.7);
+}
+
+/* Botones container */
+.modal-buttons {
+  display: flex;
+  justify-content: center;  /* centrar botones */
+  gap: 20px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* Botones */
+.modal-buttons button {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 14px;
+  border: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  min-width: 120px;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: #A9BF04;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(169, 191, 4, 0.8);
+}
+
+.modal-buttons button[type="submit"]:hover {
+  background-color: #8a885c;
+  box-shadow: 0 6px 14px rgba(138, 136, 92, 0.7);
+}
+
+.modal-buttons button[type="button"] {
+  background-color: #e0e0e0;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.modal-buttons button[type="button"]:hover {
+  background-color: #bdbdbd;
 }
