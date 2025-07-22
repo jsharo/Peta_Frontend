@@ -45,8 +45,8 @@ export class NotificationsComponent implements OnInit {
       next: (data: any[]) => {
         const parsed: Notification[] = data.map((n: any) => ({
           id: n.id,
-          type: n.type === 'IN' ? 'entrada' : 'salida',
-          message: n.message,
+          type: n.action, // o usa n.type si lo necesitas
+          message: `La mascota ${n.petName} ha ${n.action} por la puerta ${n.doorId}.`,
           isRead: n.isRead,
           createdAt: new Date(n.createdAt)
         }));

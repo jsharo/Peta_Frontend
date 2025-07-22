@@ -69,4 +69,19 @@ export class NotificationService {
       })
     );
   }
+
+  getNotificationsByUser(userId: number) {
+    return this.http.get<any[]>(`http://localhost:3000/notifications/user/${userId}`, { 
+      headers: this.getHeaders() 
+    }).pipe(
+      catchError(error => {
+        console.error('Error al obtener notificaciones por usuario:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  markAllAsReadByUser(userId: number) {
+    return this.http.patch(`http://localhost:3000/notifications/user/${userId}/read-all`, {});
+  }
 }
