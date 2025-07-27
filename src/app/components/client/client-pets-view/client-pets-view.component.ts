@@ -13,6 +13,7 @@ interface Mascota {
   raza: string;
   especie: string;
   foto: string;
+  codigo?: string;  // nuevo campo opcional para collar
 }
 
 @Component({
@@ -32,7 +33,8 @@ export class ClientPetsViewComponent implements OnInit {
     edad: 0,
     raza: '',
     especie: '',
-    foto: ''
+    foto: '',
+    codigo: ''  // inicializado vacío
   };
 
   constructor(
@@ -54,7 +56,8 @@ export class ClientPetsViewComponent implements OnInit {
               edad: pet.age_pet ?? 0,
               raza: pet.breed_pet ?? '',
               especie: pet.species_pet ?? '',
-              foto: pet.photo ?? ''
+              foto: pet.photo ?? '',
+              codigo: pet.codigo ?? ''  // si backend no tiene, queda vacío
             }));
           },
           error: (err) => {
@@ -64,13 +67,11 @@ export class ClientPetsViewComponent implements OnInit {
     }
   }
 
-  // Para trackBy en *ngFor
   trackByMascota(index: number, mascota: Mascota): number {
     return mascota.id;
   }
 
   abrirModalEditar(mascota: Mascota): void {
-    // Copia los datos de la mascota seleccionada para edición
     this.mascotaEdit = { ...mascota };
     this.modalAbierto = true;
   }
@@ -86,13 +87,14 @@ export class ClientPetsViewComponent implements OnInit {
       age_pet: this.mascotaEdit.edad,
       breed_pet: this.mascotaEdit.raza,
       species_pet: this.mascotaEdit.especie
+      // NO enviamos codigo collar al backend
     };
 
     this.http.put(url, body).subscribe({
       next: (res) => {
-        console.log('Mascota actualizada:', res);
+        console.log('Mascota actualizada en backend:', res);
 
-        // Actualiza el array de mascotas en el frontend
+        // Actualiza localmente toda la mascota, incluido codigo collar
         const index = this.mascotas.findIndex(m => m.id === this.mascotaEdit.id);
         if (index > -1) {
           this.mascotas[index] = { ...this.mascotaEdit };
