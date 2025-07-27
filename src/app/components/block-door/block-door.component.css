@@ -1,13 +1,14 @@
-/* Centrar el botón */
+/* Centrar el contenedor */
 .contenedor {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; /* Pantalla completa */
   background-color: #f5f5f5;
+  gap: 32px; /* Espacio entre botones */
 }
 
-/* Estilo del botón */
+/* Estilo general de los botones */
 .boton-color {
   padding: 16px 32px;
   font-size: 20px;
@@ -18,15 +19,19 @@
   color: white;
 }
 
-/* Colores según estado */
-.gris {
-  background-color: gray;
+/* Colores específicos para cada botón */
+.boton-color.rojo {
+  background-color: #e53935;
 }
 
-.verde {
-  background-color: green;
+.boton-color.verde {
+  background-color: #43a047;
 }
 
-.rojo {
-  background-color: red;
+.boton-color.rojo:hover {
+  background-color: #b71c1c;
+}
+
+.boton-color.verde:hover {
+  background-color: #1b5e20;
 }

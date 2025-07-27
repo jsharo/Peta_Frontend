@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../services/error.service';
+import { DoorService } from '../../services/door.service'; // <--- IMPORTA EL SERVICIO
 
 interface Notification {
   id: number;
@@ -31,7 +32,8 @@ export class NotificationsClientComponent implements OnInit {
     private notificationService: NotificationService,
     private authService: AuthService,
     private errorService: ErrorService,
-    private router: Router
+    private router: Router,
+    private doorService: DoorService // <--- INYECTA EL SERVICIO
   ) {}
 
   ngOnInit(): void {
@@ -88,7 +90,19 @@ export class NotificationsClientComponent implements OnInit {
   }
 
   togglePuerta(): void {
-    this.puertaDesbloqueada.set(!this.puertaDesbloqueada());
+    if (this.puertaDesbloqueada()) {
+      // Bloquear la puerta
+      this.doorService.bloquearPuerta().subscribe({
+        next: () => this.puertaDesbloqueada.set(false),
+        error: () => alert('Error al bloquear la puerta')
+      });
+    } else {
+      // Desbloquear la puerta
+      this.doorService.desbloquearPuerta().subscribe({
+        next: () => this.puertaDesbloqueada.set(true),
+        error: () => alert('Error al desbloquear la puerta')
+      });
+    }
   }
 
   logout(): void {

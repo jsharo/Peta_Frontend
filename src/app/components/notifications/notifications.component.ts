@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
 import { AuthService } from '../../services/auth.service';
 import { ErrorService } from '../../services/error.service';
+import { DoorService } from '../../services/door.service';
 
 interface Notification {
   id: number;
@@ -30,11 +31,23 @@ export class NotificationsComponent implements OnInit {
     private notificationService: NotificationService,
     private authService: AuthService,
     private errorService: ErrorService,
-    private router: Router
+    private router: Router,
+    private doorService: DoorService
   ) {}
 
   ngOnInit(): void {
     this.loadNotifications();
+
+    this.doorService.obtenerEstadoPuerta().subscribe({
+      next: (door) => {
+        // Si la puerta está bloqueada, set a false; si está desbloqueada, set a true
+        this.puertaDesbloqueada.set(!door.is_locked);
+      },
+      error: () => {
+        // Si hay error, puedes dejarla como desbloqueada por defecto o mostrar un mensaje
+        this.puertaDesbloqueada.set(true);
+      }
+    });
   }
 
   loadNotifications(): void {
@@ -82,7 +95,19 @@ export class NotificationsComponent implements OnInit {
   }
 
   togglePuerta(): void {
-    this.puertaDesbloqueada.set(!this.puertaDesbloqueada());
+    if (this.puertaDesbloqueada()) {
+      // Bloquear la puerta
+      this.doorService.bloquearPuerta().subscribe({
+        next: () => this.puertaDesbloqueada.set(false),
+        error: () => alert('Error al bloquear la puerta')
+      });
+    } else {
+      // Desbloquear la puerta
+      this.doorService.desbloquearPuerta().subscribe({
+        next: () => this.puertaDesbloqueada.set(true),
+        error: () => alert('Error al desbloquear la puerta')
+      });
+    }
   }
 
   logout() {

@@ -1,8 +1,4 @@
 <div class="contenedor">
-  <button 
-    (click)="cambiarEstado()" 
-    [ngClass]="estado" 
-    class="boton-color">
-    {{ texto }}
-  </button>
+  <button (click)="bloquearPuerta()" class="boton-color rojo">Bloquear</button>
+  <button (click)="desbloquearPuerta()" class="boton-color verde">Desbloquear</button>
 </div>
