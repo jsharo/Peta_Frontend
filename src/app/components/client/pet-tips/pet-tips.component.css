@@ -1,0 +1,15 @@
+.pet-tip-footer {
+  margin-top: 32px;
+  padding: 12px 16px;
+  background: #f7f7f7;
+  color: #444;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0.85;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.pet-tip-label {
+  font-weight: bold;
+  margin-right: 8px;
+}

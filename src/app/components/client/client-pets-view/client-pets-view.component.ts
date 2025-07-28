@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { PetTipsComponent } from "../pet-tips/pet-tips.component";
 
 interface Mascota {
   id: number;
@@ -19,7 +20,7 @@ interface Mascota {
 @Component({
   selector: 'app-client-pets-view',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, FormsModule, PetTipsComponent],
   templateUrl: './client-pets-view.component.html',
   styleUrls: ['./client-pets-view.component.css']
 })

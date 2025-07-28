@@ -20,6 +20,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
+  font-family: 'Arial', sans-serif;
 }
 
 /* Logo fuera del cuadro */
@@ -38,6 +39,7 @@ html, body {
   color: white;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-family: 'Arial', sans-serif;
 }
 
 /* Título */
@@ -45,6 +47,7 @@ html, body {
   color: #00bfff;
   margin-bottom: 1rem;
   font-size: 1.5rem;
+  font-family: 'Arial', sans-serif;
 }
 
 /* Campos de entrada */
@@ -55,6 +58,7 @@ html, body {
   border: none;
   font-size: 1rem;
   margin-bottom: 1rem;
+  font-family: 'Arial', sans-serif;
 }
 
 /* Botón */
@@ -69,6 +73,7 @@ html, body {
   transition: background 0.3s;
   width: 100%;
   margin-top: 0.5rem;
+  font-family: 'Arial', sans-serif;
 }
 
 .btn:hover {
@@ -76,31 +81,33 @@ html, body {
 }
 
 /* Mensajes */
-.error {
-  background-color: #ff4d4d;
+.error, .success {
   padding: 0.5rem;
   border-radius: 0.4rem;
   margin-bottom: 1rem;
   font-size: 0.9rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.error {
+  background-color: #ff4d4d;
 }
 
 .success {
   background-color: #4caf50;
-  padding: 0.5rem;
-  border-radius: 0.4rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
 }
 
 /* Registro */
 .register {
   margin-top: 1rem;
   font-size: 0.9rem;
+  font-family: 'Arial', sans-serif;
 }
 
 .register a {
   color: #00bfff;
   text-decoration: none;
+  font-family: 'Arial', sans-serif;
 }
 
 /* Desktop */

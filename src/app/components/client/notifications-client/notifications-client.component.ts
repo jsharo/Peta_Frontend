@@ -1,11 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from '../client/nav-bar/nav-bar.component';
+import { NavbarComponent } from '../nav-bar/nav-bar.component';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../services/notification.service';
-import { AuthService } from '../../services/auth.service';
-import { ErrorService } from '../../services/error.service';
-import { DoorService } from '../../services/door.service'; // <--- IMPORTA EL SERVICIO
+import { NotificationService } from '../../../services/notification.service';
+import { AuthService } from '../../../services/auth.service';
+import { ErrorService } from '../../../services/error.service';
+import { DoorService } from '../../../services/door.service';
+import { PetTipsComponent } from "../pet-tips/pet-tips.component"; // <--- IMPORTA EL SERVICIO
 
 interface Notification {
   id: number;
@@ -18,7 +19,7 @@ interface Notification {
 @Component({
   selector: 'app-notifications-client',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, PetTipsComponent],
   templateUrl: './notifications-client.component.html',
   styleUrls: ['./notifications-client.component.css']
 })

@@ -18,6 +18,8 @@
       <button class="ver-btn" (click)="abrirModalEditar(mascota)">Ver</button>
     </div>
   </div>
+  
+  <app-pet-tips></app-pet-tips>
 
   <!-- Mensaje cuando no hay mascotas -->
   <div *ngIf="mascotas.length === 0" class="no-pets-message">
