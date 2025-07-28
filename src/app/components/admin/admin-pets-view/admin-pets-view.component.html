@@ -21,23 +21,33 @@
   <!-- Lista -->
   <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
     <span class="nombre">{{ mascota.name_pet }}</span>
-    <button class="ver-btn" (click)="verDetallesMascota(mascota)">Ver</button>
+    <!--<button class="ver-btn" (click)="abrirModalEditar(mascota)">Ver</button>-->
   </div>
 
-<!-- Mensaje de carga -->
-<div *ngIf="loading" class="loading-message">
-  <p>Cargando mascotas...</p>
-</div>
+  <!-- Mensaje de carga -->
+  <div *ngIf="loading" class="loading-message">
+    <p>Cargando mascotas...</p>
+  </div>
 
-<!-- Mensaje de error -->
-<div *ngIf="error" class="error-message">
-  <p>{{ error }}</p>
-  <button (click)="cargarMascotas()" class="retry-btn">Reintentar</button>
-</div>
+  <!-- Mensaje de error -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="cargarMascotas()" class="retry-btn">Reintentar</button>
+  </div>
 
-<!-- Mensaje cuando no hay mascotas -->
-<div *ngIf="!loading && !error && mascotas.length === 0" class="no-pets-message">
-  <p>No se encontraron mascotas para este usuario</p>
-</div>
+  <!-- Mensaje cuando no hay mascotas -->
+  <div *ngIf="!loading && !error && mascotas.length === 0" class="no-pets-message">
+    <p>No se encontraron mascotas para este usuario</p>
+  </div>
 
+  <!-- MODAL REUTILIZABLE -->
+  <!--
+  <app-pet-edit-modal
+    [mascota]="mascotaEdit"
+    [visible]="modalAbierto"
+    [admin]="true"
+    (save)="guardarCambiosModal($event)"
+    (cancel)="cerrarModal()">
+  </app-pet-edit-modal>
+  -->
 </div>

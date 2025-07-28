@@ -60,7 +60,8 @@ export class NotificationService {
   }
 
   markAllAsRead(): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/mark-all-read`, {}, {
+    // Cambia PATCH por POST aquí
+    return this.http.post(`${this.apiUrl}/mark-all-read`, {}, {
       headers: this.getHeaders()
     }).pipe(
       catchError(error => {
@@ -70,15 +71,11 @@ export class NotificationService {
     );
   }
 
+  // notification.service.ts
   getNotificationsByUser(userId: number) {
     return this.http.get<any[]>(`http://localhost:3000/notifications/user/${userId}`, { 
       headers: this.getHeaders() 
-    }).pipe(
-      catchError(error => {
-        console.error('Error al obtener notificaciones por usuario:', error);
-        return throwError(() => error);
-      })
-    );
+    });
   }
 
   markAllAsReadByUser(userId: number) {

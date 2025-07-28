@@ -75,15 +75,17 @@ export class NotificationsClientComponent implements OnInit {
   }
 
   markAllAsRead(): void {
-    this.notificationService.markAllAsRead().subscribe({
-      next: () => {
-        // Elimina visualmente todas las notificaciones después de marcarlas como leídas
-        this.notifications.set([]);
-      },
-      error: (err) => {
-        this.error.set(this.errorService.handleHttpError(err));
-      }
-    });
+    const user = this.authService.getCurrentUser();
+    if (user && user.id_user) {
+      this.notificationService.markAllAsReadByUser(user.id_user).subscribe({
+        next: () => {
+          this.notifications.set([]); // Borra todas las notificaciones en pantalla
+        },
+        error: (err) => {
+          this.error.set(this.errorService.handleHttpError(err));
+        }
+      });
+    }
   }
 
   recargarNotificaciones(): void {

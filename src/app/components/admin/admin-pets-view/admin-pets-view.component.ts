@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { PetEditModalComponent } from '../../pet-edit-modal/pet-edit-modal.component'; // Modal comentado
 
 interface Mascota {
   id_pet: number;
@@ -18,7 +19,7 @@ interface Mascota {
 @Component({
   selector: 'app-admin-pets-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule /*, PetEditModalComponent*/], // Modal comentado
   templateUrl: './admin-pets-view.component.html',
   styleUrls: ['./admin-pets-view.component.css']
 })
@@ -27,6 +28,10 @@ export class AdminPetsViewComponent implements OnInit {
   loading = false;
   userId: string | null = null;
   error: string = '';
+
+  // --- MODAL: propiedades comentadas ---
+  // mascotaEdit: Mascota | null = null;
+  // modalAbierto = false;
 
   constructor(
     private router: Router,
@@ -112,4 +117,40 @@ export class AdminPetsViewComponent implements OnInit {
   logout(): void {
     this.router.navigate(['/login']);
   }
+
+  // --- MODAL: métodos comentados ---
+  // abrirModalEditar(mascota: Mascota): void {
+  //   this.mascotaEdit = { ...mascota };
+  //   this.modalAbierto = true;
+  // }
+
+  // cerrarModal(): void {
+  //   this.modalAbierto = false;
+  // }
+
+  // guardarCambiosModal(mascotaActualizada: Mascota): void {
+  //   const url = `http://localhost:3000/pets/${mascotaActualizada.id_pet}`;
+  //   const body = {
+  //     name_pet: mascotaActualizada.name_pet,
+  //     age_pet: mascotaActualizada.age_pet,
+  //     species: mascotaActualizada.species,
+  //     race: mascotaActualizada.race,
+  //     sex: mascotaActualizada.sex,
+  //     id_collar: mascotaActualizada.id_collar
+  //   };
+
+  //   this.http.put(url, body).subscribe({
+  //     next: (res) => {
+  //       // Actualiza localmente
+  //       const index = this.mascotas.findIndex(m => m.id_pet === mascotaActualizada.id_pet);
+  //       if (index > -1) {
+  //         this.mascotas[index] = { ...mascotaActualizada };
+  //       }
+  //       this.modalAbierto = false;
+  //     },
+  //     error: (err) => {
+  //       alert('Error al actualizar la mascota');
+  //     }
+  //   });
+  // }
 }
