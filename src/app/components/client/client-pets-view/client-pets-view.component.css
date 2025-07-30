@@ -121,40 +121,61 @@ body, html, :host {
   background: #007bff;
 }
 
-/* Modal Backdrop */
+/* Modal Backdrop: ya está bien, solo asegúrate de que cubre toda la pantalla */
 .modal-backdrop {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.35);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 1000;
-
   animation: fadeInBackdrop 0.3s ease forwards;
+  padding: 16px; /* Asegura margen en móviles */
+}
+
+/* Modal: centrado, responsivo y con padding adecuado */
+.modal {
+  background-color: #fff;
+  padding: 32px 24px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  animation: modalScaleFadeIn 0.35s ease forwards;
+  transform-origin: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+/* Responsive para móviles: ajustar tamaño de fuente y padding */
+@media (max-width: 480px) {
+  .modal h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal label {
+    font-size: 0.9rem;
+  }
+
+  .modal input[type="text"],
+  .modal input[type="number"] {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  .modal-buttons button {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
 }
 
 @keyframes fadeInBackdrop {
   from { background-color: rgba(0, 0, 0, 0); }
   to { background-color: rgba(0, 0, 0, 0.35); }
-}
-
-.modal {
-  background-color: #fff;
-  padding: 32px 40px;
-  border-radius: 20px;
-  width: 400px;
-  max-width: 95%;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-  animation: modalScaleFadeIn 0.35s ease forwards;
-  transform-origin: center center;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;  /* CENTRAR todo el contenido del modal */
-  gap: 24px;
 }
 
 @keyframes modalScaleFadeIn {

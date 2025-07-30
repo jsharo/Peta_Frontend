@@ -6,22 +6,23 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { PetTipsComponent } from "../pet-tips/pet-tips.component";
-// import { PetEditModalComponent } from '../../pet-edit-modal/pet-edit-modal.component'; // Modal comentado
+import { PetViewModalComponent } from '../../pet-view-modal/pet-view-modal.component';// Importa el modal
 
 interface Mascota {
   id: number;
   nombre: string;
-  edad: number;
-  raza: string;
   especie: string;
+  raza: string;
+  sexo: string;
+  codigo: string; // id_collar
+  edad: number;
   foto: string;
-  codigo?: string;  // nuevo campo opcional para collar
 }
 
 @Component({
   selector: 'app-client-pets-view',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FormsModule, PetTipsComponent /*, PetEditModalComponent*/], // Modal comentado
+  imports: [CommonModule, NavbarComponent, FormsModule, PetTipsComponent, PetViewModalComponent],
   templateUrl: './client-pets-view.component.html',
   styleUrls: ['./client-pets-view.component.css']
 })
@@ -29,17 +30,8 @@ export class ClientPetsViewComponent implements OnInit {
   mascotas: Mascota[] = [];
 
   // --- MODAL: propiedades comentadas ---
-  // modalAbierto = false;
-  // mascotaEdit: any = {
-  //   id_pet: 0,
-  //   name_pet: '',
-  //   age_pet: 0,
-  //   species: '',
-  //   sex: '',
-  //   race: '',
-  //   id_collar: '',
-  //   photo: ''
-  // };
+  modalAbierto = false;
+  mascotaSeleccionada: any = null;
 
   constructor(
     private router: Router,
@@ -55,13 +47,14 @@ export class ClientPetsViewComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.mascotas = data.map(pet => ({
-              id: pet.id,
+              id: pet.id_pet,
               nombre: pet.name_pet,
+              especie: pet.species ?? '',
+              raza: pet.race ?? '',
+              sexo: pet.sex ?? '',
+              codigo: pet.id_collar ?? '',
               edad: pet.age_pet ?? 0,
-              raza: pet.breed_pet ?? '',
-              especie: pet.species_pet ?? '',
-              foto: pet.photo ?? '',
-              codigo: pet.codigo ?? ''  // si backend no tiene, queda vacío
+              foto: pet.photo ?? ''
             }));
           },
           error: (err) => {
@@ -75,85 +68,58 @@ export class ClientPetsViewComponent implements OnInit {
     return mascota.id;
   }
 
-  // --- MODAL: métodos comentados ---
-  // abrirModalEditar(mascota: Mascota): void {
-  //   this.mascotaEdit = {
-  //     id_pet: mascota.id,
-  //     name_pet: mascota.nombre,
-  //     age_pet: mascota.edad,
-  //     species: mascota.especie,
-  //     sex: '', // Si tienes sexo, ponlo aquí
-  //     race: mascota.raza,
-  //     id_collar: mascota.codigo ?? '',
-  //     photo: mascota.foto ?? ''
-  //   };
-  //   this.modalAbierto = true;
-  // }
+  abrirModalVer(mascota: Mascota): void {
+    this.mascotaSeleccionada = { ...mascota };
+    this.modalAbierto = true;
+  }
 
-  // cerrarModal(): void {
-  //   this.modalAbierto = false;
-  // }
+  cerrarModal(): void {
+    this.modalAbierto = false;
+    this.mascotaSeleccionada = null;
+  }
 
-  // guardarCambios(): void {
-  //   const url = `http://localhost:3000/pets/${this.mascotaEdit.id}`;
-  //   const body = {
-  //     name_pet: this.mascotaEdit.nombre,
-  //     age_pet: this.mascotaEdit.edad,
-  //     breed_pet: this.mascotaEdit.raza,
-  //     species_pet: this.mascotaEdit.especie
-  //     // NO enviamos codigo collar al backend
-  //   };
+  guardarCambiosModal(mascotaActualizada: any): void {
+    if (!this.mascotaSeleccionada) return;
 
-  //   this.http.put(url, body).subscribe({
-  //     next: (res) => {
-  //       console.log('Mascota actualizada en backend:', res);
+    const id = this.mascotaSeleccionada.id;
+    const formData = new FormData();
 
-  //       // Actualiza localmente toda la mascota, incluido codigo collar
-  //       const index = this.mascotas.findIndex(m => m.id === this.mascotaEdit.id);
-  //       if (index > -1) {
-  //         this.mascotas[index] = { ...this.mascotaEdit };
-  //       }
+    // Mapea los nombres del frontend a los del backend
+    formData.append('name_pet', mascotaActualizada.nombre);
+    formData.append('species', mascotaActualizada.especie);
+    formData.append('race', mascotaActualizada.raza);
+    formData.append('sex', mascotaActualizada.sexo);
+    formData.append('id_collar', mascotaActualizada.codigo);
+    formData.append('age_pet', String(Number(mascotaActualizada.edad)));
 
-  //       this.modalAbierto = false;
-  //     },
-  //     error: (err) => {
-  //       console.error('Error actualizando mascota', err);
-  //       alert('Error al actualizar la mascota. Inténtalo de nuevo.');
-  //     }
-  //   });
-  // }
+    if (mascotaActualizada.nuevaFoto) {
+      formData.append('photo', mascotaActualizada.nuevaFoto);
+    }
 
-  // guardarCambiosModal(mascotaActualizada: any): void {
-  //   // Actualiza la mascota en el backend y localmente
-  //   const url = `http://localhost:3000/pets/${mascotaActualizada.id}`;
-  //   const body = {
-  //     name_pet: mascotaActualizada.name_pet,
-  //     age_pet: mascotaActualizada.age_pet,
-  //     breed_pet: mascotaActualizada.race,
-  //     species_pet: mascotaActualizada.species
-  //     // No se envía id_collar desde cliente
-  //   };
-
-  //   this.http.put(url, body).subscribe({
-  //     next: (res) => {
-  //       // Actualiza localmente
-  //       const index = this.mascotas.findIndex(m => m.id === mascotaActualizada.id);
-  //       if (index > -1) {
-  //         this.mascotas[index] = {
-  //           ...this.mascotas[index],
-  //           nombre: mascotaActualizada.name_pet,
-  //           edad: mascotaActualizada.age_pet,
-  //           raza: mascotaActualizada.race,
-  //           especie: mascotaActualizada.species
-  //         };
-  //       }
-  //       this.modalAbierto = false;
-  //     },
-  //     error: (err) => {
-  //       alert('Error al actualizar la mascota');
-  //     }
-  //   });
-  // }
+    this.http.put<any>(`http://localhost:3000/pets/${id}`, formData).subscribe({
+      next: (data) => {
+        // Actualiza la mascota en la lista local
+        const idx = this.mascotas.findIndex(m => m.id === id);
+        if (idx !== -1) {
+          this.mascotas[idx] = {
+            ...this.mascotas[idx],
+            nombre: data.name_pet,
+            especie: data.species,
+            raza: data.race,
+            sexo: data.sex,
+            codigo: data.id_collar,
+            edad: data.age_pet,
+            foto: data.photo ?? this.mascotas[idx].foto
+          };
+        }
+        this.cerrarModal();
+      },
+      error: (err) => {
+        alert('Error al actualizar la mascota');
+        console.error(err);
+      }
+    });
+  }
 
   logout() {
     localStorage.removeItem('auth_token');

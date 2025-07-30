@@ -1,0 +1,151 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal {
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px 24px;
+  min-width: 320px;
+  max-width: 95vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #A9BF04;
+  z-index: 2;
+}
+.pet-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+.pet-photo {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #A9BF04;
+}
+.no-photo {
+  width: 110px;
+  height: 110px;
+  background: #eee;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 1.1rem;
+  border: 2px dashed #ccc;
+}
+.edit-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.pet-field,
+.photo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* <-- centra la imagen y el lápiz */
+  gap: 8px;
+  margin-bottom: 6px;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+.pet-field.editing {
+  background: #f7ffe0;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px #A9BF04;
+  opacity: 1;
+}
+.pet-field:not(.editing) {
+  opacity: 0.8;
+}
+.pet-field label {
+  min-width: 110px;
+  font-weight: 600;
+  color: #8a885c;
+}
+.pet-field span,
+.pet-field input[type="text"],
+.pet-field input[type="number"] {
+  flex: 1 1 auto;
+}
+.edit-btn,
+.photo-edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #A9BF04;
+  margin-left: 12px;
+  align-self: center;
+}
+.photo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* <-- centra la imagen y el lápiz */
+  width: 100%;
+  gap: 8px;
+}
+.pet-photo,
+.no-photo {
+  flex-shrink: 0;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.guardar-btn {
+  background-color: #A9BF04;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.guardar-btn:hover {
+  background-color: #8a885c;
+}
+@media (max-width: 600px) {
+  .modal {
+    min-width: unset;
+    max-width: 99vw;
+    padding: 12px 2vw;
+    border-radius: 12px;
+  }
+  .pet-photo, .no-photo {
+    width: 80px;
+    height: 80px;
+  }
+  .pet-field label {
+    min-width: 80px;
+  }
+}

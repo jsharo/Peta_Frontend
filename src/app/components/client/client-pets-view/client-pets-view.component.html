@@ -15,7 +15,7 @@
   <div class="mascotas-list">
     <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
       <span class="nombre">{{ mascota.nombre }}</span>
-      <!--<button class="ver-btn" (click)="abrirModalEditar(mascota)">Ver</button>-->
+      <button class="ver-btn" (click)="abrirModalVer(mascota)">Ver</button>
     </div>
   </div>
   
@@ -26,16 +26,14 @@
     <p>No se encontraron mascotas para este usuario</p>
   </div>
 
-  <!-- MODAL REUTILIZABLE -->
-  <!--
-  <app-pet-edit-modal
-    [mascota]="mascotaEdit"
-    [visible]="modalAbierto"
-    [admin]="false"
-    (save)="guardarCambiosModal($event)"
-    (cancel)="cerrarModal()">
-  </app-pet-edit-modal>
-  -->
+</div> <!-- cierre de page-container -->
 
-  <app-navbar [activeTab]="'mascotas'"></app-navbar>
+<!-- Modal y backdrop fuera del flujo principal -->
+<div *ngIf="modalAbierto" class="modal-backdrop">
+  <app-pet-view-modal
+    [mascota]="mascotaSeleccionada"
+    [visible]="modalAbierto"
+    (close)="cerrarModal()"
+    (save)="guardarCambiosModal($event)">
+  </app-pet-view-modal>
 </div>

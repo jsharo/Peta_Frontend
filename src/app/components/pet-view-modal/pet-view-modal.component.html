@@ -1,0 +1,103 @@
+<div class="modal" *ngIf="visible">
+  <button class="close-btn" (click)="closeModal()" aria-label="Cerrar">&times;</button>
+  <h2>Editar Mascota</h2>
+  <form (ngSubmit)="saveChanges()">
+    <!-- Foto primero -->
+    <div class="pet-photo-section" [class.editing]="editField === 'foto'">
+      <div class="photo-row">
+        <div *ngIf="photoPreview; else noPhoto">
+          <img [src]="photoPreview" alt="Foto mascota" class="pet-photo" />
+        </div>
+        <ng-template #noPhoto>
+          <div class="no-photo">Sin foto</div>
+        </ng-template>
+        <!-- Lápiz a la derecha de la imagen -->
+        <button type="button" class="edit-btn photo-edit-btn" (click)="startEdit('foto')" *ngIf="editField !== 'foto'">
+          <span title="Editar">&#9998;</span>
+        </button>
+        <button type="button" class="edit-btn photo-edit-btn" (click)="stopEdit()" *ngIf="editField === 'foto'">
+          <span title="Listo">&#10003;</span>
+        </button>
+      </div>
+      <!-- Input de archivo solo si está en modo edición -->
+      <input *ngIf="editField === 'foto'" type="file" (change)="onPhotoSelected($event)" />
+    </div>
+
+    <!-- Campos en columna, solo editables al dar click en el lápiz -->
+    <div class="pet-field" [class.editing]="editField === 'nombre'">
+      <label>Nombre</label>
+      <span *ngIf="editField !== 'nombre'">{{ editedMascota.nombre }}</span>
+      <input *ngIf="editField === 'nombre'" type="text" [(ngModel)]="editedMascota.nombre" name="nombre" required />
+      <button type="button" class="edit-btn" (click)="startEdit('nombre')" *ngIf="editField !== 'nombre'">
+        <span title="Editar">&#9998;</span>
+      </button>
+      <button type="button" class="edit-btn" (click)="stopEdit()" *ngIf="editField === 'nombre'">
+        <span title="Listo">&#10003;</span>
+      </button>
+    </div>
+
+    <div class="pet-field" [class.editing]="editField === 'especie'">
+      <label>Especie</label>
+      <span *ngIf="editField !== 'especie'">{{ editedMascota.especie }}</span>
+      <input *ngIf="editField === 'especie'" type="text" [(ngModel)]="editedMascota.especie" name="especie" />
+      <button type="button" class="edit-btn" (click)="startEdit('especie')" *ngIf="editField !== 'especie'">
+        <span title="Editar">&#9998;</span>
+      </button>
+      <button type="button" class="edit-btn" (click)="stopEdit()" *ngIf="editField === 'especie'">
+        <span title="Listo">&#10003;</span>
+      </button>
+    </div>
+
+    <div class="pet-field" [class.editing]="editField === 'raza'">
+      <label>Raza</label>
+      <span *ngIf="editField !== 'raza'">{{ editedMascota.raza }}</span>
+      <input *ngIf="editField === 'raza'" type="text" [(ngModel)]="editedMascota.raza" name="raza" />
+      <button type="button" class="edit-btn" (click)="startEdit('raza')" *ngIf="editField !== 'raza'">
+        <span title="Editar">&#9998;</span>
+      </button>
+      <button type="button" class="edit-btn" (click)="stopEdit()" *ngIf="editField === 'raza'">
+        <span title="Listo">&#10003;</span>
+      </button>
+    </div>
+
+    <div class="pet-field" [class.editing]="editField === 'sexo'">
+      <label>Sexo</label>
+      <span *ngIf="editField !== 'sexo'">{{ editedMascota.sexo }}</span>
+      <input *ngIf="editField === 'sexo'" type="text" [(ngModel)]="editedMascota.sexo" name="sexo" />
+      <button type="button" class="edit-btn" (click)="startEdit('sexo')" *ngIf="editField !== 'sexo'">
+        <span title="Editar">&#9998;</span>
+      </button>
+      <button type="button" class="edit-btn" (click)="stopEdit()" *ngIf="editField === 'sexo'">
+        <span title="Listo">&#10003;</span>
+      </button>
+    </div>
+
+    <div class="pet-field" [class.editing]="editField === 'codigo'">
+      <label>Código de collar</label>
+      <span *ngIf="editField !== 'codigo'">{{ editedMascota.codigo }}</span>
+      <input *ngIf="editField === 'codigo'" type="text" [(ngModel)]="editedMascota.codigo" name="codigo" />
+      <button type="button" class="edit-btn" (click)="startEdit('codigo')" *ngIf="editField !== 'codigo'">
+        <span title="Editar">&#9998;</span>
+      </button>
+      <button type="button" class="edit-btn" (click)="stopEdit()" *ngIf="editField === 'codigo'">
+        <span title="Listo">&#10003;</span>
+      </button>
+    </div>
+
+    <div class="pet-field" [class.editing]="editField === 'edad'">
+      <label>Edad</label>
+      <span *ngIf="editField !== 'edad'">{{ editedMascota.edad }}</span>
+      <input *ngIf="editField === 'edad'" type="number" [(ngModel)]="editedMascota.edad" name="edad" />
+      <button type="button" class="edit-btn" (click)="startEdit('edad')" *ngIf="editField !== 'edad'">
+        <span title="Editar">&#9998;</span>
+      </button>
+      <button type="button" class="edit-btn" (click)="stopEdit()" *ngIf="editField === 'edad'">
+        <span title="Listo">&#10003;</span>
+      </button>
+    </div>
+
+    <div class="modal-buttons">
+      <button type="submit" class="guardar-btn">Guardar</button>
+    </div>
+  </form>
+</div>
