@@ -282,3 +282,18 @@ body, html, :host {
 .modal-buttons button[type="button"]:hover {
   background-color: #bdbdbd;
 }
+
+.foto-nombre {
+  display: flex;
+  align-items: center;
+  gap: 18px; /* Espacio entre foto y nombre */
+}
+
+.mascota-foto {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #A9BF04;
+  background: #fff;
+}

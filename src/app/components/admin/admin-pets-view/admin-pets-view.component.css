@@ -109,9 +109,26 @@ body, html, :host {
   box-shadow: 0 2px 8px rgba(44,44,44,0.08);
 }
 
+.foto-nombre {
+  display: flex;
+  align-items: center;
+  gap: 18px; /* Espacio entre foto y nombre, ajústalo si quieres más o menos */
+}
+
+.mascota-foto {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #A9BF04;
+  background: #fff;
+  margin-right: 0; /* Elimina el margin-right anterior si lo tienes */
+}
+
 .nombre {
   font-weight: 600;
   font-size: 1.1rem;
+  color: #fff;
 }
 
 /* Botón Ver con verde igual al de la imagen */
@@ -129,4 +146,14 @@ body, html, :host {
 
 .ver-btn:hover {
   background: #8a885c;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

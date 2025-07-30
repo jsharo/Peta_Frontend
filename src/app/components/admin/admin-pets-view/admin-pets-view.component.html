@@ -20,8 +20,17 @@
 
   <!-- Lista -->
   <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
-    <span class="nombre">{{ mascota.name_pet }}</span>
-    <!--<button class="ver-btn" (click)="abrirModalEditar(mascota)">Ver</button>-->
+    <div class="foto-nombre">
+      <img
+        *ngIf="mascota.photo"
+        [src]="'http://localhost:3000/uploads/pets/' + mascota.photo"
+        alt="Foto mascota"
+        class="mascota-foto"
+      />
+      <span class="nombre">{{ mascota.name_pet }}</span>
+    </div>
+    <!-- Dentro de la tarjeta de mascota -->
+    <button class="ver-btn" (click)="abrirModalVer(mascota)">Ver</button>
   </div>
 
   <!-- Mensaje de carga -->
@@ -39,15 +48,14 @@
   <div *ngIf="!loading && !error && mascotas.length === 0" class="no-pets-message">
     <p>No se encontraron mascotas para este usuario</p>
   </div>
+</div>
 
-  <!-- MODAL REUTILIZABLE -->
-  <!--
-  <app-pet-edit-modal
-    [mascota]="mascotaEdit"
+<!-- Modal para ver/editar mascota (fuera del contenedor principal) -->
+<div *ngIf="modalAbierto" class="modal-backdrop">
+  <app-pet-view-modal
+    [mascota]="mascotaSeleccionada"
     [visible]="modalAbierto"
-    [admin]="true"
-    (save)="guardarCambiosModal($event)"
-    (cancel)="cerrarModal()">
-  </app-pet-edit-modal>
-  -->
+    (close)="cerrarModal()"
+    (save)="guardarCambiosModal($event)">
+  </app-pet-view-modal>
 </div>

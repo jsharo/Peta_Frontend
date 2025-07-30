@@ -14,7 +14,15 @@
   <!-- Lista de mascotas -->
   <div class="mascotas-list">
     <div *ngFor="let mascota of mascotas; trackBy: trackByMascota" class="mascota-card">
-      <span class="nombre">{{ mascota.nombre }}</span>
+      <div class="foto-nombre">
+        <img
+          *ngIf="mascota.foto"
+          [src]="'http://localhost:3000/uploads/pets/' + mascota.foto"
+          alt="Foto mascota"
+          class="mascota-foto"
+        />
+        <span class="nombre">{{ mascota.nombre }}</span>
+      </div>
       <button class="ver-btn" (click)="abrirModalVer(mascota)">Ver</button>
     </div>
   </div>

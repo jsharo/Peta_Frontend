@@ -39,6 +39,8 @@ login(email: string, password: string) {
         }
         localStorage.setItem('auth_token', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
+        // Nuevo: guardar el rol del usuario en mayúsculas
+        localStorage.setItem('user_role', response.user.role.toUpperCase());
         console.log('✅ Usuario guardado en localStorage');
       },
       error: (err) => {
