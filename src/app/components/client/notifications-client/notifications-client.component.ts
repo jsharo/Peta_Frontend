@@ -6,7 +6,7 @@ import { NotificationService } from '../../../services/notification.service';
 import { AuthService } from '../../../services/auth.service';
 import { ErrorService } from '../../../services/error.service';
 import { DoorService } from '../../../services/door.service';
-import { PetTipsComponent } from "../pet-tips/pet-tips.component"; // <--- IMPORTA EL SERVICIO
+import { PetTipsComponent } from "../pet-tips/pet-tips.component"; 
 
 interface Notification {
   id: number;

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-pet-register',
@@ -69,7 +70,7 @@ export class PetRegisterComponent implements OnInit {
 
     console.log('📡 Cargando información del cliente:', this.clientId);
 
-    this.http.get(`http://localhost:3000/users/${this.clientId}`, { headers })
+    this.http.get(`${environment.apiUrl}/users/${this.clientId}`, { headers })
       .subscribe({
         next: (client: any) => {
           this.clientName = client.name || 'Cliente sin nombre';
@@ -187,8 +188,8 @@ export class PetRegisterComponent implements OnInit {
 
     // Endpoint específico para admin si está registrando para un cliente
     const endpoint = this.isAdminRegistering 
-      ? 'http://localhost:3000/pets/admin-create'
-      : 'http://localhost:3000/pets';
+      ? `${environment.apiUrl}/pets/admin-create`
+      : `${environment.apiUrl}/pets`;
 
     console.log('📤 Enviando a endpoint:', endpoint);
     console.log('📝 Es admin registrando:', this.isAdminRegistering);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-client-detail',
@@ -42,7 +43,7 @@ export class ClientDetailComponent implements OnInit {
   }
 
   cargarUsuario(): void {
-    this.http.get(`http://localhost:3000/users/${this.userId}`).subscribe({
+    this.http.get(`${environment.apiUrl}/users/${this.userId}`).subscribe({
       next: (data: any) => {
         this.usuario = data;
       },
@@ -51,14 +52,14 @@ export class ClientDetailComponent implements OnInit {
   }
 
   cargarNotificaciones(): void {
-    this.http.get<any[]>(`http://localhost:3000/notifications/user/${this.userId}`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/notifications/user/${this.userId}`).subscribe({
       next: (data) => this.notificaciones = data,
       error: (err) => console.error('Error al cargar notificaciones:', err)
     });
   }
 
   cargarMascotas(): void {
-    this.http.get<any[]>(`http://localhost:3000/pets/user/${this.userId}`).subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/pets/user/${this.userId}`).subscribe({
       next: (data) => this.mascotas = data,
       error: (err) => console.error('Error al cargar mascotas:', err)
     });
@@ -84,7 +85,7 @@ export class ClientDetailComponent implements OnInit {
 
   cambiarEstadoUsuario(nuevoEstado: boolean): void {
     if (!this.userId) return;
-    this.http.patch(`http://localhost:3000/users/${this.userId}/status`, { is_active: nuevoEstado }).subscribe({
+    this.http.patch(`${environment.apiUrl}/users/${this.userId}/status`, { is_active: nuevoEstado }).subscribe({
       next: (data: any) => {
         this.usuario.is_active = data.is_active;
       },

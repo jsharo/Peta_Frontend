@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PetViewModalComponent } from '../../pet-view-modal/pet-view-modal.component'; // Ajusta la ruta si es necesario
+import { environment } from '../../../../environments/environment';
 
 interface Mascota {
   id_pet: number;
@@ -65,15 +66,13 @@ export class AdminPetsViewComponent implements OnInit {
     });
     
     let endpoint = '';
-    
-    // Si hay userId, cargar mascotas de ese usuario específico
+
     if (this.userId) {
-      endpoint = `http://localhost:3000/pets/user/${this.userId}`;
+      endpoint = `${environment.apiUrl}/pets/user/${this.userId}`;
     } else {
-      // Si no hay userId, cargar mascotas del usuario autenticado
-      endpoint = 'http://localhost:3000/pets';
+      endpoint = `${environment.apiUrl}/pets`;
     }
-    
+
     this.http.get<Mascota[]>(endpoint, { headers }).subscribe({
       next: (data) => {
         this.mascotas = data;
@@ -169,8 +168,8 @@ export class AdminPetsViewComponent implements OnInit {
 
     // Usa endpoint de admin si el usuario es admin
     const endpoint = userRole === 'ADMIN'
-      ? `http://localhost:3000/pets/admin/${id}`
-      : `http://localhost:3000/pets/${id}`;
+      ? `${environment.apiUrl}/pets/admin/${id}`
+      : `${environment.apiUrl}/pets/${id}`;
 
     console.log('Endpoint usado:', endpoint);
 
@@ -201,5 +200,10 @@ export class AdminPetsViewComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  getFotoUrl(foto: string): string {
+    if (!foto) return '';
+    return `${environment.apiUrl}/uploads/pets/${foto}`;
   }
 }

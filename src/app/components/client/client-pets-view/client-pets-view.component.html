@@ -17,7 +17,7 @@
       <div class="foto-nombre">
         <img
           *ngIf="mascota.foto"
-          [src]="'http://localhost:3000/uploads/pets/' + mascota.foto"
+          [src]="getFotoUrl(mascota.foto)"
           alt="Foto mascota"
           class="mascota-foto"
         />

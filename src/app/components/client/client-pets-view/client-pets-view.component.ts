@@ -7,6 +7,7 @@ import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { PetTipsComponent } from "../pet-tips/pet-tips.component";
 import { PetViewModalComponent } from '../../pet-view-modal/pet-view-modal.component';// Importa el modal
+import { environment } from '../../../../environments/environment';
 
 interface Mascota {
   id: number;
@@ -43,7 +44,7 @@ export class ClientPetsViewComponent implements OnInit {
     const user = this.authService.getCurrentUser();
 
     if (user && user.id_user) {
-      this.http.get<any[]>(`http://localhost:3000/pets/user/${user.id_user}`)
+      this.http.get<any[]>(`${environment.apiUrl}/pets/user/${user.id_user}`)
         .subscribe({
           next: (data) => {
             this.mascotas = data.map(pet => ({
@@ -96,7 +97,7 @@ export class ClientPetsViewComponent implements OnInit {
       formData.append('photo', mascotaActualizada.nuevaFoto);
     }
 
-    this.http.put<any>(`http://localhost:3000/pets/${id}`, formData).subscribe({
+    this.http.put<any>(`${environment.apiUrl}/pets/${id}`, formData).subscribe({
       next: (data) => {
         // Actualiza la mascota en la lista local
         const idx = this.mascotas.findIndex(m => m.id === id);
@@ -125,5 +126,10 @@ export class ClientPetsViewComponent implements OnInit {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
+  }
+
+  getFotoUrl(foto: string): string {
+    if (!foto) return '';
+    return `${environment.apiUrl}/uploads/pets/${foto}`;
   }
 }

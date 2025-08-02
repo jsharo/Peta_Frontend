@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // <-- Agrega esto
+import { environment } from '../../../environments/environment'; // Agrega esto
 
 @Component({
   selector: 'app-pet-view-modal',
@@ -31,7 +32,7 @@ export class PetViewModalComponent implements OnChanges {
 
   getPhotoUrl(foto: string): string {
     if (!foto) return '';
-    return `http://localhost:3000/uploads/pets/${foto}`;
+    return `${environment.apiUrl}/uploads/pets/${foto}`;
   }
 
   onPhotoSelected(event: any): void {

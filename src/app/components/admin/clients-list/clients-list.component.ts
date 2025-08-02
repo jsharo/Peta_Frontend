@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ErrorService } from '../../../services/error.service';
+import { environment } from '../../../../environments/environment';// Agrega esto
 
 interface Usuario {
   id: number;
@@ -58,10 +59,10 @@ export class ClientsListComponent implements OnInit {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }
 
-    console.log('Haciendo petición a:', 'http://localhost:3000/users');
+    console.log('Haciendo petición a:', `${environment.apiUrl}/users`);
     console.log('Headers:', headers);
 
-    this.http.get<Usuario[]>('http://localhost:3000/users', { headers }).subscribe({
+    this.http.get<Usuario[]>(`${environment.apiUrl}/users`, { headers }).subscribe({
       next: (data) => {
         console.log('✅ Datos recibidos del backend:', data);
         this.usuarios = data;
@@ -100,7 +101,7 @@ export class ClientsListComponent implements OnInit {
 
   console.log('🔍 Probando sin autenticación...');
 
-  this.http.get<Usuario[]>('http://localhost:3000/users').subscribe({
+  this.http.get<Usuario[]>(`${environment.apiUrl}/users`).subscribe({
     next: (data) => {
       console.log('✅ Datos sin auth:', data);
       this.usuarios = data;

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { catchError, throwError } from 'rxjs';
 import { ErrorService } from './error.service';
-import { Router } from '@angular/router';   
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment'; // Agrega esto
 
 interface LoginResponse {
   token: string;
@@ -19,56 +20,52 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private errorService: ErrorService,
     private router: Router
-  ) {}
+  ) { }
 
-// ...existing code...
-// ...existing code...
-login(email: string, password: string) {
-  return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
-    tap({
-      next: (response: any) => {
-        // Mapear 'rol' a 'role' si es necesario
-        if (response.user && response.user.rol && !response.user.role) {
-          response.user.role = response.user.rol;
+  login(email: string, password: string) {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap({
+        next: (response: any) => {
+          // Mapear 'rol' a 'role' si es necesario
+          if (response.user && response.user.rol && !response.user.role) {
+            response.user.role = response.user.rol;
+          }
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
+          // Nuevo: guardar el rol del usuario en mayúsculas
+          localStorage.setItem('user_role', response.user.role.toUpperCase());
+          console.log('✅ Usuario guardado en localStorage');
+        },
+        error: (err) => {
+          console.error('❌ Error en login:', err);
         }
-        localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        // Nuevo: guardar el rol del usuario en mayúsculas
-        localStorage.setItem('user_role', response.user.role.toUpperCase());
-        console.log('✅ Usuario guardado en localStorage');
-      },
-      error: (err) => {
-        console.error('❌ Error en login:', err);
-      }
-    })
-  );
-}
-// ...existing code...
-// ...existing code...
+      })
+    );
+  }
 
   register(userData: { name: string, email: string, password: string, confirmPassword: string, role?: string }) {
-  console.log('📤 AuthService: Enviando datos de registro:', userData);
-  return this.http.post<{ message: string }>(`${this.apiUrl}/register`, userData).pipe(
-    tap({
-      next: (response) => {
-        console.log('✅ Respuesta del registro:', response);
-      },
-      error: (err) => {
-        console.error('❌ Error en el registro:', err);
-      }
-    }),
-    catchError(error => {
-      console.error('❌ Error capturado en register:', error);
-      return throwError(() => this.errorService.handleHttpError(error));
-    })
-  );
-}
+    console.log('📤 AuthService: Enviando datos de registro:', userData);
+    return this.http.post<{ message: string }>(`${this.apiUrl}/register`, userData).pipe(
+      tap({
+        next: (response) => {
+          console.log('✅ Respuesta del registro:', response);
+        },
+        error: (err) => {
+          console.error('❌ Error en el registro:', err);
+        }
+      }),
+      catchError(error => {
+        console.error('❌ Error capturado en register:', error);
+        return throwError(() => this.errorService.handleHttpError(error));
+      })
+    );
+  }
 
   updateProfile(userId: string, updateData: any) {
     return this.http.patch(`${this.apiUrl}/profile`, updateData, {
@@ -77,98 +74,98 @@ login(email: string, password: string) {
   }
 
   logout(): void {
-  console.log('🚪 Cerrando sesión...');
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('user');
-  
-  // ✅ Redirigir a login con parámetro que indica logout
-  this.router.navigate(['/login'], { 
-    queryParams: { fromLogout: 'true' } 
-  });
-}
+    console.log('🚪 Cerrando sesión...');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user');
+
+    // ✅ Redirigir a login con parámetro que indica logout
+    this.router.navigate(['/login'], {
+      queryParams: { fromLogout: 'true' }
+    });
+  }
 
   isAuthenticated(): boolean {
-  const token = localStorage.getItem('auth_token');
-  console.log('🔍 isAuthenticated() - token existe:', !!token);
-  
-  if (!token) return false;
-  
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const exp = payload.exp * 1000;
-    const isValid = Date.now() < exp;
-    console.log('🔍 isAuthenticated() - token válido:', isValid);
-    return isValid;
-  } catch (error) {
-    console.error('❌ Error al verificar token:', error);
-    return false;
-  }
-}
+    const token = localStorage.getItem('auth_token');
+    console.log('🔍 isAuthenticated() - token existe:', !!token);
 
-  getCurrentUser() {
-  const userStr = localStorage.getItem('user');
-  console.log('String de usuario desde localStorage:', userStr);
-  
-  if (userStr) {
+    if (!token) return false;
+
     try {
-      const user = JSON.parse(userStr);
-      console.log('Usuario parseado:', user);
-      return user;
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const exp = payload.exp * 1000;
+      const isValid = Date.now() < exp;
+      console.log('🔍 isAuthenticated() - token válido:', isValid);
+      return isValid;
     } catch (error) {
-      console.error('Error al parsear usuario:', error);
-      return null;
+      console.error('❌ Error al verificar token:', error);
+      return false;
     }
   }
-  return null;
-}
+
+  getCurrentUser() {
+    const userStr = localStorage.getItem('user');
+    console.log('String de usuario desde localStorage:', userStr);
+
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        console.log('Usuario parseado:', user);
+        return user;
+      } catch (error) {
+        console.error('Error al parsear usuario:', error);
+        return null;
+      }
+    }
+    return null;
+  }
 
   // Nuevo método para obtener el rol del usuario actual
   getCurrentUserRole(): string | null {
-  console.log('🔍 Obteniendo rol del usuario...');
-  
-  const user = this.getCurrentUser();
-  console.log('Usuario desde getCurrentUser():', user);
-  
-  if (user && user.role) {
-    console.log('✅ Rol encontrado en usuario:', user.role);
-    // Normalizar a mayúsculas para consistencia
-    return user.role.toUpperCase();
-  }
-  
-  // Fallback: intentar obtener el rol desde el token
-  const token = localStorage.getItem('auth_token');
-  if (!token) {
-    console.log('❌ No hay token');
-    return null;
-  }
-  
-  try {
-    console.log('🔍 Decodificando token...');
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    console.log('Payload del token:', payload);
-    
-    const role = payload.role || payload.userRole || payload.user?.role;
-    console.log('Rol extraído del token:', role);
-    
-    // Normalizar a mayúsculas
-    return role ? role.toUpperCase() : null;
-  } catch (error) {
-    console.error('❌ Error al decodificar token:', error);
-    return null;
-  }
-}
+    console.log('🔍 Obteniendo rol del usuario...');
 
-isAdmin(): boolean {
-  const role = this.getCurrentUserRole();
-  console.log('🔍 isAdmin() - rol obtenido:', role);
-  const result = role === 'ADMIN';
-  console.log('🔍 isAdmin() - resultado:', result);
-  return result;
-}
+    const user = this.getCurrentUser();
+    console.log('Usuario desde getCurrentUser():', user);
 
-isCliente(): boolean {
-  return this.getCurrentUserRole() === 'CLIENTE';
-}
+    if (user && user.role) {
+      console.log('✅ Rol encontrado en usuario:', user.role);
+      // Normalizar a mayúsculas para consistencia
+      return user.role.toUpperCase();
+    }
+
+    // Fallback: intentar obtener el rol desde el token
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      console.log('❌ No hay token');
+      return null;
+    }
+
+    try {
+      console.log('🔍 Decodificando token...');
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log('Payload del token:', payload);
+
+      const role = payload.role || payload.userRole || payload.user?.role;
+      console.log('Rol extraído del token:', role);
+
+      // Normalizar a mayúsculas
+      return role ? role.toUpperCase() : null;
+    } catch (error) {
+      console.error('❌ Error al decodificar token:', error);
+      return null;
+    }
+  }
+
+  isAdmin(): boolean {
+    const role = this.getCurrentUserRole();
+    console.log('🔍 isAdmin() - rol obtenido:', role);
+    const result = role === 'ADMIN';
+    console.log('🔍 isAdmin() - resultado:', result);
+    return result;
+  }
+
+  isCliente(): boolean {
+    return this.getCurrentUserRole() === 'CLIENTE';
+  }
 
   private getAuthHeaders() {
     return {

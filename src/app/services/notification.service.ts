@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorService } from './error.service'; // ✅ AGREGAR import
+import { ErrorService } from './error.service'; 
+import { environment } from '../../environments/environment'; 
 
 interface Notification {
   id: number;
@@ -16,7 +17,7 @@ interface Notification {
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:3000/notifications';
+  private apiUrl = `${environment.apiUrl}/notifications`;
 
   constructor(
     private http: HttpClient,
@@ -73,14 +74,14 @@ export class NotificationService {
 
   // notification.service.ts
   getNotificationsByUser(userId: number) {
-    return this.http.get<any[]>(`http://localhost:3000/notifications/user/${userId}`, { 
+    return this.http.get<any[]>(`${environment.apiUrl}/notifications/user/${userId}`, { 
       headers: this.getHeaders() 
     });
   }
 
   markAllAsReadByUser(userId: number) {
     return this.http.patch(
-      `http://localhost:3000/notifications/user/${userId}/read-all`,
+      `${environment.apiUrl}/notifications/user/${userId}/read-all`,
       {},
       { headers: this.getHeaders() }
     ).pipe(
