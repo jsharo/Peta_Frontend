@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PetViewModalComponent } from '../../pet-view-modal/pet-view-modal.component'; // Ajusta la ruta si es necesario
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 
 interface Mascota {
   id_pet: number;
