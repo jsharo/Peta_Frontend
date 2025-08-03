@@ -33,7 +33,7 @@
   <div *ngIf="mascotas.length === 0" class="no-pets-message">
     <p>No se encontraron mascotas para este usuario</p>
   </div>
-
+<app-navbar></app-navbar>
 </div> <!-- cierre de page-container -->
 
 <!-- Modal y backdrop fuera del flujo principal -->
@@ -45,3 +45,5 @@
     (save)="guardarCambiosModal($event)">
   </app-pet-view-modal>
 </div>
+
+

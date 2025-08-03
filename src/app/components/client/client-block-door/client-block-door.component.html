@@ -3,10 +3,11 @@
     <h2>Estado de la Puerta</h2>
     <button 
       class="puerta-btn" 
-      [class.encendida]="puertaEncendida"
-      [class.apagada]="!puertaEncendida"
+      [class.encendida]="puertaBloqueada === false"
+      [class.apagada]="puertaBloqueada === true"
+      [disabled]="puertaBloqueada === null"
       (click)="togglePuerta()">
-      {{ puertaEncendida ? 'Puerta Encendida' : 'Puerta Apagada' }}
+      {{ textoBoton }}
     </button>
   </div>
 </div>
