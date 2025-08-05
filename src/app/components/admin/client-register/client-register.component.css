@@ -4,19 +4,28 @@ body {
   background-color: #fff;
 }
 
+.cliente-header.header-green {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: #A9BF04;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 1000;
+  box-sizing: border-box;
+  border-radius: 0;
+}
+
 .cliente-wrapper {
   min-height: 100vh;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-}
-
-.header-green {
-  background-color: #A9BF04; /* Cambia el color del header */
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
+  padding-top: 80px; /* Deja espacio para la barra fija */
 }
 
 .logo {

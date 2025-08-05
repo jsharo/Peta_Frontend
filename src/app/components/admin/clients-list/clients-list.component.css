@@ -15,18 +15,24 @@ body, :host {
   padding: 24px 16px 32px 16px; /* Igual que .cliente-formulario */
   box-sizing: border-box;
   font-family: 'Montserrat', Arial, sans-serif;
+  padding-top: 80px; /* Deja espacio para la barra fija */
 }
 
 /* Header */
 .clientes-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   background-color: #A9BF04;
   height: 60px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  margin-bottom: 18px;
   justify-content: space-between;
-  /* Elimina border-radius para que el borde inferior sea recto */
+  padding: 0 24px;
+  z-index: 1000;
+  box-sizing: border-box;
+  border-radius: 0;
 }
 
 .logo {
