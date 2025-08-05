@@ -12,26 +12,19 @@ body, html, :host {
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  padding: 80px 16px 32px 16px; /* Deja espacio para la barra fija */
+  padding: 24px 16px 32px 16px;
   box-sizing: border-box;
   font-family: 'Montserrat', Arial, sans-serif;
 }
 
 /* Header */
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
   background-color: #A9BF04;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  z-index: 1000;
-  box-sizing: border-box;
-  border-radius: 0;
+  padding: 0 16px;
   margin-bottom: 18px;
   /* Sin border-radius para borde recto */
 }
