@@ -15,23 +15,30 @@ body, html, :host {
   padding: 24px 16px 32px 16px;
   box-sizing: border-box;
   font-family: 'Montserrat', Arial, sans-serif;
+  padding-top: 80px;            /* Deja espacio para la barra fija */
 }
 
 /* Header adaptativo y verde */
 .top-bar {
+  position: fixed;              /* Fija la barra arriba */
+  top: 0;
+  left: 0;
+  width: 100vw;                 /* Ocupa todo el ancho de la ventana */
   background-color: #A9BF04;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 24px;              /* Más espacio a los lados */
   height: 60px;
-  margin-bottom: 18px;
-  /* Sin borde redondeado */
+  z-index: 1000;                /* Siempre encima */
+  box-sizing: border-box;
+  border-radius: 0;             /* Sin borde redondeado */
 }
 
 /* Logo */
 .logo {
   height: 40px;
+  margin-left: 0;               /* Asegura que esté pegado al borde izquierdo */
 }
 
 /* Botón cerrar sesión */
@@ -45,6 +52,7 @@ body, html, :host {
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s; /* Igual que los otros botones */
+  margin-right: 0;              /* Asegura que esté pegado al borde derecho */
 }
 
 .logout-btn:hover {

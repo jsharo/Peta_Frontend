@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../nav-bar/nav-bar.component';
 import { Router } from '@angular/router';
@@ -23,11 +23,12 @@ interface Notification {
   templateUrl: './notifications-client.component.html',
   styleUrls: ['./notifications-client.component.css']
 })
-export class NotificationsClientComponent implements OnInit {
+export class NotificationsClientComponent implements OnInit, OnDestroy {
   notifications = signal<Notification[]>([]);
   loading = signal(true);
   error = signal('');
   puertaDesbloqueada = signal(true);
+  private estadoInterval: any;
 
   constructor(
     private notificationService: NotificationService,
@@ -39,6 +40,13 @@ export class NotificationsClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadNotifications();
+    this.consultarEstadoPuerta(); // Consulta inicial
+    // Polling cada 5 segundos
+    this.estadoInterval = setInterval(() => this.consultarEstadoPuerta(), 5000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.estadoInterval) clearInterval(this.estadoInterval);
   }
 
   loadNotifications(): void {
@@ -92,17 +100,29 @@ export class NotificationsClientComponent implements OnInit {
     this.loadNotifications();
   }
 
+  consultarEstadoPuerta(): void {
+    this.doorService.obtenerEstadoPuerta().subscribe({
+      next: (door) => {
+        this.puertaDesbloqueada.set(!door.is_locked);
+      },
+      error: () => {
+        // Si hay error, puedes decidir si mostrar desbloqueada o dejar el estado anterior
+        // this.puertaDesbloqueada.set(true);
+      }
+    });
+  }
+
   togglePuerta(): void {
     if (this.puertaDesbloqueada()) {
       // Bloquear la puerta
       this.doorService.bloquearPuerta().subscribe({
-        next: () => this.puertaDesbloqueada.set(false),
+        next: () => this.consultarEstadoPuerta(),
         error: () => alert('Error al bloquear la puerta')
       });
     } else {
       // Desbloquear la puerta
       this.doorService.desbloquearPuerta().subscribe({
-        next: () => this.puertaDesbloqueada.set(true),
+        next: () => this.consultarEstadoPuerta(),
         error: () => alert('Error al desbloquear la puerta')
       });
     }

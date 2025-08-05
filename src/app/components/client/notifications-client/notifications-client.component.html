@@ -5,7 +5,7 @@
 </div>
 
 <div class="notifications-main-container">
-  <div class="estado-puerta">
+  <div class="estado-puerta" [ngClass]="!puertaDesbloqueada() ? 'bloqueada' : ''">
     <p
       class="estado-puerta-text"
       [ngClass]="puertaDesbloqueada() ? 'green' : 'white'"

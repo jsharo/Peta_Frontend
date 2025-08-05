@@ -50,7 +50,7 @@ body, html, :host {
   background: #007bff; /* Azul más oscuro al pasar el ratón */
 }
 
-/* Estado puerta */
+/* Estado puerta: por defecto (desbloqueada) */
 .estado-puerta {
   background-color: #E9E9C6;
   color: #2d2d2d;
@@ -62,21 +62,22 @@ body, html, :host {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 24px;
+  transition: background 0.2s;
 }
 
-.estado-puerta-text {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0;
-  transition: color 0.2s;
+/* Fondo negro cuando está bloqueada */
+.estado-puerta.bloqueada {
+  background-color: #1e1e1e !important;
 }
 
+/* Texto verde cuando está desbloqueada */
 .estado-puerta-text.green {
   color: #A9BF04;
 }
 
+/* Texto blanco cuando está bloqueada */
 .estado-puerta-text.white {
-  color: #1e1e1e; /* Negro igual que el fondo del botón */
+  color: #fff;
 }
 
 .icon-btn {
